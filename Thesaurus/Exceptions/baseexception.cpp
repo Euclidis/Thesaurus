@@ -1,4 +1,4 @@
-#include "baseexceprion.h"
+#include "baseexception.h"
 
 BaseExceprion::BaseExceprion(QString str_)
 {

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>ExceptionWindow</class>
- <widget class="QWidget" name="ExceptionWindow">
+ <widget class="QDialog" name="ExceptionWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>251</width>
-    <height>125</height>
+    <height>131</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Dialog</string>
   </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>10</y>
      <width>231</width>
-     <height>71</height>
+     <height>80</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -38,9 +38,9 @@
   <widget class="QWidget" name="verticalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>95</x>
-     <y>89</y>
-     <width>61</width>
+     <x>90</x>
+     <y>100</y>
+     <width>71</width>
      <height>25</height>
     </rect>
    </property>

@@ -1,6 +1,7 @@
 #ifndef BASEEXCEPRION_H
 #define BASEEXCEPRION_H
 
+#include "../general.h"
 #include "exceptionwindow.h"
 
 class BaseExceprion

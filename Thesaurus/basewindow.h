@@ -1,7 +1,7 @@
 #ifndef BASEWINDOW_H
 #define BASEWINDOW_H
 
-#include "general.h"
+#include <QWidget>
 
 namespace Ui {
 class BaseWindow;

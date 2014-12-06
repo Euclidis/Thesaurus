@@ -1,14 +1,13 @@
 #ifndef EXCEPTIONWINDOW_H
 #define EXCEPTIONWINDOW_H
 
-#include "../basewindow.h"
-//#include <QDialog>
+#include <QDialog>
 
 namespace Ui {
 class ExceptionWindow;
 }
 
-class ExceptionWindow : public BaseWindow //QDialog
+class ExceptionWindow : public QDialog
 {
     Q_OBJECT
 
