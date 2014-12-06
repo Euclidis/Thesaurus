@@ -1,7 +1,7 @@
 #ifndef ADRESS_TEXTS_H
 #define ADRESS_TEXTS_H
 
-#include <QWidget>
+#include "general.h"
 
 struct Adr
 {

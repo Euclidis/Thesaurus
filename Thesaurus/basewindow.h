@@ -1,7 +1,7 @@
 #ifndef BASEWINDOW_H
 #define BASEWINDOW_H
 
-#include "carcass.h"
+#include "general.h"
 
 namespace Ui {
 class BaseWindow;
