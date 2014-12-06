@@ -2,7 +2,7 @@
 #define BASEEXCEPRION_H
 
 #include "../general.h"
-#include "exceptionwindow.h"
+#include "exception_window.h"
 
 class BaseExceprion
 {

@@ -1,13 +1,13 @@
-#ifndef EXCEPTIONWINDOW_H
-#define EXCEPTIONWINDOW_H
+#ifndef EXCEPTION_WINDOW_H
+#define EXCEPTION_WINDOW_H
 
-#include <QDialog>
+#include "../general.h"
 
 namespace Ui {
 class ExceptionWindow;
 }
 
-class ExceptionWindow : public QDialog
+class ExceptionWindow : public BaseWindow
 {
     Q_OBJECT
 
@@ -22,4 +22,4 @@ private slots:
     void OK_Click();
 };
 
-#endif // EXCEPTIONWINDOW_H
+#endif // EXCEPTION_WINDOW_H

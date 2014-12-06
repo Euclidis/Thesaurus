@@ -1,8 +1,8 @@
-#include "basewindow.h"
-#include "ui_basewindow.h"
+#include "base_window.h"
+#include "ui_base_window.h"
 
 BaseWindow::BaseWindow(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::BaseWindow)
 {
     ui->setupUi(this);

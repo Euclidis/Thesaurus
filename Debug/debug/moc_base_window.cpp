@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'basewindow.h'
+** Meta object code from reading C++ file 'base_window.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.3.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../Thesaurus/basewindow.h"
+#include "../../Thesaurus/base_window.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'basewindow.h' doesn't include <QObject>."
+#error "The header file 'base_window.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.3.1. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -60,7 +60,7 @@ void BaseWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
 }
 
 const QMetaObject BaseWindow::staticMetaObject = {
-    { &QWidget::staticMetaObject, qt_meta_stringdata_BaseWindow.data,
+    { &QDialog::staticMetaObject, qt_meta_stringdata_BaseWindow.data,
       qt_meta_data_BaseWindow,  qt_static_metacall, 0, 0}
 };
 
@@ -75,12 +75,12 @@ void *BaseWindow::qt_metacast(const char *_clname)
     if (!_clname) return 0;
     if (!strcmp(_clname, qt_meta_stringdata_BaseWindow.stringdata))
         return static_cast<void*>(const_cast< BaseWindow*>(this));
-    return QWidget::qt_metacast(_clname);
+    return QDialog::qt_metacast(_clname);
 }
 
 int BaseWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QWidget::qt_metacall(_c, _id, _a);
+    _id = QDialog::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     return _id;

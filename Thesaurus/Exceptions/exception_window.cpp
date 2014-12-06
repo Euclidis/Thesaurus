@@ -1,8 +1,8 @@
-#include "exceptionwindow.h"
-#include "ui_exceptionwindow.h"
+#include "exception_window.h"
+#include "ui_exception_window.h"
 
 ExceptionWindow::ExceptionWindow(QString str, QWidget *parent) :
-    QDialog(parent),
+    BaseWindow(parent),
     ui(new Ui::ExceptionWindow)
 {
     ui->setupUi(this);
@@ -16,6 +16,7 @@ ExceptionWindow::~ExceptionWindow()
 {
     delete ui;
 }
+
 
 void ExceptionWindow::OK_Click()
 {

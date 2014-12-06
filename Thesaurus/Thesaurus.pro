@@ -13,17 +13,19 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        basewindow.cpp \
     carcass.cpp \
-    Exceptions/exceptionwindow.cpp \
-    Exceptions/baseexception.cpp
+    base_window.cpp \
+    Exceptions/exception_window.cpp \
+    Exceptions/base_exception.cpp
 
-HEADERS  += basewindow.h \
+HEADERS  += \
     carcass.h \
     adress_texts.h \
     general.h \
-    Exceptions/exceptionwindow.h \
-    Exceptions/baseexception.h
+    base_window.h \
+    Exceptions/exception_window.h \
+    Exceptions/base_exception.h
 
-FORMS    += basewindow.ui \
-    Exceptions/exceptionwindow.ui
+FORMS    += \
+    base_window.ui \
+    Exceptions/exception_window.ui

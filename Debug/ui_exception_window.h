@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'exceptionwindow.ui'
+** Form generated from reading UI file 'exception_window.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.3.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_EXCEPTIONWINDOW_H
-#define UI_EXCEPTIONWINDOW_H
+#ifndef UI_EXCEPTION_WINDOW_H
+#define UI_EXCEPTION_WINDOW_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -36,10 +36,10 @@ public:
     {
         if (ExceptionWindow->objectName().isEmpty())
             ExceptionWindow->setObjectName(QStringLiteral("ExceptionWindow"));
-        ExceptionWindow->resize(251, 131);
+        ExceptionWindow->resize(241, 129);
         verticalLayoutWidget = new QWidget(ExceptionWindow);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 231, 80));
+        verticalLayoutWidget->setGeometry(QRect(10, 9, 221, 81));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -51,7 +51,7 @@ public:
 
         verticalLayoutWidget_2 = new QWidget(ExceptionWindow);
         verticalLayoutWidget_2->setObjectName(QStringLiteral("verticalLayoutWidget_2"));
-        verticalLayoutWidget_2->setGeometry(QRect(90, 100, 71, 25));
+        verticalLayoutWidget_2->setGeometry(QRect(85, 99, 71, 25));
         verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget_2);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -81,4 +81,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_EXCEPTIONWINDOW_H
+#endif // UI_EXCEPTION_WINDOW_H

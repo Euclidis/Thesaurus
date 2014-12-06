@@ -1,13 +1,13 @@
-#ifndef BASEWINDOW_H
-#define BASEWINDOW_H
+#ifndef BASE_WINDOW_H
+#define BASE_WINDOW_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class BaseWindow;
 }
 
-class BaseWindow : public QWidget
+class BaseWindow : public QDialog
 {
     Q_OBJECT
 
@@ -19,4 +19,4 @@ private:
     Ui::BaseWindow *ui;
 };
 
-#endif // BASEWINDOW_H
+#endif // BASE_WINDOW_H
