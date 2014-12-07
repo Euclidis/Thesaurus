@@ -6,7 +6,7 @@
 class BaseException
 {
 protected:
-    QString text_show;                                             //строка, которую получает конструктор при создании объекта
+    QString text_show;
 public:
     BaseException();
     virtual void show();        //демонстрирует диалоговое окно с текстом text_show
