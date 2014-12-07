@@ -1,18 +1,19 @@
 #ifndef ACCOUNT_WINDOW_H
 #define ACCOUNT_WINDOW_H
 
-#include <QDialog>
+#include "../carcass.h"
 
 namespace Ui {
 class AccountWindow;
 }
 
-class AccountWindow : public QDialog
+class AccountWindow : public BaseWindow
 {
     Q_OBJECT
-
 public:
-    explicit AccountWindow(QWidget *parent = 0);
+    Carcass * carcass;
+public:
+    explicit AccountWindow(Carcass*);
     ~AccountWindow();
 
 private:

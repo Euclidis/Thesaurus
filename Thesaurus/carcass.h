@@ -6,7 +6,7 @@
 
 class Carcass
 {
-private:
+public:
     QString cur_acc;        //курируемый аккаунт
     QString cur_lang;       //курируемый язык
 
