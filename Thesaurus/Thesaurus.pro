@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     Exceptions/exception_window.cpp \
     Exceptions/base_exception.cpp \
     Exceptions/ex_file_not_found.cpp \
-    Windows/account_window.cpp
+    Windows/account_window.cpp \
+    Exceptions/ex_file_not_open.cpp
 
 HEADERS  += \
     carcass.h \
@@ -29,7 +30,8 @@ HEADERS  += \
     Exceptions/base_exception.h \
     Exceptions/ex_file_not_found.h \
     exceptions_list.h \
-    Windows/account_window.h
+    Windows/account_window.h \
+    Exceptions/ex_file_not_open.h
 
 FORMS    += \
     base_window.ui \

@@ -13,6 +13,7 @@ public:
     Adr adr;                //структура адресов
     ControlSymbol symb;     //структура символов
     WidgetsTexts wg_tx;     //структура текстов виджетов
+
 public:
     Carcass();
 };
