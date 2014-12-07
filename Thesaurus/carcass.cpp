@@ -1,7 +1,12 @@
 #include "carcass.h"
+#include "Windows/account_window.h"
+
+
+
 
 Carcass::Carcass()
 {
+  //configuration file
     QFile f(adr.config);
     try
     {
@@ -25,4 +30,11 @@ Carcass::Carcass()
     catch(ex_file_not_found& ex){ex.show();}
     catch(ex_file_not_open& ex){ex.show();}
     catch(...){BaseException ex; ex.show();}
+
+    AccountWindow *account= new AccountWindow (this, 0);
+    account->show();
+
+
+
+
 }

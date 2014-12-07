@@ -7,6 +7,7 @@ struct Adr
 {
     QString ext = ".conf";          //расширение для файлов
     QString config = "\\settings\\configuration" + ext;
+    QString User = "\\data\\users\\UsersList" + ext;
 };
 
 struct ControlSymbol
