@@ -41,4 +41,7 @@ Network Trash Folder
 Temporary Items
 Debug/
 Release/
+build-Thesaurus-Desktop_Qt_5_3_MSVC2013_OpenGL_64bit-Release/
+build-Thesaurus-Desktop_Qt_5_3_MSVC2013_OpenGL_64bit-Debug/
 .apdisk
+Thesaurus/Thesaurus.pro.user
