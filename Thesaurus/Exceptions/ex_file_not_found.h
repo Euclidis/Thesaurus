@@ -1,0 +1,14 @@
+#ifndef EX_FILE_NOT_FOUND_H
+#define EX_FILE_NOT_FOUND_H
+
+#include "base_exception.h"
+
+class ex_file_not_found: public BaseException
+{
+private:
+    const char* const pre_text_show = QT_TRANSLATE_NOOP(context, "File %1 not found.");     //прекурсор для text_show базового класса
+public:
+    ex_file_not_found(QString);
+};
+
+#endif // EX_FILE_NOT_FOUND_H

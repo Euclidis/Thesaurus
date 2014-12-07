@@ -1,17 +1,12 @@
 #include "base_exception.h"
 
-BaseExceprion::BaseExceprion(QString str_)
+BaseException::BaseException()
 {
-    str = str_;
+    text_show = "";
 }
 
-void BaseExceprion::show()
+void BaseException::show()
 {
-    ExceptionWindow* ex = new ExceptionWindow(str);
+    ExceptionWindow* ex = new ExceptionWindow(text_show);
     ex->show();
-}
-
-QString BaseExceprion::text()
-{
-    return str;
 }

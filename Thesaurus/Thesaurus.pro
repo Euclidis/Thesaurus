@@ -16,7 +16,8 @@ SOURCES += main.cpp\
     carcass.cpp \
     base_window.cpp \
     Exceptions/exception_window.cpp \
-    Exceptions/base_exception.cpp
+    Exceptions/base_exception.cpp \
+    Exceptions/ex_file_not_found.cpp
 
 HEADERS  += \
     carcass.h \
@@ -24,7 +25,9 @@ HEADERS  += \
     general.h \
     base_window.h \
     Exceptions/exception_window.h \
-    Exceptions/base_exception.h
+    Exceptions/base_exception.h \
+    Exceptions/ex_file_not_found.h \
+    exceptions_list.h
 
 FORMS    += \
     base_window.ui \

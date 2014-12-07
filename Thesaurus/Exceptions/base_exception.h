@@ -1,17 +1,16 @@
-#ifndef BASEEXCEPRION_H
-#define BASEEXCEPRION_H
+#ifndef BASEEXCEPTION_H
+#define BASEEXCEPTION_H
 
-#include "../general.h"
 #include "exception_window.h"
 
-class BaseExceprion
+class BaseException
 {
-private:
-    QString str;
+protected:
+    QString text_show;                                             //строка, которую получает конструктор при создании объекта
+    const char* const context = QT_TR_NOOP("ExceptionsTexts");     //задает контекст для ф-и QCoreApplication::translate()
 public:
-    BaseExceprion(QString);
-    virtual void show();
-    virtual QString text();
+    BaseException();
+    virtual void show();        //демонстрирует диалоговое окно с текстом text_show
 };
 
-#endif // BASEEXCEPRION_H
+#endif // BASEEXCEPTION_H

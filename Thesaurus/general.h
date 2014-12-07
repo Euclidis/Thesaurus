@@ -2,6 +2,6 @@
 #define GENERAL_H
 
 #include "base_window.h"
-#include <QTranslator>
+#include <QCoreApplication>
 
 #endif // GENERAL_H
