@@ -16,9 +16,8 @@ struct ControlSymbol
 
 struct WidgetsTexts
 {
-    const char* const context = QT_TR_NOOP("WidgetsTexts");     //задает контекст для ф-и QCoreApplication::translate()
-    const char* const OK = QT_TRANSLATE_NOOP("WidgetsTexts", "OK");
-    const char* const Cancel = QT_TRANSLATE_NOOP("WidgetsTexts", "Cancel");
+    const char* const OK = QT_TR_NOOP("OK");
+    const char* const Cancel = QT_TR_NOOP("Cancel");
 };
 
 

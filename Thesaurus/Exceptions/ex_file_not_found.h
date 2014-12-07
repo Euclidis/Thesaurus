@@ -6,7 +6,7 @@
 class ex_file_not_found: public BaseException
 {
 private:
-    const char* const pre_text_show = QT_TRANSLATE_NOOP(context, "File %1 not found.");     //прекурсор для text_show базового класса
+    const char* const pre_text_show = QT_TR_NOOP("File %1 not found.");     //прекурсор для text_show базового класса
 public:
     ex_file_not_found(QString);
 };

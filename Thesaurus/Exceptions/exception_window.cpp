@@ -7,7 +7,7 @@ ExceptionWindow::ExceptionWindow(QString str, QWidget *parent) :
 {
     ui->setupUi(this);
     ui->label->setText(str);
-    ui->pushButton->setText(QCoreApplication::translate("ExceptionWindow", "OK"));
+    ui->pushButton->setText(tr("OK"));
     connect(ui->pushButton, SIGNAL(clicked()), SLOT(OK_Click()));
     setModal(true);
 }
