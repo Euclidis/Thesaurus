@@ -14,7 +14,8 @@ void AccountWindow::Login(){
   ui->pushButton_3->hide();
   ui->pushButton_2->show();
   ui->lineEdit_3->hide();
-  ui->label->setText(QString::number((mode_flag)));
+  ui->label->hide();
+
 
 
 }
@@ -29,13 +30,25 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
 
     ui->setupUi(this);
     carcass = _carcass;
+    //--------------------------------------------------------//
+    //Допустимые Символы Имении Пароля
+    //--------------------------------------------------------//
+    ui->lineEdit->setPlaceholderText("user name");
+    ui->lineEdit_2->setPlaceholderText("password");
+    ui->lineEdit_3->setPlaceholderText("confirm password");
+    QRegExp regexp ("[A-Za-z-_0-9]{1,20}");
+    QValidator *validator = new QRegExpValidator(regexp, this);
+    ui->lineEdit->setValidator(validator);
+    ui->lineEdit_2->setValidator(validator);
+    ui->lineEdit_3->setValidator(validator);
+    //-------------------------------------------------------
+
     setFixedSize(400,300);
     mode_flag = mode;
-    ui->label->setText(QString::number((mode_flag)));
+    ui->label->hide();
     if (mode_flag)
     Login();
     GetUsers();
-
     retranslateUI();
 
 
@@ -50,7 +63,7 @@ AccountWindow::~AccountWindow()
 void AccountWindow::on_pushButton_2_clicked()
 {
     mode_flag = false;
-    ui->label->setText(QString::number((mode_flag)));
+    ui->label->hide();
     ui->pushButton_2->hide();
     ui->pushButton_3->show();
     ui->lineEdit_3->show();
@@ -72,11 +85,19 @@ if (mode_flag){
     // LOGIN BLOCK
     //
 
+
+
   }
 else if (ui->lineEdit_2->text() == ui->lineEdit_3->text()){
+    //REGISTRATION BLOCK
+    //
+    //
 
   name_pass.insert(ui->lineEdit->text(), ui->lineEdit_2->text());
-
+  //
+  //
+  //
+  // ЗАПИСЬ В ФАЙЛ
   QFile f(carcass->adr.User);
 try
 {
@@ -94,7 +115,12 @@ try
 
 catch(ex_file_not_open& ex){ex.show();}
   }
-// else несовпадает пароль
+//несовпадает пароль
+ else {
+  ui->label->setText("Passwords do not match");
+  ui->label->show();
+  ui->lineEdit_2->setFocus();
+  }
 
 
   //delete (this);
@@ -125,4 +151,37 @@ void AccountWindow::GetUsers(){
   catch(ex_file_not_found& ex){ex.show();}
   catch(ex_file_not_open& ex){ex.show();}
 
+}
+
+
+//----------------------------------------------------------------
+// скрывает окошко ошибки при изменении пароля
+void AccountWindow::on_lineEdit_2_textChanged(const QString &arg1)
+{
+    ui->label->hide();
+
+}
+
+void AccountWindow::on_lineEdit_3_textChanged(const QString &arg1)
+{
+    ui->label->hide();
+}
+//---------------------------------------------------------------
+// прыжки по объектам используя Ентер
+void AccountWindow::on_lineEdit_returnPressed()
+{
+    ui->lineEdit_2->setFocus();
+}
+
+void AccountWindow::on_lineEdit_2_returnPressed()
+{
+  if (mode_flag == 0) // Registration
+    ui->lineEdit_3->setFocus();
+        else if (mode_flag == 1)
+    on_pushButton_clicked();
+}
+
+void AccountWindow::on_lineEdit_3_returnPressed()
+{
+     on_pushButton_clicked();
 }
