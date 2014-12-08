@@ -6,5 +6,6 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Carcass car;
+    a.exit();
     return a.exec();
 }

@@ -28,8 +28,10 @@ private slots:
     void on_pushButton_clicked();
 
 private:
-    //void GetUsers();                //заполняет мэп именами и паролями
-   //QMap <QString, QString> User;   //имена и пароли пользователей
+   bool mode_flag;
+   void GetUsers();                //заполняет мэп именами и паролями
+
+   QMap <QString, QString> name_pass;             //имена и пароли пользователей
     Ui::AccountWindow *ui;
 
 };
