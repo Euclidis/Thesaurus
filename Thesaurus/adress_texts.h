@@ -8,6 +8,8 @@ struct Adr
     QString ext = ".conf";          //расширение для файлов
     QString config = "\\settings\\configuration" + ext;
     QString User = "\\data\\users\\UsersList" + ext;
+    QString users_dir = "\\data\\users";
+    QString user_config = "\\configuration" + ext;
 };
 
 struct ControlSymbol
