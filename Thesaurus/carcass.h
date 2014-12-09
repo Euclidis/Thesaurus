@@ -8,9 +8,9 @@ class Carcass
 {
 
 public: //метки
-      QString current_account;            //курируемый аккаунт
+      QString current_account;
       QString current_language_interface;
-      QString current_language;           //курируемый язык
+      QString current_language;
       QString current_dct;
 
 public: //структуры данных
@@ -22,12 +22,34 @@ public: //методы
     Carcass();
 
 public: //метод вывода месседж окна
-    void message(QString);
+    void message(QString, bool _modal = true);
 
 public: //методы записи и чтения файлов
-    enum class WriteResult {OK, Write, Open, Copy, DelTmpWhileCopy, DelSource, DelTmp, RenameTmp};
-    enum class OpenWriteAs {WriteOnly =  static_cast<OpenWriteAs>(QIODevice::WriteOnly),
-                            Append = static_cast<OpenWriteAs>(QIODevice::Append)};
+    enum class WriteResult  {OK, Write, Open, Copy, DelTmpWhileCopy, DelSource, DelTmp, RenameTmp};
+    enum class ReadResult   {OK, NotFound, Open, Read, DelTmp, RenameTmp};
+    enum class OpenWriteAs  {WriteOnly  =   static_cast<OpenWriteAs>(QIODevice::WriteOnly),
+                             Append     =   static_cast<OpenWriteAs>(QIODevice::Append)};
+
+    QString enumWToQStr (WriteResult);
+    QString enumRToQStr (ReadResult rr)
+    {
+        switch (rr) {
+        case ReadResult::OK:
+            return "OK";
+        case ReadResult::DelTmp:
+            return "DelTmp";
+        case ReadResult::NotFound:
+            return "NotFound";
+        case ReadResult::Open:
+            return "Open";
+        case ReadResult::Read:
+            return "Read";
+        case ReadResult::RenameTmp:
+            return "RenameTmp";
+        default:
+            return "Error";
+        }
+    }
 
     template <typename T>
     WriteResult WriteFile (QString AdrFile, T& t,OpenWriteAs flag_Open = OpenWriteAs::WriteOnly)
@@ -85,6 +107,54 @@ public: //методы записи и чтения файлов
         //------------------------------------
 
         return WriteResult::OK; //если все успешно прошло
+    }
+
+    template <typename T>
+    ReadResult ReadFile (QString AdrFile, T& t)
+    {
+        QString AdrTemp = AdrFile + adr.EndingTemp;
+        QString FileName = AdrFile.section("//", -1);
+        QString AdrReadFile;
+
+        //Открываем один из файлов (с адресом AdrTemp или AdrFile) в зависимости от наличия AdrFile
+        //Если флаг в режиме добавления в файл, копируем сурс файл в темп файл
+        //-----------------------------------------------------------------------------------------
+        if (QFile::exists(AdrFile)) AdrReadFile = AdrFile;
+        else {
+            if (!QFile::exists(AdrTemp)) return ReadResult::NotFound;
+            else AdrReadFile = AdrTemp;
+        }
+        QFile f(AdrReadFile);
+        if(!f.open(QIODevice::ReadOnly)) return ReadResult::Open;
+        //----------------------------------------------------------------------------------------
+
+
+        //Записываем информацию в соответствующий файл
+        //--------------------------------------------
+        try
+        {
+            QDataStream out(&f);
+            out.setVersion(QDataStream::Qt_5_3);
+            out >> t;
+            f.close();
+        }
+        catch(...) {return ReadResult::Read;}
+        //--------------------------------------------
+
+
+        //Если изначально файл для записи был, удаляем его и переименовываем временный файл
+        //---------------------------------------------------------------------------------
+        if (AdrReadFile == AdrFile){
+            if (QFile::exists(AdrTemp)){
+                if(!QFile::remove(AdrTemp)) return ReadResult::DelTmp;
+            }
+        }
+        else {
+            if(!QFile::rename(AdrTemp, FileName)) return ReadResult::RenameTmp;
+        }
+        //---------------------------------------------------------------------------------
+
+        return ReadResult::OK; //если все успешно прошло
     }
 
 };

@@ -6,7 +6,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Carcass carcass;
-    QString str = "GOOD";
-    carcass.WriteFile("Godot.txt", str);
+    QString str;
+    carcass.message(carcass.enumRToQStr( carcass.ReadFile("godot.txt", str)));
+    carcass.message(str);
     return a.exec();
 }

@@ -44,8 +44,8 @@ Carcass::Carcass()
 
 }
 
-void Carcass::message(QString str)
+void Carcass::message(QString str, bool _modal)
 {
-    MessageWindow* ms = new MessageWindow(str);
+    MessageWindow* ms = new MessageWindow(str, _modal);
     ms->show();
 }
