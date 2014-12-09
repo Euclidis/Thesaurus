@@ -15,9 +15,6 @@ void AccountWindow::Login(){
   ui->pushButton_2->show();
   ui->lineEdit_3->hide();
   ui->label->hide();
-
-
-
 }
 void AccountWindow::retranslateUI(){}
 
@@ -33,9 +30,9 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
     //--------------------------------------------------------//
     //Допустимые Символы Имении Пароля
     //--------------------------------------------------------//
-    ui->lineEdit->setPlaceholderText("user name");
-    ui->lineEdit_2->setPlaceholderText("password");
-    ui->lineEdit_3->setPlaceholderText("confirm password");
+    ui->lineEdit->setPlaceholderText(tr("User name"));
+    ui->lineEdit_2->setPlaceholderText(tr("Password"));
+    ui->lineEdit_3->setPlaceholderText(tr("Confirm password"));
     QRegExp regexp ("[A-Za-z-_0-9]{1,20}");
     QValidator *validator = new QRegExpValidator(regexp, this);
     ui->lineEdit->setValidator(validator);
@@ -48,10 +45,7 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
     ui->label->hide();
     if (mode_flag)
     Login();
-    GetUsers();
     retranslateUI();
-
-
 }
 
 AccountWindow::~AccountWindow()
@@ -67,7 +61,6 @@ void AccountWindow::on_pushButton_2_clicked()
     ui->pushButton_2->hide();
     ui->pushButton_3->show();
     ui->lineEdit_3->show();
-
 }
 
 //LOGIN
@@ -81,92 +74,63 @@ void AccountWindow::on_pushButton_clicked()
 {
 
 if (mode_flag){
+    ui->lineEdit_3->hide();
     //
     // LOGIN BLOCK
     //
+    if (carcass->ReadFile(carcass->adr.User, name_pass) == Carcass::ReadResult::OK){
 
-
-
+    if (name_pass.contains(ui->lineEdit->text())){
+        if (name_pass[ui->lineEdit->text()] == ui->lineEdit_2->text()){
+              carcass->current_account = ui->lineEdit->text();
+            //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+              carcass->WWW = new WriteWordsWindow;
+              carcass->WWW->show();
+            //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-END--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                close();}
+        else {
+              carcass->message(tr("Incorrect Password"));
+              ui->lineEdit_2->setFocus();
+              }
+         }
+    else {
+         carcass->message(tr("User is not found"));
+         ui->lineEdit->setFocus();
+      }
   }
+    else {
+        QString mess = tr("Problems reading file ") + carcass->adr.User + tr("\nProgramm will shutdown");
+        carcass->message(mess);
+        close();
+      }
+  }
+//REGISTRATION BLOCK
+//
+//
 else if (ui->lineEdit_2->text() == ui->lineEdit_3->text()){
-    //REGISTRATION BLOCK
-    //
-    //
 
   name_pass.insert(ui->lineEdit->text(), ui->lineEdit_2->text());
-  //
-  //
-  //
-  // ЗАПИСЬ В ФАЙЛ
-  QFile f(carcass->adr.User);
-try
-{
+  carcass->current_account = ui->lineEdit->text();
+  carcass->WriteFile(carcass->adr.User, name_pass);
 
-   if (f.open(QIODevice::WriteOnly)){
-
-            QDataStream in(&f);
-            in << name_pass;
-            f.close();
-          }
-        else throw ex_file_not_open(carcass->adr.User);
-
-
-}
-
-catch(ex_file_not_open& ex){ex.show();}
+  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  carcass->WWW = new WriteWordsWindow;
+  carcass->WWW->show();
+  close();
   }
+  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-END--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 //несовпадает пароль
  else {
-  ui->label->setText("Passwords do not match");
-  ui->label->show();
+
+  carcass->message(tr("Passwords is not match"));
   ui->lineEdit_2->setFocus();
   }
-
-
-  //delete (this);
-
-
-
 }
 
-void AccountWindow::GetUsers(){
-
-  QFile f(carcass->adr.User);
-
-  try
-  {
-
-    if (!f.exists()) throw ex_file_not_found(carcass->adr.User);
-    else if (f.open(QIODevice::ReadOnly)){
-
-
-              QDataStream out(&f);
-              out >> name_pass;
-              f.close();
-            }
-          else throw ex_file_not_open(carcass->adr.User);
-
-
-  }
-  catch(ex_file_not_found& ex){ex.show();}
-  catch(ex_file_not_open& ex){ex.show();}
-
-}
-
-
-//----------------------------------------------------------------
-// скрывает окошко ошибки при изменении пароля
-void AccountWindow::on_lineEdit_2_textChanged(const QString &arg1)
-{
-    ui->label->hide();
-
-}
-
-void AccountWindow::on_lineEdit_3_textChanged(const QString &arg1)
-{
-    ui->label->hide();
-}
 //---------------------------------------------------------------
+
+
 // прыжки по объектам используя Ентер
 void AccountWindow::on_lineEdit_returnPressed()
 {
