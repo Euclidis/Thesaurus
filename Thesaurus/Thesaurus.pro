@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     Exceptions/ex_file_not_found.cpp \
     Windows/account_window.cpp \
     Exceptions/ex_file_not_open.cpp \
-    Windows/write_words_window.cpp
+    Windows/write_words_window.cpp \
+    Exceptions/ex_unexpected.cpp
 
 HEADERS  += \
     carcass.h \
@@ -33,7 +34,8 @@ HEADERS  += \
     exceptions_list.h \
     Windows/account_window.h \
     Exceptions/ex_file_not_open.h \
-    Windows/write_words_window.h
+    Windows/write_words_window.h \
+    Exceptions/ex_unexpected.h
 
 FORMS    += \
     base_window.ui \

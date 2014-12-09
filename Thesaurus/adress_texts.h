@@ -5,16 +5,17 @@
 
 struct Adr
 {
-    QString ext = ".conf";          //расширение для файлов
-    QString config = "\\settings\\configuration" + ext;
-    QString User = "\\data\\users\\UsersList" + ext;
-    QString users_dir = "\\data\\users";
-    QString user_config = "\\configuration" + ext;
+    const QString ext = ".conf";          //расширение для файлов
+    const QString config = "settings\\configuration" + ext;
+    const QString User = "data\\users\\UsersList" + ext;
+    const QString users_dir = "data\\users";
+    const QString user_config = "configuration" + ext;
+    const QString EndingTemp = ".temp";
 };
 
 struct ControlSymbol
 {
-    QString ac_count_0 = "⚜";       //символ для обозначения в файле конфигурации отсутствия созданных аккаунтов
+    const QString ac_count_0 = "⚜";       //символ для обозначения в файле конфигурации отсутствия созданных аккаунтов
 };
 
 struct WidgetsTexts
