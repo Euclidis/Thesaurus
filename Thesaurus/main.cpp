@@ -5,9 +5,9 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Carcass car;
-    QString asd = "Very GOOD";
-    car.WriteFile<QString>("doro.txt", asd);
+    Carcass carcass;
+    QString str = "GOOD";
+    carcass.WriteFile("Godot.txt", str);
 
     return a.exec();
 }
