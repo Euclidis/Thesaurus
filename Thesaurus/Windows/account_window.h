@@ -23,13 +23,24 @@ void retranslateUI();
 private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
-    void Login();
-
     void on_pushButton_clicked();
 
+    void on_lineEdit_2_textChanged(const QString &arg1);
+
+    void on_lineEdit_3_textChanged(const QString &arg1);
+
+    void on_lineEdit_returnPressed();
+
+    void on_lineEdit_2_returnPressed();
+
+    void on_lineEdit_3_returnPressed();
+
 private:
-    //void GetUsers();                //заполняет мэп именами и паролями
-   //QMap <QString, QString> User;   //имена и пароли пользователей
+   void Login();
+   bool mode_flag;
+   void GetUsers();                //заполняет мэп именами и паролями
+
+   QMap <QString, QString> name_pass;             //имена и пароли пользователей
     Ui::AccountWindow *ui;
 
 };
