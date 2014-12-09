@@ -3,7 +3,6 @@
 
 #include "adress_texts.h"
 #include "exceptions_list.h"
-#include <QFlag>
 
 class Carcass
 {
@@ -23,49 +22,64 @@ public: //методы
     Carcass();
 
 public: //методы записи и чтения файлов
-    enum class WriteResult {OK, CanNotWrite, NotOpen, UnExp, NotDel, NotDelTemp, NotRenameTemp};
+    enum class WriteResult {OK, Write, Open, Copy, DelTmpWhileCopy, DelSource, DelTmp, RenameTmp};
     enum class OpenWriteAs {WriteOnly =  static_cast<OpenWriteAs>(QIODevice::WriteOnly),
                             Append = static_cast<OpenWriteAs>(QIODevice::Append)};
 
     template <typename T>
-    WriteResult WriteFile (T& t, QString AdrFile, OpenWriteAs flag_Open = OpenWriteAs::WriteOnly, bool flag_ExShow = true)
+    WriteResult WriteFile (QString AdrFile, T& t,OpenWriteAs flag_Open = OpenWriteAs::WriteOnly)
     {
         QString AdrTemp = AdrFile + adr.EndingTemp;
         QString FileName = AdrFile.section("//", -1);
         QString AdrWriteFile;
 
         //Открываем один из файлов (с адресом AdrTemp или AdrFile) в зависимости от наличия AdrFile
-        AdrWriteFile = (QFile::exists(AdrFile)) ? AdrTemp : AdrFile;
-        QFile f(AdrWriteFile);
-        try
-        {
-            if(!f.open(static_cast<QIODevice::OpenModeFlag>(flag_Open))) throw ex_file_not_open(AdrWriteFile);
+        //Если флаг в режиме добавления в файл, копируем сурс файл в темп файл
+        //-----------------------------------------------------------------------------------------
+        if (QFile::exists(AdrFile)) {
+            AdrWriteFile = AdrTemp;
+            if (flag_Open == OpenWriteAs::Append){
+                if (QFile::exists(AdrTemp))
+                    if (!QFile::remove(AdrTemp)) return WriteResult::DelTmpWhileCopy;
+                if (!QFile::copy(AdrFile, AdrTemp)) return WriteResult::Copy;
+            }
         }
-        catch(ex_file_not_open ex){
-            if(flag_ExShow) ex.show();
-            return WriteResult::NotOpen;}
-        catch(...) {
-            ex_unexpected ex;
-            if(flag_ExShow) ex.show();
-            return WriteResult::UnExp;}
+        else {
+            AdrWriteFile = AdrFile;
+        }
+        QFile f(AdrWriteFile);
+        if(!f.open(static_cast<QIODevice::OpenModeFlag>(flag_Open))) return WriteResult::Open;
+        //----------------------------------------------------------------------------------------
+
 
         //Записываем информацию в соответствующий файл
-        QDataStream in(&f);
-        in << t;
-        f.close();
+        //--------------------------------------------
+        try
+        {
+            QDataStream in(&f);
+            in.setVersion(QDataStream::Qt_5_3);
+            in << t;
+            f.close();
+        }
+        catch(...) {return WriteResult::Write;}
+        //--------------------------------------------
+
 
         //Если изначально файл для записи был, удаляем его и переименовываем временный файл
-        QFile file(AdrFile);
-        QFile temp(AdrTemp);
+        //---------------------------------------------------------------------------------
         if (AdrWriteFile == AdrTemp){
-            if(!file.remove()) return WriteResult::NotDel;
-            if(!temp.rename(FileName)) return WriteResult::NotRenameTemp;
+            if(!QFile::remove(AdrFile)) return WriteResult::DelSource;
+            if(!QFile::rename(AdrTemp, FileName)) return WriteResult::RenameTmp;
         }
+        //---------------------------------------------------------------------------------
+
 
         //Удаляем временный файл, если он есть
-        if (temp.exists()){
-            if(!temp.remove()) return WriteResult::NotDelTemp;
+        //------------------------------------
+        if (QFile::exists(AdrTemp)){
+            if(!QFile::remove(AdrTemp)) return WriteResult::DelTmp;
         }
+        //------------------------------------
 
         return WriteResult::OK; //если все успешно прошло
     }

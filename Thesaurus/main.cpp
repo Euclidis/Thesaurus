@@ -6,8 +6,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Carcass car;
-    QString asd = "asdsffffffdfsdf";
-    car.WriteFile<QString>(asd, "doro.txt", Carcass::OpenWriteAs::Append , true);
+    QString asd = "Very GOOD";
+    car.WriteFile<QString>("doro.txt", asd);
 
     return a.exec();
 }
