@@ -30,7 +30,30 @@ public: //методы записи и чтения файлов
     enum class OpenWriteAs  {WriteOnly  =   static_cast<OpenWriteAs>(QIODevice::WriteOnly),
                              Append     =   static_cast<OpenWriteAs>(QIODevice::Append)};
 
-    QString enumWToQStr (WriteResult);
+    QString enumWToQStr (WriteResult wr)
+    {
+        switch (wr) {
+        case WriteResult::OK:
+            return "OK";
+        case WriteResult::Write:
+            return "Write";
+        case WriteResult::Open:
+            return "Open";
+        case WriteResult::Copy:
+            return "Copy";
+        case WriteResult::DelTmpWhileCopy:
+            return "DelTmpWhileCopy";
+        case WriteResult::DelSource:
+            return "DelSource";
+        case WriteResult::DelTmp:
+            return "DelTmp";
+        case WriteResult::RenameTmp:
+            return "RenameTmp";
+        default:
+            return "Error";
+        }
+    }
+
     QString enumRToQStr (ReadResult rr)
     {
         switch (rr) {
@@ -117,7 +140,6 @@ public: //методы записи и чтения файлов
         QString AdrReadFile;
 
         //Открываем один из файлов (с адресом AdrTemp или AdrFile) в зависимости от наличия AdrFile
-        //Если флаг в режиме добавления в файл, копируем сурс файл в темп файл
         //-----------------------------------------------------------------------------------------
         if (QFile::exists(AdrFile)) AdrReadFile = AdrFile;
         else {
@@ -142,7 +164,8 @@ public: //методы записи и чтения файлов
         //--------------------------------------------
 
 
-        //Если изначально файл для записи был, удаляем его и переименовываем временный файл
+        //Если изначально файл для записи был, удаляем временный файл, если он есть
+        //Если его не было переименовываем временный файл
         //---------------------------------------------------------------------------------
         if (AdrReadFile == AdrFile){
             if (QFile::exists(AdrTemp)){
