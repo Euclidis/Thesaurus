@@ -38,7 +38,14 @@ Carcass::Carcass()
 //        catch(...) {BaseException ex; ex.show();}
 //    }/*-------------------------------*/
 
+
     AccountWindow *account= new AccountWindow (this);
     account->show();
 
+}
+
+void Carcass::message(QString str)
+{
+    MessageWindow* ms = new MessageWindow(str);
+    ms->show();
 }

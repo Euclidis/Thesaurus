@@ -7,6 +7,6 @@ BaseException::BaseException()
 
 void BaseException::show()
 {
-    ExceptionWindow* ex = new ExceptionWindow(text_show);
+    MessageWindow* ex = new MessageWindow(text_show);
     ex->show();
 }

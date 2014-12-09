@@ -8,6 +8,5 @@ int main(int argc, char *argv[])
     Carcass carcass;
     QString str = "GOOD";
     carcass.WriteFile("Godot.txt", str);
-
     return a.exec();
 }

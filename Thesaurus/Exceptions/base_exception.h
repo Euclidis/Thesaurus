@@ -1,7 +1,7 @@
 #ifndef BASEEXCEPTION_H
 #define BASEEXCEPTION_H
 
-#include "exception_window.h"
+#include "../message_window.h"
 
 class BaseException
 {

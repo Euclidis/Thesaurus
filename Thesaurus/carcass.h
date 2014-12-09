@@ -21,6 +21,9 @@ public: //структуры данных
 public: //методы
     Carcass();
 
+public: //метод вывода месседж окна
+    void message(QString);
+
 public: //методы записи и чтения файлов
     enum class WriteResult {OK, Write, Open, Copy, DelTmpWhileCopy, DelSource, DelTmp, RenameTmp};
     enum class OpenWriteAs {WriteOnly =  static_cast<OpenWriteAs>(QIODevice::WriteOnly),
