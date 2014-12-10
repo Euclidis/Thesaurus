@@ -10,10 +10,13 @@
 //--------------------------------------------------------
 void AccountWindow::Login(){
   mode_flag = true;
+  this->setWindowTitle(tr("Login"));
   ui->pushButton_3->hide();
   ui->pushButton_2->show();
   ui->lineEdit_3->hide();
-  ui->label->hide();
+  QPalette *palette = new QPalette();
+  palette->setColor(QPalette::Text,Qt::black);
+  ui->lineEdit->setPalette(*palette);
 }
 void AccountWindow::retranslateUI(){}
 
@@ -32,19 +35,27 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
     ui->lineEdit->setPlaceholderText(tr("User name"));
     ui->lineEdit_2->setPlaceholderText(tr("Password"));
     ui->lineEdit_3->setPlaceholderText(tr("Confirm password"));
-    QRegExp regexp ("[A-Za-z-_0-9]{1,20}");
-    QValidator *validator = new QRegExpValidator(regexp, this);
-    ui->lineEdit->setValidator(validator);
-    ui->lineEdit_2->setValidator(validator);
-    ui->lineEdit_3->setValidator(validator);
+    QRegExp validUserName ("[A-Za-z-_0-9]{1,20}");
+    QRegExp validUserPass ("[A-Za-z-_0-9]{0,20}");
+    QValidator *validUN = new QRegExpValidator(validUserName, this);
+    QValidator *validUP = new QRegExpValidator(validUserPass, this);
+    ui->lineEdit->setValidator(validUN);
+    ui->lineEdit_2->setValidator(validUP);
+    ui->lineEdit_3->setValidator(validUP);
+    //----------------READ FILE----------------------------
+    if (carcass->ReadFile(carcass->adr.User, name_pass) != Carcass::ReadResult::OK){
+        QString mess = tr("Problems reading file ") + carcass->adr.User + tr("\nProgramm will shutdown");
+        carcass->message(mess);
+        close();
+      }
     //-------------------------------------------------------
-
     setFixedSize(400,300);
     mode_flag = mode;
-    ui->label->hide();
     if (mode_flag)
     Login();
+    else this->setWindowTitle(tr("Registration"));
     retranslateUI();
+    ui->lineEdit->setFocus();
 }
 
 AccountWindow::~AccountWindow()
@@ -56,10 +67,17 @@ AccountWindow::~AccountWindow()
 void AccountWindow::on_pushButton_2_clicked()
 {
     mode_flag = false;
-    ui->label->hide();
+    this->setWindowTitle(tr("Registration"));
     ui->pushButton_2->hide();
     ui->pushButton_3->show();
     ui->lineEdit_3->show();
+ //setTextColor
+    if (name_pass.contains(ui->lineEdit->text()))
+{
+      QPalette *palette = new QPalette();
+      palette->setColor(QPalette::Text,Qt::red);
+      ui->lineEdit->setPalette(*palette);
+}
 }
 
 //LOGIN
@@ -73,11 +91,9 @@ void AccountWindow::on_pushButton_clicked()
 {
 
 if (mode_flag){
-    ui->lineEdit_3->hide();
-    //
-    // LOGIN BLOCK
-    //
-    if (carcass->ReadFile(carcass->adr.User, name_pass) == Carcass::ReadResult::OK){
+
+//=========================================================================================
+// LOGIN BLOCK
 
     if (name_pass.contains(ui->lineEdit->text())){
         if (name_pass[ui->lineEdit->text()] == ui->lineEdit_2->text()){
@@ -97,15 +113,13 @@ if (mode_flag){
          ui->lineEdit->setFocus();
       }
   }
-    else {
-        QString mess = tr("Problems reading file ") + carcass->adr.User + tr("\nProgramm will shutdown");
-        carcass->message(mess);
-        close();
-      }
-  }
+//=========================================================================================
 //REGISTRATION BLOCK
-//
-//
+
+else if (name_pass.contains(ui->lineEdit->text())){
+    carcass->message(tr("This user name is already in use"));
+    ui->lineEdit->setFocus();
+  }
 else if (ui->lineEdit->text() == ""){
 
     carcass->message(tr("The user name must contain at least one character"));
@@ -140,6 +154,7 @@ else if (ui->lineEdit_2->text() == ui->lineEdit_3->text()){
 void AccountWindow::on_lineEdit_returnPressed()
 {
     ui->lineEdit_2->setFocus();
+
 }
 
 void AccountWindow::on_lineEdit_2_returnPressed()
@@ -153,4 +168,37 @@ void AccountWindow::on_lineEdit_2_returnPressed()
 void AccountWindow::on_lineEdit_3_returnPressed()
 {
      on_pushButton_clicked();
+}
+
+void AccountWindow::on_lineEdit_textChanged()
+{
+  //---------------------Изменение жирности шрифта при вводе имени юзера
+  if (ui->lineEdit->text() != ""){
+      QFont font(ui->lineEdit->font().family(), 18);
+      font.setBold(1);
+      ui->lineEdit->setFont(font);
+    }
+  else {
+      QFont font(ui->lineEdit->font().family(), 18);
+      font.setBold(0);
+      ui->lineEdit->setFont(font);
+
+    }
+  //---------------------Изменение жирности шрифта при вводе имени юзера
+
+  //----------------------Цвет текста меняется на красный, если пользователь при регистрации вводит имя, существующее в базе
+  if (!mode_flag){
+      if (name_pass.contains(ui->lineEdit->text()))
+{
+        QPalette *palette = new QPalette();
+        palette->setColor(QPalette::Text,Qt::red);
+        ui->lineEdit->setPalette(*palette);
+ }
+      else {
+          QPalette *palette = new QPalette();
+          palette->setColor(QPalette::Text,Qt::black);
+          ui->lineEdit->setPalette(*palette);
+  }
+    }
+
 }

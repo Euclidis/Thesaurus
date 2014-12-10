@@ -56,8 +56,8 @@
     <font>
      <family>Code Pro Light LC</family>
      <pointsize>18</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <weight>50</weight>
+     <bold>false</bold>
     </font>
    </property>
   </widget>
@@ -75,6 +75,9 @@
      <family>Code Pro Light LC</family>
      <pointsize>18</pointsize>
     </font>
+   </property>
+   <property name="acceptDrops">
+    <bool>true</bool>
    </property>
    <property name="echoMode">
     <enum>QLineEdit::Password</enum>
@@ -109,7 +112,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>Registration</string>
+    <string>&amp;Registration</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">
@@ -125,32 +131,18 @@
     </rect>
    </property>
    <property name="text">
-    <string>Login</string>
+    <string>&amp;Login</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>240</y>
-     <width>141</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="autoFillBackground">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
+  <zorder>pushButton_2</zorder>
+  <zorder>pushButton_3</zorder>
   <zorder>pushButton</zorder>
-  <zorder>label</zorder>
   <zorder>lineEdit</zorder>
   <zorder>lineEdit_2</zorder>
   <zorder>lineEdit_3</zorder>
-  <zorder>pushButton_2</zorder>
-  <zorder>pushButton_3</zorder>
  </widget>
  <resources/>
  <connections/>
