@@ -106,6 +106,12 @@ if (mode_flag){
 //REGISTRATION BLOCK
 //
 //
+else if (ui->lineEdit->text() == ""){
+
+    carcass->message(tr("The user name must contain at least one character"));
+    ui->lineEdit_2->setFocus();
+
+  }
 else if (ui->lineEdit_2->text() == ui->lineEdit_3->text()){
 
   name_pass.insert(ui->lineEdit->text(), ui->lineEdit_2->text());
