@@ -1,6 +1,5 @@
 #include "account_window.h"
 #include "ui_account_window.h"
-#include "../adress_texts.h"
 
 
 //--------------------------------------------------------

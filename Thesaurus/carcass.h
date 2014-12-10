@@ -3,6 +3,7 @@
 
 #include "adress_texts.h"
 #include "exceptions_list.h"
+#include "Windows/write_words_window.h"
 
 class Carcass
 {
@@ -17,6 +18,7 @@ public: //структуры данных
       Adr adr;                    //структура адресов
       ControlSymbol symb;         //структура символов
       WidgetsTexts wg_tx;         //структура текстов виджетов
+      WriteWordsWindow *WWW;
 
 public: //методы
     Carcass();
