@@ -46,5 +46,5 @@ build-Thesaurus-Desktop_Qt_5_3_MSVC2013_OpenGL_64bit-Debug/
 build-Thesaurus-Desktop_Qt_5_3_0_MSVC2013_64bit-Debug/
 build-Thesaurus-Desktop_Qt_5_3_0_MSVC2013_64bit-Release/
 .apdisk
-Thesaurus/Thesaurus.pro.user
-Thesaurus/Thesaurus.pro
+Thesaurus.pro.user
+Thesaurus.pro
