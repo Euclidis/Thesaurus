@@ -3,20 +3,26 @@
 
 #include "adress_texts.h"
 #include "exceptions_list.h"
+#include "Windows/account_window.h"
+#include "Windows/write_words_window.h"
 
 class Carcass
 {
+public: //окна
+    AccountWindow* AW;
+    WriteWordsWindow* WWW;
 
 public: //метки
-      QString current_account;
-      QString current_language_interface;
-      QString current_language;
-      QString current_dct;
+    QString current_account;
+    QString current_language_interface;
+    QString current_language;
+    QString current_dct;
+    bool flag_AWIgnore;
 
 public: //структуры данных
-      Adr adr;                    //структура адресов
-      ControlSymbol symb;         //структура символов
-      WidgetsTexts wg_tx;         //структура текстов виджетов
+    Adr adr;                    //структура адресов
+    ControlSymbol symb;         //структура символов
+    WidgetsTexts wg_tx;         //структура текстов виджетов
 
 public: //методы
     Carcass();
@@ -30,49 +36,13 @@ public: //методы записи и чтения файлов
     enum class OpenWriteAs  {WriteOnly  =   static_cast<OpenWriteAs>(QIODevice::WriteOnly),
                              Append     =   static_cast<OpenWriteAs>(QIODevice::Append)};
 
-    QString enumWToQStr (WriteResult wr)
-    {
-        switch (wr) {
-        case WriteResult::OK:
-            return "OK";
-        case WriteResult::Write:
-            return "Write";
-        case WriteResult::Open:
-            return "Open";
-        case WriteResult::Copy:
-            return "Copy";
-        case WriteResult::DelTmpWhileCopy:
-            return "DelTmpWhileCopy";
-        case WriteResult::DelSource:
-            return "DelSource";
-        case WriteResult::DelTmp:
-            return "DelTmp";
-        case WriteResult::RenameTmp:
-            return "RenameTmp";
-        default:
-            return "Error";
-        }
-    }
+    QString enumWToQStr (WriteResult);
+    QString enumRToQStr (ReadResult);
 
-    QString enumRToQStr (ReadResult rr)
-    {
-        switch (rr) {
-        case ReadResult::OK:
-            return "OK";
-        case ReadResult::DelTmp:
-            return "DelTmp";
-        case ReadResult::NotFound:
-            return "NotFound";
-        case ReadResult::Open:
-            return "Open";
-        case ReadResult::Read:
-            return "Read";
-        case ReadResult::RenameTmp:
-            return "RenameTmp";
-        default:
-            return "Error";
-        }
-    }
+    bool conf_write();
+    void conf_read();
+    void confUser_write();
+    void confUser_read();
 
     template <typename T>
     WriteResult WriteFile (QString AdrFile, T& t,OpenWriteAs flag_Open = OpenWriteAs::WriteOnly)
