@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     message_window.cpp \
     Exceptions/ex_config_error.cpp \
     Exceptions/exception_window.cpp \
-    Exceptions/ex_some_show.cpp
+    Exceptions/ex_some_show.cpp \
+    Windows/lang_selection_window.cpp
 
 HEADERS  += \
     carcass.h \
@@ -41,11 +42,13 @@ HEADERS  += \
     message_window.h \
     Exceptions/ex_config_error.h \
     Exceptions/exception_window.h \
-    Exceptions/ex_some_show.h
+    Exceptions/ex_some_show.h \
+    Windows/lang_selection_window.h
 
 FORMS    += \
     base_window.ui \
     Windows/account_window.ui \
     Windows/write_words_window.ui \
     message_window.ui \
-    Exceptions/exception_window.ui
+    Exceptions/exception_window.ui \
+    Windows/lang_selection_window.ui
