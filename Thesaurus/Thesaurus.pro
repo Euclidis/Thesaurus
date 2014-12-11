@@ -22,7 +22,9 @@ SOURCES += main.cpp\
     Windows/write_words_window.cpp \
     Exceptions/ex_unexpected.cpp \
     message_window.cpp \
-    Exceptions/ex_config_error.cpp
+    Exceptions/ex_config_error.cpp \
+    Exceptions/exception_window.cpp \
+    Exceptions/ex_some_show.cpp
 
 HEADERS  += \
     carcass.h \
@@ -37,10 +39,13 @@ HEADERS  += \
     Windows/write_words_window.h \
     Exceptions/ex_unexpected.h \
     message_window.h \
-    Exceptions/ex_config_error.h
+    Exceptions/ex_config_error.h \
+    Exceptions/exception_window.h \
+    Exceptions/ex_some_show.h
 
 FORMS    += \
     base_window.ui \
     Windows/account_window.ui \
     Windows/write_words_window.ui \
-    message_window.ui
+    message_window.ui \
+    Exceptions/exception_window.ui

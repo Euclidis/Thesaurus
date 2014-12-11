@@ -5,5 +5,6 @@
 #include "Exceptions/ex_file_not_open.h"
 #include "Exceptions/ex_unexpected.h"
 #include "Exceptions/ex_config_error.h"
+#include "Exceptions/ex_some_show.h"
 
 #endif // EXCEPTIONS_LIST_H

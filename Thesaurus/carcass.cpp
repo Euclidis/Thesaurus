@@ -14,7 +14,7 @@ Carcass::Carcass()
     flag_AWIgnore = false;
 
     //читаем файл конфигурации и заполняем QMapAccounts
-    if (!conf_read()) throw ex_config_error(0, adr.config);
+    conf_read();
 
     //Проверяем наличие пользователя компьютера в QMapAccounts
     if (QMapAccounts.isEmpty()){
@@ -26,7 +26,7 @@ Carcass::Carcass()
             current_account = QMapAccounts[current_accountOS];
 
             //читаем user config
-            if(!confUser_read(current_account)) throw ex_config_error(0, adr.users_dir + current_account + adr.user_config);
+            confUser_read(current_account);
             if(flag_AWIgnore) flag_AWIgnore; //>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Дабавить код запуска меню <<<<<<<//
             else {
                 AccountWindow *account = new AccountWindow (this, 1);
@@ -40,42 +40,53 @@ Carcass::Carcass()
     }
 }
 
-bool Carcass::conf_write()
+void Carcass::conf_write()
 {
     WriteResult wr = WriteFile(adr.config, QMapAccounts);
     switch (wr) {
     case WriteResult::OK:
-        return true;
+        break;
     default:
+        ex_some_show ex(QObject::tr("Problems writing the file ") + adr.config);
+        ex.show();
         message(enumWToQStr(wr));
-        return false;
     }
 }
-bool Carcass::conf_read()
+void Carcass::conf_read()
 {
     ReadResult rr = ReadFile(adr.config, QMapAccounts);
     switch (rr) {
     case ReadResult::OK:
-        return true;
+        break;
     default:
+        ex_some_show ex(QObject::tr("Problems reading the file ") + adr.config);
+        ex.show();
         message(enumRToQStr(rr));
-        return false;
     }
 }
-bool Carcass::confUser_write(QString str)
+void Carcass::confUser_write(QString str)
 {
     QStringList data;
-    data << current_language_interface << current_language << (QString::number(flag_AWIgnore));
+    try
+    {
+        data << current_language_interface << current_language << (QString::number(flag_AWIgnore));
+    }
+    catch(...){
+        ex_some_show ex(QObject::tr("Problems writing the file ") + adr.users_dir + str + adr.user_config);
+        ex.show();
+        return;
+    }
     WriteResult wr = WriteFile(adr.users_dir + str + adr.user_config, data);
     switch (wr) {
     case WriteResult::OK:
-        return true;
+        break;
     default:
+        ex_some_show ex(QObject::tr("Problems writing the file ") + adr.users_dir + str + adr.user_config);
+        ex.show();
         message(enumWToQStr(wr));
-        return false;
     }
 }
-bool Carcass::confUser_read(QString str)
+void Carcass::confUser_read(QString str)
 {
     QStringList data;
     ReadResult rr = ReadFile(adr.users_dir + str + adr.user_config, data);
@@ -83,8 +94,10 @@ bool Carcass::confUser_read(QString str)
     case ReadResult::OK:
         break;
     default:
+        ex_some_show ex(QObject::tr("Problems reading the file ") + adr.users_dir + str + adr.user_config);
+        ex.show();
         message(enumRToQStr(rr));
-        return false;
+        return;
     }
     try
     {
@@ -92,8 +105,10 @@ bool Carcass::confUser_read(QString str)
         current_language = data.at(1);
         flag_AWIgnore = ((data.at(2) == "0") ? false : true);
     }
-    catch(...) {return false;}
-    return true;
+    catch(...){
+        ex_some_show ex(QObject::tr("Problems reading the file ") + adr.users_dir + str + adr.user_config);
+        ex.show();
+    }
 }
 
 void Carcass::message(QString str, bool _modal)

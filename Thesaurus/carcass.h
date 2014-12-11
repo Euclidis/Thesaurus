@@ -32,10 +32,10 @@ public: //методы записи и чтения файлов
     enum class ReadResult   {OK, NotFound, Open, Read, DelTmp, RenameTmp};
     enum class OpenWriteAs  {WriteOnly  =   static_cast<OpenWriteAs>(QIODevice::WriteOnly),
                              Append     =   static_cast<OpenWriteAs>(QIODevice::Append)};
-    bool conf_write();
-    bool conf_read();
-    bool confUser_write(QString str);
-    bool confUser_read(QString str);
+    void conf_write();
+    void conf_read();
+    void confUser_write(QString str);
+    void confUser_read(QString str);
 
     QString enumWToQStr (WriteResult wr);
     QString enumRToQStr (ReadResult rr);
