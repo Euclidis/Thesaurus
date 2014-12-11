@@ -29,6 +29,8 @@ private slots:
     void on_lineEdit_2_returnPressed();
     void on_lineEdit_3_returnPressed();
 
+    void on_lineEdit_textChanged();
+
 private:
     void Login();
     bool mode_flag;
