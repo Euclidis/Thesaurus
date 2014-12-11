@@ -46,7 +46,8 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
     if (carcass->ReadFile(carcass->adr.User, name_pass) != Carcass::ReadResult::OK){
         QString mess = tr("Problems reading file ") + carcass->adr.User + tr("\nProgramm will shutdown");
         carcass->message(mess);
-        close();
+        this->deleteLater();
+
       }
     //-------------------------------------------------------
     setFixedSize(400,300);
@@ -89,6 +90,7 @@ void AccountWindow::on_pushButton_3_clicked()
 //Enter
 void AccountWindow::on_pushButton_clicked()
 {
+
 
 if (mode_flag){
 
