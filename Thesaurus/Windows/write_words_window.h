@@ -1,18 +1,20 @@
 #ifndef WRITE_WORDS_WINDOW_H
 #define WRITE_WORDS_WINDOW_H
 
-#include <QDialog>
+#include <QDialog> // удалить
+//#include "../carcass.h"
 
 namespace Ui {
 class WriteWordsWindow;
 }
 
-class WriteWordsWindow : public QDialog
+class WriteWordsWindow : public QDialog //BaseWindow
 {
     Q_OBJECT
-
 public:
-    explicit WriteWordsWindow(QWidget *parent = 0);
+    //Carcass * carcass;
+public:
+    explicit WriteWordsWindow(/*Carcass * _carcass*/);
     ~WriteWordsWindow();
 
 private:

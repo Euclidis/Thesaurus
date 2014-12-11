@@ -2,18 +2,20 @@
 #define LANG_SELECTION_WINDOW_H
 
 
-#include <QDialog>
+#include <QDialog> //удалить после коррекции
+//#include "../carcass.h"
 
 namespace Ui {
   class LangSelectionWindow;
 }
 
-class LangSelectionWindow : public QDialog
+class LangSelectionWindow : public QDialog//BaseWindow
 {
   Q_OBJECT
-
 public:
-  explicit LangSelectionWindow(QWidget *parent = 0);
+    //Carcass * carcass;
+public:
+  explicit LangSelectionWindow(/*Carcass * _carcass*/);
   ~LangSelectionWindow();
 
 private:

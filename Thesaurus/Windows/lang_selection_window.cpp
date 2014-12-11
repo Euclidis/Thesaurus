@@ -2,11 +2,11 @@
 #include "ui_lang_selection_window.h"
 
 
-LangSelectionWindow::LangSelectionWindow(QWidget *parent) :
-  QDialog(parent),
+LangSelectionWindow::LangSelectionWindow(/*Carcass * _carcass*/) :
   ui(new Ui::LangSelectionWindow)
 {
   ui->setupUi(this);
+  //carcass = _carcass;
 }
 
 LangSelectionWindow::~LangSelectionWindow()
