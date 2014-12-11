@@ -9,16 +9,18 @@ class Carcass
 {
 
 public: //метки
-      QString current_account;
-      QString current_language_interface;
-      QString current_language;
-      QString current_dct;
+    QString current_account;
+    QString current_language_interface;
+    QString current_language;
+    QString current_accountOS;
+    QMap<QString, QString> QMapAccounts;
+    bool flag_AWIgnore;
 
 public: //структуры данных
-      Adr adr;                    //структура адресов
-      ControlSymbol symb;         //структура символов
-      WidgetsTexts wg_tx;         //структура текстов виджетов
-      WriteWordsWindow *WWW;
+    Adr adr;                    //структура адресов
+    ControlSymbol symb;         //структура символов
+    WidgetsTexts wg_tx;         //структура текстов виджетов
+    WriteWordsWindow *WWW;
 
 public: //методы
     Carcass();
@@ -32,9 +34,9 @@ public: //методы записи и чтения файлов
     enum class OpenWriteAs  {WriteOnly  =   static_cast<OpenWriteAs>(QIODevice::WriteOnly),
                              Append     =   static_cast<OpenWriteAs>(QIODevice::Append)};
     bool conf_write();
-    void conf_read();
-    void confUser_write();
-    void confUser_read();
+    bool conf_read();
+    bool confUser_write(QString str);
+    bool confUser_read(QString str);
 
     QString enumWToQStr (WriteResult wr);
     QString enumRToQStr (ReadResult rr);

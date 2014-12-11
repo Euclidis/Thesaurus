@@ -8,7 +8,7 @@ struct Adr
     const QString ext = ".conf";          //расширение для файлов
     const QString config = "settings\\configuration" + ext;
     const QString User = "data\\users\\UsersList" + ext;
-    const QString users_dir = "data\\users";
+    const QString users_dir = "data\\users\\";
     const QString user_config = "configuration" + ext;
     const QString EndingTemp = ".temp";
 };
