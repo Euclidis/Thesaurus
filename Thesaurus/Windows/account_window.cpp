@@ -101,8 +101,8 @@ if (mode_flag){
         if (name_pass[ui->lineEdit->text()] == ui->lineEdit_2->text()){
               carcass->current_account = ui->lineEdit->text();
             //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-              carcass->WWW = new WriteWordsWindow;
-              carcass->WWW->show();
+              carcass->LSW = new LangSelectionWindow;
+              carcass->LSW->show();
             //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-END--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 close();}
         else {
@@ -135,8 +135,8 @@ else if (ui->lineEdit_2->text() == ui->lineEdit_3->text()){
   carcass->WriteFile(carcass->adr.User, name_pass);
 
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  carcass->WWW = new WriteWordsWindow;
-  carcass->WWW->show();
+  carcass->LSW = new LangSelectionWindow;
+  carcass->LSW->show();
   close();
   }
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-END--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
