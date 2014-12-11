@@ -1,8 +1,8 @@
 #ifndef LANG_SELECTION_WINDOW_H
 #define LANG_SELECTION_WINDOW_H
 
-#include "account_window.h"
-//#include <QDialog>
+
+#include <QDialog>
 
 namespace Ui {
   class LangSelectionWindow;

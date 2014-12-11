@@ -3,6 +3,7 @@
 
 #include "exceptions_list.h"
 #include "Windows/write_words_window.h"
+#include "Windows/lang_selection_window.h"
 
 class Carcass
 {
@@ -20,6 +21,8 @@ public: //структуры данных
     ControlSymbol symb;         //структура символов
     WidgetsTexts wg_tx;         //структура текстов виджетов
     WriteWordsWindow *WWW;
+    LangSelectionWindow *LSW;
+
 
 public: //методы
     Carcass();
