@@ -3,8 +3,41 @@
 
 Carcass::Carcass()
 {
-    AccountWindow *account = new AccountWindow (this);
-    account->show();
+    //Получаем имя пользователя компьютера
+    current_accountOS = qgetenv("USER");
+    if (current_accountOS.isEmpty())
+        current_accountOS = qgetenv("USERNAME");
+
+    //Присваиваем общим переменным стандартные значения
+    current_language_interface = adr.LangInterface_en;  //>>>>>>>>> Стоит поменять на что-то другое <<<<<<<<//
+    current_language = symb.lang_empty;
+    flag_AWIgnore = false;
+
+    //читаем файл конфигурации и заполняем QMapAccounts
+    if (!conf_read()) throw ex_config_error(0, adr.config);
+
+    //Проверяем наличие пользователя компьютера в QMapAccounts
+    if (QMapAccounts.isEmpty()){
+        AccountWindow *account = new AccountWindow (this);
+        account->show();
+    }
+    else{
+        if (QMapAccounts.contains(current_accountOS)){
+            current_account = QMapAccounts[current_accountOS];
+
+            //читаем user config
+            if(!confUser_read(current_account)) throw ex_config_error(0, adr.users_dir + current_account + adr.user_config);
+            if(flag_AWIgnore) flag_AWIgnore; //>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Дабавить код запуска меню <<<<<<<//
+            else {
+                AccountWindow *account = new AccountWindow (this, 1);
+                account->show();
+            }
+        }
+        else {
+            AccountWindow *account = new AccountWindow (this, 1);
+            account->show();
+        }
+    }
 }
 
 bool Carcass::conf_write()
