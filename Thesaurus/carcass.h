@@ -1,6 +1,7 @@
 #ifndef CARCASS_H
 #define CARCASS_H
 
+#include "adress_texts.h"
 #include "exceptions_list.h"
 #include "Windows/write_words_window.h"
 

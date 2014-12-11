@@ -1,7 +1,7 @@
 #ifndef ADRESS_TEXTS_H
 #define ADRESS_TEXTS_H
 
-#include "base_window.h"
+#include "general.h"
 
 struct Adr
 {
@@ -11,14 +11,11 @@ struct Adr
     const QString users_dir = "data\\users\\";
     const QString user_config = "configuration" + ext;
     const QString EndingTemp = ".temp";
-
-    const QString LangInterface_en = ":/...";
-    const QString LangInterface_ru = ":/...";
 };
 
 struct ControlSymbol
 {
-    const QString lang_empty = "⚜";       //символ для обозначения в файле конфигурации отсутствия созданных аккаунтов
+    const QString ac_count_0 = "⚜";       //символ для обозначения в файле конфигурации отсутствия созданных аккаунтов
 };
 
 struct WidgetsTexts
@@ -26,6 +23,7 @@ struct WidgetsTexts
     const char* const OK = QT_TR_NOOP("OK");
     const char* const Cancel = QT_TR_NOOP("Cancel");
 };
+
 
 
 #endif // ADRESS_TEXTS_H

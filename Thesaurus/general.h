@@ -1,7 +1,7 @@
 #ifndef GENERAL_H
 #define GENERAL_H
 
-#include "adress_texts.h"
+#include "base_window.h"
 #include <QFile>
 #include <QMap>
 #include <QStringList>
