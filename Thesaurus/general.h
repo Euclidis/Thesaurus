@@ -5,5 +5,6 @@
 #include <QFile>
 #include <QMap>
 #include <QStringList>
+#include <QDir>
 
 #endif // GENERAL_H

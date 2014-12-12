@@ -34,6 +34,7 @@ private slots:
 private:
     void Login();
     bool mode_flag;
+    QString UserName;
     QMap <QString, QString> name_pass;             //имена и пароли пользователей
     Ui::AccountWindow *ui;
 

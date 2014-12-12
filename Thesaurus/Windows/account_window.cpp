@@ -2,6 +2,7 @@
 #include "ui_account_window.h"
 
 
+
 //--------------------------------------------------------
 //1) Каркасс проверяет, какой пользователь был последним и оставил ли он флаг автовхода
 //  а) если да, то запустить окно основного меню, вызывающее запись слов для данного пользователя
@@ -73,7 +74,7 @@ void AccountWindow::on_pushButton_2_clicked()
     ui->pushButton_3->show();
     ui->lineEdit_3->show();
  //setTextColor
-    if (name_pass.contains(ui->lineEdit->text()))
+    if (name_pass.contains(UserName))
 {
       QPalette *palette = new QPalette();
       palette->setColor(QPalette::Text,Qt::red);
@@ -97,9 +98,10 @@ if (mode_flag){
 //=========================================================================================
 // LOGIN BLOCK
 
-    if (name_pass.contains(ui->lineEdit->text())){
-        if (name_pass[ui->lineEdit->text()] == ui->lineEdit_2->text()){
-              carcass->current_account = ui->lineEdit->text();
+
+    if (name_pass.contains(UserName)){
+        if (name_pass[UserName] == ui->lineEdit_2->text()){
+              carcass->current_account = UserName;
             //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
               carcass->LSW = new LangSelectionWindow;
               carcass->LSW->show();
@@ -110,19 +112,25 @@ if (mode_flag){
               ui->lineEdit_2->setFocus();
               }
          }
+    //some MAGIC
+    else if (UserName != "Thesaurus"){
+
+        ui->lineEdit->setFocus();
+      }
     else {
          carcass->message(tr("User is not found"));
+
          ui->lineEdit->setFocus();
       }
   }
 //=========================================================================================
 //REGISTRATION BLOCK
 
-else if (name_pass.contains(ui->lineEdit->text())){
+else if (name_pass.contains(UserName)){
     carcass->message(tr("This user name is already in use"));
     ui->lineEdit->setFocus();
   }
-else if (ui->lineEdit->text() == ""){
+else if (UserName == ""){
 
     carcass->message(tr("The user name must contain at least one character"));
     ui->lineEdit_2->setFocus();
@@ -130,11 +138,27 @@ else if (ui->lineEdit->text() == ""){
   }
 else if (ui->lineEdit_2->text() == ui->lineEdit_3->text()){
 
-  name_pass.insert(ui->lineEdit->text(), ui->lineEdit_2->text());
-  carcass->current_account = ui->lineEdit->text();
+  name_pass.insert(UserName, ui->lineEdit_2->text());
+  carcass->current_account = UserName;
   carcass->WriteFile(carcass->adr.User, name_pass);
+  //Загрузка конфиг-файла QMapAccounts
+  carcass->QMapAccounts.insert(carcass->current_accountOS, carcass->current_account);
+  carcass->conf_write();
+  // create dir and files for new user
+  QString path_to_User = carcass->adr.users_dir + carcass->current_account;
+  QDir dir(path_to_User);
+  if (!dir.exists()){
+
+      dir.mkpath(".");
+      carcass->confUser_write(carcass->current_account);
+    }
+  else {
+      carcass->message(tr("Something is wrong!\n Programm will shutdown"));
+      close();
+    }
 
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
   carcass->LSW = new LangSelectionWindow;
   carcass->LSW->show();
   close();
@@ -174,8 +198,10 @@ void AccountWindow::on_lineEdit_3_returnPressed()
 
 void AccountWindow::on_lineEdit_textChanged()
 {
+
+  UserName = ui->lineEdit->text().toLower();
   //---------------------Изменение жирности шрифта при вводе имени юзера
-  if (ui->lineEdit->text() != ""){
+  if (UserName != ""){
       QFont font(ui->lineEdit->font().family(), 18);
       font.setBold(1);
       ui->lineEdit->setFont(font);
@@ -190,7 +216,7 @@ void AccountWindow::on_lineEdit_textChanged()
 
   //----------------------Цвет текста меняется на красный, если пользователь при регистрации вводит имя, существующее в базе
   if (!mode_flag){
-      if (name_pass.contains(ui->lineEdit->text()))
+      if (name_pass.contains(UserName))
 {
         QPalette *palette = new QPalette();
         palette->setColor(QPalette::Text,Qt::red);
