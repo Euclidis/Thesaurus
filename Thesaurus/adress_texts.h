@@ -14,6 +14,8 @@ struct Adr
 
     const QString LangInterface_en = ":/...";
     const QString LangInterface_ru = ":/...";
+
+    const QString ext_dct = ".dct";
 };
 
 struct ControlSymbol
