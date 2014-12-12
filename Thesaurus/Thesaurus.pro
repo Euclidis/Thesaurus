@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     Exceptions/exception_window.cpp \
     Exceptions/ex_some_show.cpp \
     Windows/lang_selection_window.cpp \
-    Windows/menu_window.cpp
+    Windows/menu_window.cpp \
+    Windows/MyWidgets/label.cpp
 
 HEADERS  += \
     carcass.h \
@@ -45,7 +46,8 @@ HEADERS  += \
     Exceptions/exception_window.h \
     Exceptions/ex_some_show.h \
     Windows/lang_selection_window.h \
-    Windows/menu_window.h
+    Windows/menu_window.h \
+    Windows/MyWidgets/label.h
 
 FORMS    += \
     base_window.ui \

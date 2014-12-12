@@ -12,8 +12,7 @@
 void AccountWindow::Login(){
   mode_flag = true;
   this->setWindowTitle(tr("Login"));
-  ui->pushButton_3->hide();
-  ui->pushButton_2->show();
+  ui->LogReg_Button->setText(tr("Registration"));
   ui->lineEdit_3->hide();
   QPalette *palette = new QPalette();
   palette->setColor(QPalette::Text,Qt::black);
@@ -52,6 +51,19 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
       }
     //-------------------------------------------------------
     setFixedSize(400,300);
+    //-------------------------------------------------------
+    //Background color
+    QPalette p = this->palette();
+    QColor backgrColor( 247, 238, 255, 255);
+    p.setColor(this->backgroundRole(), backgrColor);
+    this->setPalette(p);
+    //this->setStyleSheet("background-image: url(data/space2.png)");
+    //=======================================================
+
+    //Font Color
+    QColor fontColor (255, 243, 255, 255);
+
+
     mode_flag = mode;
     if (mode_flag)
     Login();
@@ -63,114 +75,6 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
 AccountWindow::~AccountWindow()
 {
     delete ui;
-}
-
-//REGISTRATION
-void AccountWindow::on_pushButton_2_clicked()
-{
-    mode_flag = false;
-    this->setWindowTitle(tr("Registration"));
-    ui->pushButton_2->hide();
-    ui->pushButton_3->show();
-    ui->lineEdit_3->show();
- //setTextColor
-    if (name_pass.contains(UserName))
-{
-      QPalette *palette = new QPalette();
-      palette->setColor(QPalette::Text,Qt::red);
-      ui->lineEdit->setPalette(*palette);
-}
-}
-
-//LOGIN
-void AccountWindow::on_pushButton_3_clicked()
-{
-    Login();
-}
-
-//Enter
-void AccountWindow::on_pushButton_clicked()
-{
-
-
-if (mode_flag){
-
-//=========================================================================================
-// LOGIN BLOCK
-
-
-    if (name_pass.contains(UserName)){
-        if (name_pass[UserName] == ui->lineEdit_2->text()){
-              carcass->current_account = UserName;
-            //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-              carcass->LSW = new LangSelectionWindow;
-              carcass->LSW->show();
-            //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-END--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                close();}
-        else {
-              carcass->message(tr("Incorrect Password"));
-              ui->lineEdit_2->setFocus();
-              }
-         }
-    //some MAGIC
-    else if (UserName != "Thesaurus"){
-
-        ui->lineEdit->setFocus();
-      }
-    else {
-         carcass->message(tr("User is not found"));
-
-         ui->lineEdit->setFocus();
-      }
-  }
-//=========================================================================================
-//REGISTRATION BLOCK
-
-else if (name_pass.contains(UserName)){
-    carcass->message(tr("This user name is already in use"));
-    ui->lineEdit->setFocus();
-  }
-else if (UserName == ""){
-
-    carcass->message(tr("The user name must contain at least one character"));
-    ui->lineEdit_2->setFocus();
-
-  }
-else if (ui->lineEdit_2->text() == ui->lineEdit_3->text()){
-
-  name_pass.insert(UserName, ui->lineEdit_2->text());
-  carcass->current_account = UserName;
-  carcass->WriteFile(carcass->adr.User, name_pass);
-  //Загрузка конфиг-файла QMapAccounts
-  carcass->QMapAccounts.insert(carcass->current_accountOS, carcass->current_account);
-  carcass->conf_write();
-  // create dir and files for new user
-  QString path_to_User = carcass->adr.users_dir + carcass->current_account;
-  QDir dir(path_to_User);
-  if (!dir.exists()){
-
-      dir.mkpath(".");
-      carcass->confUser_write(carcass->current_account);
-    }
-  else {
-      carcass->message(tr("Something is wrong!\n Programm will shutdown"));
-      close();
-    }
-
-  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-  carcass->LSW = new LangSelectionWindow;
-  carcass->LSW->show();
-  close();
-  }
-  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-END--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-//несовпадает пароль
- else {
-
-  carcass->message(tr("Passwords is not match"));
-  ui->lineEdit_2->setFocus();
-  }
 }
 
 //---------------------------------------------------------------
@@ -188,12 +92,12 @@ void AccountWindow::on_lineEdit_2_returnPressed()
   if (mode_flag == 0) // Registration
     ui->lineEdit_3->setFocus();
         else if (mode_flag == 1)
-    on_pushButton_clicked();
+    on_OK_Button_clicked();
 }
 
 void AccountWindow::on_lineEdit_3_returnPressed()
 {
-     on_pushButton_clicked();
+    on_OK_Button_clicked();
 }
 
 void AccountWindow::on_lineEdit_textChanged()
@@ -229,4 +133,147 @@ void AccountWindow::on_lineEdit_textChanged()
   }
     }
 
+}
+
+void AccountWindow::on_label_clicked()
+{
+    ui->lineEdit->setText("CLICK");
+}
+
+void AccountWindow::on_OK_Button_clicked()
+{
+
+  if (mode_flag){
+
+  //=========================================================================================
+  // LOGIN BLOCK
+
+
+      if (name_pass.contains(UserName)){
+          if (name_pass[UserName] == ui->lineEdit_2->text()){
+                carcass->current_account = UserName;
+              //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                carcass->LSW = new LangSelectionWindow;
+                carcass->LSW->show();
+              //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-END--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                  close();}
+          else {
+                carcass->message(tr("Incorrect Password"));
+                ui->lineEdit_2->setFocus();
+                }
+           }
+      //some MAGIC
+      else if (UserName == ""){
+
+          ui->lineEdit->setFocus();
+        }
+      else {
+           carcass->message(tr("User is not found"));
+
+           ui->lineEdit->setFocus();
+        }
+    }
+  //=========================================================================================
+  //REGISTRATION BLOCK
+
+  else if (name_pass.contains(UserName)){
+      carcass->message(tr("This user name is already in use"));
+      ui->lineEdit->setFocus();
+    }
+  else if (UserName == ""){
+
+      carcass->message(tr("The user name must contain at least one character"));
+      ui->lineEdit_2->setFocus();
+
+    }
+  else if (ui->lineEdit_2->text() == ui->lineEdit_3->text()){
+
+    name_pass.insert(UserName, ui->lineEdit_2->text());
+    carcass->current_account = UserName;
+    carcass->WriteFile(carcass->adr.User, name_pass);
+    //Загрузка конфиг-файла QMapAccounts
+    carcass->QMapAccounts.insert(carcass->current_accountOS, carcass->current_account);
+    carcass->conf_write();
+    // create dir and files for new user
+    QString path_to_User = carcass->adr.users_dir + carcass->current_account;
+    QDir dir(path_to_User);
+    if (!dir.exists()){
+
+        dir.mkpath(".");
+        carcass->confUser_write(carcass->current_account);
+      }
+    else {
+        carcass->message(tr("Something is wrong!\n Programm will shutdown"));
+        close();
+      }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    carcass->LSW = new LangSelectionWindow;
+    carcass->LSW->show();
+    close();
+    }
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-END--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+  //несовпадает пароль
+   else {
+
+    carcass->message(tr("Passwords is not match"));
+    ui->lineEdit_2->setFocus();
+    }
+  }
+
+  //---------------------------------------------------------------
+
+
+
+void AccountWindow::on_LogReg_Button_clicked()
+{
+  if (!mode_flag){
+      Login();
+    }
+  else{
+
+      mode_flag = false;
+      this->setWindowTitle(tr("Registration"));
+      ui->LogReg_Button->setText(tr("Login"));
+      ui->lineEdit_3->show();
+
+   //setTextColor
+      if (name_pass.contains(UserName))
+  {
+        QPalette *palette = new QPalette();
+        palette->setColor(QPalette::Text,Qt::red);
+        ui->lineEdit->setPalette(*palette);
+  }
+    }
+
+}
+
+void AccountWindow::on_OK_Button_mouseEnter()
+{
+  QFont font(ui->OK_Button->font().family(), 20);
+  font.setBold(1);
+  ui->OK_Button->setFont(font);
+}
+
+void AccountWindow::on_OK_Button_mouseLeave()
+{
+  QFont font(ui->OK_Button->font().family(), 20);
+  font.setBold(0);
+  ui->OK_Button->setFont(font);
+}
+
+void AccountWindow::on_LogReg_Button_mouseEnter()
+{
+  QFont font(ui->LogReg_Button->font().family(), 11);
+  font.setBold(1);
+  ui->LogReg_Button->setFont(font);
+}
+
+void AccountWindow::on_LogReg_Button_mouseLeave()
+{
+  QFont font(ui->LogReg_Button->font().family(), 11);
+  font.setBold(0);
+  ui->LogReg_Button->setFont(font);
 }

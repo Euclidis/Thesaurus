@@ -21,15 +21,26 @@ void retranslateUI();
 
 
 private slots:
-    void on_pushButton_2_clicked();
-    void on_pushButton_3_clicked();
-    void on_pushButton_clicked();
 
     void on_lineEdit_returnPressed();
     void on_lineEdit_2_returnPressed();
     void on_lineEdit_3_returnPressed();
 
     void on_lineEdit_textChanged();
+
+    void on_label_clicked();
+
+    void on_OK_Button_clicked();
+
+    void on_LogReg_Button_clicked();
+
+    void on_OK_Button_mouseEnter();
+
+    void on_OK_Button_mouseLeave();
+
+    void on_LogReg_Button_mouseEnter();
+
+    void on_LogReg_Button_mouseLeave();
 
 private:
     void Login();

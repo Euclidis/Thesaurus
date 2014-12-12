@@ -6,5 +6,13 @@
 #include <QMap>
 #include <QStringList>
 #include <QDir>
+#include <QMultiMap>
+#include <QDate>
+#include <QLabel>
+#include <QMouseEvent>
+#include <QEvent>
+
+
+#include "Windows/MyWidgets/label.h"
 
 #endif // GENERAL_H
