@@ -46,8 +46,15 @@ private:
     void Registration();
     void Login();
     bool mode_flag;
+    void Login_Anim();
+    void Regis_Anim();
     QString UserName;
     QMap <QString, QString> name_pass;             //имена и пароли пользователей
+    int STARTPOS;
+    QPropertyAnimation *lineedit_anim;
+    QPropertyAnimation *lineedit_2_anim;
+    QPropertyAnimation *lineedit_3_anim;
+    QPropertyAnimation *OK_Butt_anim;
     Ui::AccountWindow *ui;
 
 };

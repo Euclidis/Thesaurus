@@ -10,17 +10,15 @@
 //  в) если пользователя небыло, до запустить окно регистрации
 //--------------------------------------------------------
 void AccountWindow::Login(){
+
   mode_flag = true;
   this->setWindowTitle(tr("Login"));
   ui->LogReg_Button->setText(tr("Registration"));
-  ui->lineEdit_3->hide();
   QPalette *palette = new QPalette();
   palette->setColor(QPalette::Text,Qt::black);
   ui->lineEdit->setPalette(*palette);
-  ui->lineEdit->move(ui->lineEdit->x(), ui->lineEdit->y()+20);
-  ui->lineEdit_2->move(ui->lineEdit_2->x(), ui->lineEdit_2->y()+20);
-  ui->lineEdit_3->move(ui->lineEdit_3->x(), ui->lineEdit_3->y()+20);
-  ui->OK_Button->move(ui->OK_Button->x(), ui->OK_Button->y()-20);
+  Login_Anim();
+
 }
 void AccountWindow::Registration(){
   mode_flag = false;
@@ -35,10 +33,8 @@ void AccountWindow::Registration(){
     palette->setColor(QPalette::Text,Qt::red);
     ui->lineEdit->setPalette(*palette);
 }
-  ui->lineEdit->move(ui->lineEdit->x(), ui->lineEdit->y()-20);
-  ui->lineEdit_2->move(ui->lineEdit_2->x(), ui->lineEdit_2->y()-20);
-  ui->lineEdit_3->move(ui->lineEdit_3->x(), ui->lineEdit_3->y()-20);
-  ui->OK_Button->move(ui->OK_Button->x(), ui->OK_Button->y()+20);
+  Regis_Anim();
+
 }
 
 
@@ -53,6 +49,14 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
 
     ui->setupUi(this);
     carcass = _carcass;
+
+    lineedit_anim   = new QPropertyAnimation(ui->lineEdit, "pos", this);
+    lineedit_2_anim = new QPropertyAnimation(ui->lineEdit_2, "pos", this);
+    lineedit_3_anim = new QPropertyAnimation(ui->lineEdit_3, "geometry", this);
+    OK_Butt_anim    = new QPropertyAnimation(ui->OK_Button, "pos", this);
+
+
+
     //--------------------------------------------------------//
     //Допустимые Символы Имении Пароля
     //--------------------------------------------------------//
@@ -291,4 +295,52 @@ void AccountWindow::on_LogReg_Button_mouseLeave()
   QFont font(ui->LogReg_Button->font().family(), 11);
   font.setBold(0);
   ui->LogReg_Button->setFont(font);
+}
+void AccountWindow::Login_Anim(){
+
+  lineedit_anim->setDuration(500);
+  lineedit_anim->setEndValue(QPoint (ui->lineEdit->pos().x(), 80));
+  lineedit_anim->setEasingCurve(QEasingCurve::BezierSpline);
+  lineedit_anim->start();
+
+  lineedit_2_anim->setDuration(500);
+  lineedit_2_anim->setEndValue(QPoint (ui->lineEdit->pos().x(), 140));
+  lineedit_2_anim->setEasingCurve(QEasingCurve::BezierSpline);
+  lineedit_2_anim->start();
+
+  lineedit_3_anim->setDuration(500);
+  lineedit_3_anim->setStartValue(QRect(60,180,281,51));
+  lineedit_3_anim->setEndValue(QRect(350,320,0,0));
+  lineedit_3_anim->setEasingCurve(QEasingCurve::InCubic);
+  lineedit_3_anim->start();
+
+
+  OK_Butt_anim->setDuration(500);
+  OK_Butt_anim->setEndValue(QPoint (ui->OK_Button->pos().x(), 200));
+  OK_Butt_anim->setEasingCurve(QEasingCurve::BezierSpline);
+  OK_Butt_anim->start();
+
+}
+void AccountWindow::Regis_Anim(){
+
+  lineedit_anim->setDuration(500);
+  lineedit_anim->setEndValue(QPoint (ui->lineEdit->pos().x(), 60));
+  lineedit_anim->setEasingCurve(QEasingCurve::InCubic);
+  lineedit_anim->start();
+
+  lineedit_2_anim->setDuration(500);
+  lineedit_2_anim->setEndValue(QPoint (ui->lineEdit->pos().x(), 120));
+  lineedit_2_anim->setEasingCurve(QEasingCurve::InCubic);
+  lineedit_2_anim->start();
+
+  lineedit_3_anim->setDuration(500);
+  lineedit_3_anim->setStartValue(QRect(350,270,0,0));
+  lineedit_3_anim->setEndValue(QRect(60,180,281,51));
+  lineedit_3_anim->setEasingCurve(QEasingCurve::InCubic);
+  lineedit_3_anim->start();
+
+  OK_Butt_anim->setDuration(500);
+  OK_Butt_anim->setEndValue(QPoint (ui->OK_Button->pos().x(), 240));
+  OK_Butt_anim->setEasingCurve(QEasingCurve::InCubic);
+  OK_Butt_anim->start();
 }

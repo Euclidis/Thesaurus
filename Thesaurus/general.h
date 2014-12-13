@@ -11,6 +11,8 @@
 #include <QLabel>
 #include <QMouseEvent>
 #include <QEvent>
+#include <QPropertyAnimation>
+#include <QPoint>
 
 
 #include "Windows/MyWidgets/label.h"
