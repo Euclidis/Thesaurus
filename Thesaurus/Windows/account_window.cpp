@@ -184,8 +184,7 @@ void AccountWindow::on_OK_Button_clicked()
           if (name_pass[UserName] == ui->lineEdit_2->text()){
                 carcass->current_account = UserName;
               //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                carcass->LSW = new LangSelectionWindow;
-                carcass->LSW->show();
+                emit LSW_open();
               //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-END--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                   close();}
           else {
@@ -240,8 +239,7 @@ void AccountWindow::on_OK_Button_clicked()
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    carcass->LSW = new LangSelectionWindow;
-    carcass->LSW->show();
+    emit LSW_open();
     close();
     }
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-END--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

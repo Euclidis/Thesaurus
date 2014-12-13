@@ -23,7 +23,7 @@ private:
 
     QList<QString> words;
     QList<QString> transcriptions;
-    QList<QMultiMap> translates;
+    //QList<QMultiMap> translates;
     QList<QString> notes;
     QList<QDate> dates;
     QList<double> priorities;

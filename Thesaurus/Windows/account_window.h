@@ -56,7 +56,8 @@ private:
     QPropertyAnimation *lineedit_3_anim;
     QPropertyAnimation *OK_Butt_anim;
     Ui::AccountWindow *ui;
-
+signals:
+    void LSW_open();
 };
 
 #endif // ACCOUNT_WINDOW_H
