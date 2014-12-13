@@ -6,6 +6,7 @@ MenuWindow::MenuWindow(Carcass * _carcass) :
 {
     ui->setupUi(this);
     carcass =  _carcass;
+
 }
 
 MenuWindow::~MenuWindow()

@@ -62,3 +62,6 @@ FORMS    += \
     Exceptions/exception_window.ui \
     Windows/lang_selection_window.ui \
     Windows/menu_window.ui
+
+RESOURCES += \
+    Fonts.qrc

@@ -4,7 +4,7 @@ Label::Label(QWidget *parent, Qt::WindowFlags f):QLabel(parent,f){}
 Label::Label(const QString &text, QWidget *parent, Qt::WindowFlags f):QLabel(text,parent,f){}
 Label::~Label(){}
 
-void Label::mousePressEvent(QMouseEvent *ev){
+void Label::mousePressEvent(){
     emit clicked();
 }
 void Label::leaveEvent(QEvent *e)

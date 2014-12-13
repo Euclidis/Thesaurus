@@ -47,6 +47,7 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
     ui(new Ui::AccountWindow)
 {
 
+    InstallFont();
     ui->setupUi(this);
     carcass = _carcass;
 
@@ -341,4 +342,19 @@ void AccountWindow::Regis_Anim(){
   OK_Butt_anim->setEndValue(QPoint (ui->OK_Button->pos().x(), 240));
   OK_Butt_anim->setEasingCurve(QEasingCurve::InCubic);
   OK_Butt_anim->start();
+}
+
+void AccountWindow::InstallFont(){
+  QString font;
+  font = "Code Pro Light LC.otf";
+  QFile res(font);
+  if (res.open(QIODevice::ReadOnly) == false){
+      QString mess = tr("Font file ") + font + tr(" is not found");
+      carcass->message(mess);
+    }
+  else {
+      QFontDatabase::addApplicationFontFromData(res.readAll());
+    }
+
+
 }

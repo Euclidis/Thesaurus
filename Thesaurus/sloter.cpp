@@ -19,7 +19,8 @@ Sloter::Sloter()
 
     //Проверяем наличие пользователя компьютера в QMapAccounts
     if (carcass->QMapAccounts.isEmpty()){
-        AW_show();
+       AW_show();
+        //LSW->show();
     }
     else{
         if (carcass->QMapAccounts.contains(carcass->current_accountOS)){
@@ -30,10 +31,12 @@ Sloter::Sloter()
             if(carcass->flag_AWIgnore) MW = new MenuWindow(carcass);
             else {
                 AW_show(1);
+                //LSW->show();
             }
         }
         else {
             AW_show(1);
+            //LSW->show();
         }
     }
 }

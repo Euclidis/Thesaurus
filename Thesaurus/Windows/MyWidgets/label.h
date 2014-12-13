@@ -13,7 +13,7 @@ public:
     ~Label();
 
 protected:
-    void mousePressEvent(QMouseEvent *ev);
+    void mousePressEvent();
     virtual void enterEvent(QEvent *e);
     virtual void leaveEvent(QEvent *e);
 

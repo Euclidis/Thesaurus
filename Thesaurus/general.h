@@ -13,6 +13,7 @@
 #include <QEvent>
 #include <QPropertyAnimation>
 #include <QPoint>
+#include <QFontDatabase>
 
 
 #include "Windows/MyWidgets/label.h"
