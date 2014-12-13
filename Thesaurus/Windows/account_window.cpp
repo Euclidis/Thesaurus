@@ -17,7 +17,31 @@ void AccountWindow::Login(){
   QPalette *palette = new QPalette();
   palette->setColor(QPalette::Text,Qt::black);
   ui->lineEdit->setPalette(*palette);
+  ui->lineEdit->move(ui->lineEdit->x(), ui->lineEdit->y()+20);
+  ui->lineEdit_2->move(ui->lineEdit_2->x(), ui->lineEdit_2->y()+20);
+  ui->lineEdit_3->move(ui->lineEdit_3->x(), ui->lineEdit_3->y()+20);
+  ui->OK_Button->move(ui->OK_Button->x(), ui->OK_Button->y()-20);
 }
+void AccountWindow::Registration(){
+  mode_flag = false;
+  this->setWindowTitle(tr("Registration"));
+  ui->LogReg_Button->setText(tr("Login"));
+  ui->lineEdit_3->show();
+
+//setTextColor
+  if (name_pass.contains(UserName))
+{
+    QPalette *palette = new QPalette();
+    palette->setColor(QPalette::Text,Qt::red);
+    ui->lineEdit->setPalette(*palette);
+}
+  ui->lineEdit->move(ui->lineEdit->x(), ui->lineEdit->y()-20);
+  ui->lineEdit_2->move(ui->lineEdit_2->x(), ui->lineEdit_2->y()-20);
+  ui->lineEdit_3->move(ui->lineEdit_3->x(), ui->lineEdit_3->y()-20);
+  ui->OK_Button->move(ui->OK_Button->x(), ui->OK_Button->y()+20);
+}
+
+
 void AccountWindow::retranslateUI(){}
 
 
@@ -70,8 +94,8 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
     mode_flag = mode;
     if (mode_flag)
     Login();
-    else this->setWindowTitle(tr("Registration"));
-    retranslateUI();
+    else
+      Registration();
     ui->lineEdit->setFocus();
 }
 
@@ -166,7 +190,7 @@ void AccountWindow::on_OK_Button_clicked()
                 }
            }
       //some MAGIC
-      else if (UserName == ""){
+      else if (UserName.isEmpty()){
 
           ui->lineEdit->setFocus();
         }
@@ -237,22 +261,10 @@ void AccountWindow::on_LogReg_Button_clicked()
     }
   else{
 
-      mode_flag = false;
-      this->setWindowTitle(tr("Registration"));
-      ui->LogReg_Button->setText(tr("Login"));
-      ui->lineEdit_3->show();
-
-   //setTextColor
-      if (name_pass.contains(UserName))
-  {
-        QPalette *palette = new QPalette();
-        palette->setColor(QPalette::Text,Qt::red);
-        ui->lineEdit->setPalette(*palette);
-  }
-    }
+    Registration();
 
 }
-
+}
 void AccountWindow::on_OK_Button_mouseEnter()
 {
   QFont font(ui->OK_Button->font().family(), 20);

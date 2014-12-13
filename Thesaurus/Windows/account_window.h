@@ -43,6 +43,7 @@ private slots:
     void on_LogReg_Button_mouseLeave();
 
 private:
+    void Registration();
     void Login();
     bool mode_flag;
     QString UserName;
