@@ -6,14 +6,15 @@
 class LanguageMethods
 {
 private:
-    Carcass * carcass;
+    Carcass* carcass;
     QString adress;
     QDate date;
-
+    Language language;
 
 public:
-    LanguageMethods(Carcass * _carcass, QString _adress, bool &flag_good);
+    LanguageMethods(Carcass *_carcass, QString _adress, bool &flag_good);
     bool Write();
+    bool AddNewWords(Word& _word);
 
 private:
     bool ReadFile(Carcass::ReadResult rr);

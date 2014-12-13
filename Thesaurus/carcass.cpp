@@ -120,3 +120,25 @@ QString Carcass::enumRToQStr (ReadResult rr)
         return "Error";
     }
 }
+
+QDataStream& operator>>(QDataStream& out, Language& lang)
+{
+    out >> lang.words;
+    out >> lang.transcriptions;
+    out >> lang.translates;
+    out >> lang.notes;
+    out >> lang.dates;
+    out >> lang.priorities;
+    return out;
+}
+
+QDataStream& operator<<(QDataStream& in, Language& lang)
+{
+    in << lang.words;
+    in << lang.transcriptions;
+    in << lang.translates;
+    in << lang.notes;
+    in << lang.dates;
+    in << lang.priorities;
+    return in;
+}

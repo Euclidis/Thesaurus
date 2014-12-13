@@ -19,8 +19,7 @@ Sloter::Sloter()
 
     //Проверяем наличие пользователя компьютера в QMapAccounts
     if (carcass->QMapAccounts.isEmpty()){
-       AW_show();
-        //LSW->show();
+        AW_show();
     }
     else{
         if (carcass->QMapAccounts.contains(carcass->current_accountOS)){
@@ -30,35 +29,33 @@ Sloter::Sloter()
             carcass->confUser_read(carcass->current_account);
             if(carcass->flag_AWIgnore) MW = new MenuWindow(carcass);
             else {
-                AW_show(1);
-                //LSW->show();
+                AW_show();
             }
         }
         else {
-            AW_show(1);
-            //LSW->show();
+            AW_show();
         }
     }
 }
 
 void Sloter::AW_show(bool mode)
 {
-    if(!AW)AW = new AccountWindow(carcass, mode);
+    if(AW != nullptr)AW = new AccountWindow(carcass, mode);
     AW->show();
     connect(AW, SIGNAL(LSW_open()), SLOT(LSW_show()));
 }
 void Sloter::MW_show()
 {
-    if(!MW)MW = new MenuWindow(carcass);
+    if(MW != nullptr)MW = new MenuWindow(carcass);
     MW->show();
 }
 void Sloter::WWW_show()
 {
-    if(!WWW)WWW = new WriteWordsWindow(carcass);
+    if(WWW != nullptr)WWW = new WriteWordsWindow(carcass);
     WWW->show();
 }
 void Sloter::LSW_show()
 {
-    if(!LSW)LSW = new LangSelectionWindow(carcass);
+    if(LSW != nullptr)LSW = new LangSelectionWindow(carcass);
     LSW->show();
 }

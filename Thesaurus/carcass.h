@@ -3,6 +3,9 @@
 
 #include "language_struct.h"
 
+QDataStream& operator>>(QDataStream& out, Language& lang);
+QDataStream& operator<<(QDataStream& out, Language& lang);
+
 struct Carcass
 {
 
