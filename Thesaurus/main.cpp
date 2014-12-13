@@ -1,10 +1,9 @@
-#include "carcass.h"
 #include <QApplication>
-#include "Windows/account_window.h"
+#include "sloter.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Carcass carcass;
+    Sloter sloter;
     return a.exec();
 }

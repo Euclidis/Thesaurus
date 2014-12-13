@@ -27,7 +27,9 @@ SOURCES += main.cpp\
     Exceptions/ex_some_show.cpp \
     Windows/lang_selection_window.cpp \
     Windows/menu_window.cpp \
-    Windows/MyWidgets/label.cpp
+    Windows/MyWidgets/label.cpp \
+    sloter.cpp \
+    language.cpp
 
 HEADERS  += \
     carcass.h \
@@ -47,7 +49,9 @@ HEADERS  += \
     Exceptions/ex_some_show.h \
     Windows/lang_selection_window.h \
     Windows/menu_window.h \
-    Windows/MyWidgets/label.h
+    Windows/MyWidgets/label.h \
+    sloter.h \
+    language.h
 
 FORMS    += \
     base_window.ui \

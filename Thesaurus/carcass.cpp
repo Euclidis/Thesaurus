@@ -1,44 +1,4 @@
 #include "carcass.h"
-#include "Windows/account_window.h"
-
-Carcass::Carcass()
-{
-    //Получаем имя пользователя компьютера
-    current_accountOS = qgetenv("USER");
-    if (current_accountOS.isEmpty())
-        current_accountOS = qgetenv("USERNAME");
-
-    //Присваиваем общим переменным стандартные значения
-    current_language_interface = adr.LangInterface_en;  //>>>>>>>>> Стоит поменять на что-то другое <<<<<<<<//
-    current_language = symb.lang_empty;
-    flag_AWIgnore = false;
-
-    //читаем файл конфигурации и заполняем QMapAccounts
-    conf_read();
-
-    //Проверяем наличие пользователя компьютера в QMapAccounts
-    if (QMapAccounts.isEmpty()){
-        AccountWindow *account = new AccountWindow (this);
-        account->show();
-    }
-    else{
-        if (QMapAccounts.contains(current_accountOS)){
-            current_account = QMapAccounts[current_accountOS];
-
-            //читаем user config
-            confUser_read(current_account);
-            if(flag_AWIgnore) flag_AWIgnore; //>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Дабавить код запуска меню <<<<<<<//
-            else {
-                AccountWindow *account = new AccountWindow (this, 1);
-                account->show();
-            }
-        }
-        else {
-            AccountWindow *account = new AccountWindow (this, 1);
-            account->show();
-        }
-    }
-}
 
 void Carcass::conf_write()
 {

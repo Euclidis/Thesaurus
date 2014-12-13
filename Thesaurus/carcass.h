@@ -2,10 +2,8 @@
 #define CARCASS_H
 
 #include "exceptions_list.h"
-#include "Windows/write_words_window.h"
-#include "Windows/lang_selection_window.h"
 
-class Carcass
+struct Carcass
 {
 
 public: //метки
@@ -20,12 +18,6 @@ public: //структуры данных
     Adr adr;                    //структура адресов
     ControlSymbol symb;         //структура символов
     WidgetsTexts wg_tx;         //структура текстов виджетов
-    WriteWordsWindow *WWW;
-    LangSelectionWindow *LSW;
-
-
-public: //методы
-    Carcass();
 
 public: //метод вывода месседж окна
     void message(QString, bool _modal = true);

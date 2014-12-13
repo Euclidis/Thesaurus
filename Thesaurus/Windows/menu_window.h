@@ -1,20 +1,19 @@
 #ifndef MENU_WINDOW_H
 #define MENU_WINDOW_H
 
-#include <QDialog>  // удалить
-//#include "../carcass.h"
+#include "../carcass.h"
 
 namespace Ui {
 class MenuWindow;
 }
 
-class MenuWindow : public QDialog //BaseWindow
+class MenuWindow : public BaseWindow
 {
     Q_OBJECT
 public:
-    //Carcass * carcass;
+    Carcass * carcass;
 public:
-    explicit MenuWindow(/*Carcass * _carcass*/);
+    explicit MenuWindow(Carcass * _carcass);
     ~MenuWindow();
 
 private:
