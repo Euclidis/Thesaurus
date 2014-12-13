@@ -54,7 +54,7 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
     //-------------------------------------------------------
     //Background color
     QPalette p = this->palette();
-    QColor backgrColor( 247, 238, 255, 255);
+    QColor backgrColor( 165, 104, 178, 255);
     p.setColor(this->backgroundRole(), backgrColor);
     this->setPalette(p);
     //this->setStyleSheet("background-image: url(data/space2.png)");
@@ -62,7 +62,10 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
 
     //Font Color
     QColor fontColor (255, 243, 255, 255);
-
+    QPalette *Buttons_Color = new QPalette();
+    Buttons_Color->setColor(QPalette::WindowText,fontColor);
+    ui->OK_Button->setPalette(*Buttons_Color);
+    ui->LogReg_Button->setPalette(*Buttons_Color);
 
     mode_flag = mode;
     if (mode_flag)
