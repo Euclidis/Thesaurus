@@ -29,7 +29,7 @@ SOURCES += main.cpp\
     Windows/menu_window.cpp \
     Windows/MyWidgets/label.cpp \
     sloter.cpp \
-    language.cpp
+    language_methods.cpp
 
 HEADERS  += \
     carcass.h \
@@ -51,7 +51,8 @@ HEADERS  += \
     Windows/menu_window.h \
     Windows/MyWidgets/label.h \
     sloter.h \
-    language.h
+    language_struct.h \
+    language_methods.h
 
 FORMS    += \
     base_window.ui \

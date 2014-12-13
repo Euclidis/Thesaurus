@@ -1,6 +1,6 @@
-#include "language.h"
+#include "language_methods.h"
 
-Language::Language(Carcass * _carcass, QString _adress, bool& flag_good)
+LanguageMethods::LanguageMethods(Carcass * _carcass, QString _adress, bool &flag_good)
 {
     adress = _adress;
     carcass = _carcass;
@@ -16,12 +16,12 @@ Language::Language(Carcass * _carcass, QString _adress, bool& flag_good)
 //    if(!ReadFile(carcass->ReadFile(adress+carcass->adr.priorities, priorities))) flag_good = false;
 }
 
-bool Language::Write()
+bool LanguageMethods::Write()
 {
 return true;
 }
 
-bool Language::ReadFile(Carcass::ReadResult rr)
+bool LanguageMethods::ReadFile(Carcass::ReadResult rr)
 {
     switch (rr) {
     case Carcass::ReadResult::OK:

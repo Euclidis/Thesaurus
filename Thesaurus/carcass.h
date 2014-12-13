@@ -1,7 +1,7 @@
 #ifndef CARCASS_H
 #define CARCASS_H
 
-#include "exceptions_list.h"
+#include "language_struct.h"
 
 struct Carcass
 {
