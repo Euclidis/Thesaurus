@@ -49,6 +49,11 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
 
     InstallFont();
     ui->setupUi(this);
+
+    ui->lineEdit->setFrame(false);
+    ui->lineEdit_2->setFrame(false);
+    ui->lineEdit_3->setFrame(false);
+
     carcass = _carcass;
 
     lineedit_anim   = new QPropertyAnimation(ui->lineEdit, "pos", this);
@@ -61,6 +66,7 @@ AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
     //--------------------------------------------------------//
     //Допустимые Символы Имении Пароля
     //--------------------------------------------------------//
+
     ui->lineEdit->setPlaceholderText(tr("User name"));
     ui->lineEdit_2->setPlaceholderText(tr("Password"));
     ui->lineEdit_3->setPlaceholderText(tr("Confirm password"));
