@@ -2,6 +2,7 @@
 #define ACCOUNT_WINDOW_H
 
 #include "../carcass.h"
+#include "reset_pass_window.h"
 
 
 namespace Ui {
@@ -42,15 +43,19 @@ private:
     void Regis_Anim();
 
     void InstallFont();
+    void RPW_open();
 
     QString UserName;
     QMap <QString, QString> name_pass;  //имена и пароли пользователей
-    int STARTPOS;
     QPropertyAnimation *lineedit_anim;
     QPropertyAnimation *lineedit_2_anim;
     QPropertyAnimation *lineedit_3_anim;
     QPropertyAnimation *OK_Butt_anim;
+    ResetPassWindow *RPW;
     Ui::AccountWindow *ui;
+
+
+
 signals:
     void LSW_open();
 };

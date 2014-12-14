@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     Windows/menu_window.cpp \
     Windows/MyWidgets/label.cpp \
     sloter.cpp \
-    language_methods.cpp
+    language_methods.cpp \
+    Windows/reset_pass_window.cpp
 
 HEADERS  += \
     carcass.h \
@@ -52,7 +53,8 @@ HEADERS  += \
     Windows/MyWidgets/label.h \
     sloter.h \
     language_struct.h \
-    language_methods.h
+    language_methods.h \
+    Windows/reset_pass_window.h
 
 FORMS    += \
     base_window.ui \
@@ -61,7 +63,8 @@ FORMS    += \
     message_window.ui \
     Exceptions/exception_window.ui \
     Windows/lang_selection_window.ui \
-    Windows/menu_window.ui
+    Windows/menu_window.ui \
+    Windows/reset_pass_window.ui
 
 RESOURCES += \
     Fonts.qrc
