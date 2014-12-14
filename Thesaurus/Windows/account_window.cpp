@@ -9,6 +9,20 @@
 //  б) если полбзователь был, а флаг не оставил, то запустить окно логина
 //  в) если пользователя небыло, до запустить окно регистрации
 //--------------------------------------------------------------------------------------------------
+bool AccountWindow::is_User_Name_exists_here(){
+
+  QMap<QString, QString>::const_iterator i = name_pass.constBegin();
+  QString username = UserName.toLower();
+  while (i != name_pass.constEnd()){
+
+      if (i.key().toLower() == username)
+        return 1;
+      i++;
+    }
+  return 0;
+}
+
+//Login
 void AccountWindow::Login(){
   mode_flag = true;
   this->setWindowTitle(tr("Login"));
@@ -23,6 +37,7 @@ void AccountWindow::Login(){
   Login_Anim();
 
 }
+//Registration
 void AccountWindow::Registration(){
   mode_flag = false;
   this->setWindowTitle(tr("Registration"));
@@ -30,7 +45,7 @@ void AccountWindow::Registration(){
   ui->lineEdit_3->show();
 
     //setTextColor
-  if (name_pass.contains(UserName))
+  if (is_User_Name_exists_here())
 {
     QPalette *palette = new QPalette();
     palette->setColor(QPalette::Text,Qt::red);
@@ -146,7 +161,7 @@ void AccountWindow::on_lineEdit_3_returnPressed()
 void AccountWindow::on_lineEdit_textChanged()
 {
 
-  UserName = ui->lineEdit->text().toLower();
+  UserName = ui->lineEdit->text();
   //Изменение жирности шрифта при вводе имени юзера
   if (UserName != ""){
       QFont font(ui->lineEdit->font().family(), 18);
@@ -162,7 +177,7 @@ void AccountWindow::on_lineEdit_textChanged()
 
   //Цвет текста меняется на красный, если пользователь при регистрации вводит имя, существующее в базе
   if (!mode_flag){
-      if (name_pass.contains(UserName)){
+      if (is_User_Name_exists_here()){
         QPalette *palette = new QPalette();
         palette->setColor(QPalette::Text,Qt::red);
         ui->lineEdit->setPalette(*palette);
@@ -223,11 +238,11 @@ void AccountWindow::on_OK_Button_clicked()
   //=========================================================================================
   //REGISTRATION BLOCK
 
-  else if (name_pass.contains(UserName)){
+  else if (is_User_Name_exists_here()){
       carcass->message(tr("This user name is already in use"));
       ui->lineEdit->setFocus();
     }
-  else if (UserName == ""){
+  else if (UserName.isEmpty()){
       carcass->message(tr("The user name must contain at least one character"));
       ui->lineEdit_2->setFocus();
     }
@@ -241,7 +256,7 @@ void AccountWindow::on_OK_Button_clicked()
     carcass->conf_write();
 
     // create dir and files for new user
-    QString path_to_User = carcass->adr.users_dir + carcass->current_account;
+    QString path_to_User = carcass->adr.users_dir + UserName.toLower();
     QDir dir(path_to_User);
     if (!dir.exists()){
 

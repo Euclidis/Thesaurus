@@ -53,7 +53,7 @@ private:
     QPropertyAnimation *OK_Butt_anim;
     ResetPassWindow *RPW;
     Ui::AccountWindow *ui;
-
+    bool is_User_Name_exists_here();
 
 
 signals:
