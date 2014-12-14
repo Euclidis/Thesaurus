@@ -43,7 +43,7 @@ private:
     void Regis_Anim();
 
     void InstallFont();
-    void RPW_open();
+    void RPW_open(QMap<QString, QString> &);
 
     QString UserName;
     QMap <QString, QString> name_pass;  //имена и пароли пользователей

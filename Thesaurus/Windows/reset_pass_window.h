@@ -12,8 +12,17 @@ class ResetPassWindow : public BaseWindow
   Q_OBJECT
 
 public:
-  explicit ResetPassWindow();
+  explicit ResetPassWindow(QMap<QString, QString> &, QLineEdit &, Carcass &);
+
+  QMap<QString, QString> &names;
+  QLineEdit &CurrName;
+  Carcass &carcass;
   ~ResetPassWindow();
+
+private slots:
+  void on_buttonBox_accepted();
+
+  void on_buttonBox_rejected();
 
 private:
   Ui::ResetPassWindow *ui;

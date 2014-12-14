@@ -45,7 +45,7 @@ void AccountWindow::retranslateUI(){}
 
 //mode 1 = Login
 //mode 0 = Registration
-AccountWindow::AccountWindow(Carcass* _carcass, bool mode) :
+AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
     ui(new Ui::AccountWindow)
 {
 
@@ -175,15 +175,16 @@ void AccountWindow::on_lineEdit_textChanged()
   }
 }
 
-void AccountWindow::RPW_open(){
+void AccountWindow::RPW_open(QMap<QString, QString>& names){
 
-  RPW = new ResetPassWindow();
+  RPW = new ResetPassWindow(names, *ui->lineEdit, *carcass);
   RPW->show();
+  Login();
 
 }
 void AccountWindow::on_label_clicked()
 {
-   RPW_open();
+   RPW_open(name_pass);
 }
 
 void AccountWindow::on_OK_Button_clicked()

@@ -14,6 +14,7 @@
 #include <QPropertyAnimation>
 #include <QPoint>
 #include <QFontDatabase>
+#include <QLineEdit>
 
 
 #include "Windows/MyWidgets/label.h"
