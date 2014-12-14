@@ -9,6 +9,15 @@ Sloter::Sloter()
     MW = nullptr;
     LSW = nullptr;
 
+    bool flag_good = true;
+    Language lg(carcass, flag_good);
+    carcass->current_language = "lang1.lang";
+    if(flag_good){
+        lg.AddNewWord();
+        lg.WriteFile();
+    }
+    else {carcass->message("Error read language");}
+
     carcass->current_accountOS = qgetenv("USER");
     if (carcass->current_accountOS.isEmpty())
         carcass->current_accountOS = qgetenv("USERNAME");

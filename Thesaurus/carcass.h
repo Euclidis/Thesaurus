@@ -1,10 +1,21 @@
 #ifndef CARCASS_H
 #define CARCASS_H
 
-#include "language_struct.h"
+#include "exceptions_list.h"
 
-QDataStream& operator>>(QDataStream& out, Language& lang);
-QDataStream& operator<<(QDataStream& out, Language& lang);
+struct LanguageForDataStream
+{
+    QList<QString> words;
+    QList<QString> transcriptions;
+    QList<QStringList> translates;
+    QList<QStringList> dictionaryes;
+    QList<QString> notes;
+    QList<QDate> dates;
+    QList<double> priorities;
+};
+
+QDataStream& operator>>(QDataStream& out, LanguageForDataStream& lang);
+QDataStream& operator<<(QDataStream& in, LanguageForDataStream& lang);
 
 struct Carcass
 {
