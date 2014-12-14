@@ -4,6 +4,10 @@ Sloter::Sloter()
 {
     //Получаем имя пользователя компьютера
     carcass = new Carcass;
+    AW = nullptr;
+    WWW = nullptr;
+    MW = nullptr;
+    LSW = nullptr;
 
     carcass->current_accountOS = qgetenv("USER");
     if (carcass->current_accountOS.isEmpty())
@@ -40,22 +44,30 @@ Sloter::Sloter()
 
 void Sloter::AW_show(bool mode)
 {
-    if(AW != nullptr)AW = new AccountWindow(carcass, mode);
+    if(!AW){
+        AW = new AccountWindow(carcass, mode);
+        connect(AW, SIGNAL(LSW_open()), SLOT(LSW_show()));
+    }
     AW->show();
-    connect(AW, SIGNAL(LSW_open()), SLOT(LSW_show()));
 }
 void Sloter::MW_show()
 {
-    if(MW != nullptr)MW = new MenuWindow(carcass);
+    if(!MW){
+        MW = new MenuWindow(carcass);
+    }
     MW->show();
 }
 void Sloter::WWW_show()
 {
-    if(WWW != nullptr)WWW = new WriteWordsWindow(carcass);
+    if(!WWW){
+        WWW = new WriteWordsWindow(carcass);
+    }
     WWW->show();
 }
 void Sloter::LSW_show()
 {
-    if(LSW != nullptr)LSW = new LangSelectionWindow(carcass);
+    if(!LSW){
+        LSW = new LangSelectionWindow(carcass);
+    }
     LSW->show();
 }
