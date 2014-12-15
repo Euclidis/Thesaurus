@@ -1,7 +1,7 @@
 #ifndef MESOKCANCEL_H
 #define MESOKCANCEL_H
 
-#include "../message_window.h"
+#include "message_window.h"
 
 namespace Ui {
 class MesOKCancel;

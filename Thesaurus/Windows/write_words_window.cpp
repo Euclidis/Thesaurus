@@ -13,13 +13,3 @@ WriteWordsWindow::~WriteWordsWindow()
 {
     delete ui;
 }
-
-void WriteWordsWindow::on_pushButton_clicked()
-{
-    carcass->mesOKCancel("asdf");
-}
-
-void WriteWordsWindow::msOC(bool b)
-{
-    carcass->message(QString::number(b));
-}

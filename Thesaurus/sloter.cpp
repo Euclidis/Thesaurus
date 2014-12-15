@@ -10,14 +10,14 @@ Sloter::Sloter()
     LSW = nullptr;
     MOCW = nullptr;
 
-    bool flag_good = true;
-    Language lg(carcass, flag_good);
-    carcass->current_language = "lang1.lang";
-    if(flag_good){
-        lg.AddNewWord();
-        lg.WriteFile();
-    }
-    else {carcass->message("Error read language");}
+//    bool flag_good = true;
+//    Language lg(carcass, flag_good);
+//    carcass->current_language = "lang1.lang";
+//    if(flag_good){
+//        lg.AddNewWord();
+//        lg.WriteFile();
+//    }
+//    else {carcass->message("Error read language");}
 
     carcass->current_accountOS = qgetenv("USER");
     if (carcass->current_accountOS.isEmpty())
@@ -50,15 +50,30 @@ Sloter::Sloter()
             AW_show();
         }
     }
-    WWW_show();
     connector();
 }
 
+
+/*************************************************************************************
+                  Коннектор и слот открытия месседжа с двумя кнопками
+*************************************************************************************/
 void Sloter::connector()
 {
     connect(carcass, SIGNAL(mesOKCancelShow(QString)), SLOT(MOCW_show(QString)));
 }
+void Sloter::MOCW_show(QString str)
+{
+    if(!MOCW){
+        MOCW = new MesOKCancel(str);
+        //Шаблон для заполнения - связывание сигнала месседжера с двумя кнопками со слотом объекта
+        //connect(MOCW, SIGNAL(MesOKCancelResult(bool)), /*some obj*/, /*some SLOT*/);
+    }
+    MOCW->show();
+}
 
+/*********************************************************
+                    Блок открытия окон
+*********************************************************/
 void Sloter::AW_show(bool mode)
 {
     if(!AW){
@@ -89,12 +104,4 @@ void Sloter::LSW_show()
     connect (LSW, SIGNAL(MW_open()), SLOT(MW_show()));
     LSW->show();
 }
-void Sloter::MOCW_show(QString str)
-{
-    if(!MOCW){
-        MOCW = new MesOKCancel(str);
-        //connect(MOCW, SIGNAL(MesOKCancelResult(bool)), /*some obj*/, /*some SLOT*/);
-        connect(MOCW, SIGNAL(MesOKCancelResult(bool)), WWW, SLOT(msOC(bool)));
-    }
-    MOCW->show();
-}
+
