@@ -40,7 +40,7 @@ Sloter::Sloter()
             carcass->current_account = carcass->QMapAccounts[carcass->current_accountOS];
 
             //читаем user config
-            carcass->confUser_read(carcass->current_account);
+            carcass->confUser_read();
             if(carcass->flag_AWIgnore) MW = new MenuWindow(carcass);
             else {
                 AW_show();
@@ -86,6 +86,7 @@ void Sloter::LSW_show()
     if(!LSW){
         LSW = new LangSelectionWindow(carcass);
     }
+    connect (LSW, SIGNAL(MW_open()), SLOT(MW_show()));
     LSW->show();
 }
 void Sloter::MOCW_show(QString str)

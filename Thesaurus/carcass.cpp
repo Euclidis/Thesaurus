@@ -24,9 +24,10 @@ void Carcass::conf_read()
         message(enumRToQStr(rr));
     }
 }
-void Carcass::confUser_write(QString str)
+void Carcass::confUser_write()
 {
     QStringList data;
+    QString str = current_account.toLower();
     try
     {
         data << current_language_interface << current_language << (QString::number(flag_AWIgnore));
@@ -46,8 +47,9 @@ void Carcass::confUser_write(QString str)
         message(enumWToQStr(wr));
     }
 }
-void Carcass::confUser_read(QString str)
+void Carcass::confUser_read()
 {
+    QString str = current_account.toLower();
     QStringList data;
     ReadResult rr = ReadFile(adr.users_dir + str + adr.user_config, data);
     switch (rr) {

@@ -57,7 +57,36 @@
     </item>
    </layout>
   </widget>
+  <widget class="Label" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>240</y>
+     <width>71</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <slots>
+    <signal>clicked()</signal>
+    <signal>MouseEnter()</signal>
+    <signal>MouseLeave()</signal>
+   </slots>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

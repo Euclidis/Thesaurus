@@ -47,8 +47,8 @@ public: //методы записи и чтения файлов
                              Append     =   static_cast<OpenWriteAs>(QIODevice::Append)};
     void conf_write();
     void conf_read();
-    void confUser_write(QString str);
-    void confUser_read(QString str);
+    void confUser_write();
+    void confUser_read();
 
     QString enumWToQStr (WriteResult wr);
     QString enumRToQStr (ReadResult rr);
