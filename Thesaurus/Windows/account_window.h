@@ -60,6 +60,7 @@ private:
 
 signals:
     void LSW_open();
+    void MW_open();
 };
 
 #endif // ACCOUNT_WINDOW_H
