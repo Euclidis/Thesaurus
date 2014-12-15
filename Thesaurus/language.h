@@ -23,7 +23,6 @@ public:
 private:
     Carcass* carcass;
     QString adress;
-    QDate date;
 
 public:
     Language(Carcass *_carcass, bool &flag_good);

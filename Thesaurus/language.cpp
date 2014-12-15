@@ -5,8 +5,6 @@ Language::Language(Carcass *_carcass, bool &flag_good)
     carcass = _carcass;
     adress = carcass->adr.users_dir + carcass->current_account + "\\" + carcass->current_language;
 
-    date = QDate::currentDate();
-
     flag_good = true;
     if(!ReadFile()) flag_good = false;
 }
@@ -44,18 +42,22 @@ void Language::AddNewWord(Word& _word)
 
 bool Language::contains(const QString str)
 {
-    QList<Word>::iterator i = words.begin();
-    while(i != words.end()){
-        if((*i).word == str) return true;
-        ++i;
+    if(!words.isEmpty()){
+        QList<Word>::iterator i = words.begin();
+        while(i != words.end()){
+            if((*i).word == str) return true;
+            ++i;
+        }
     }
     return false;
 }
 
 int Language::indexOf(const QString str)
 {
-    for(int i = 0; i < words.size(); ++i){
-        if(words.at(i).word == str) return i;
+    if(!words.isEmpty()){
+        for(int i = 0; i < words.size(); ++i){
+            if(words.at(i).word == str) return i;
+        }
     }
     return -1;
 }
