@@ -13,11 +13,11 @@ class Language
 public:
     QList<Word> words;
 public:
-    bool contains(const QString);
-    int  indexOf(const QString);
+    bool contains(const QString str);
+    int  indexOf(const QString str);
     bool WriteFile();
     bool ReadFile();
-    bool AddNewWord();
+    void AddNewWord(Word &_word);
 //-----------------------------------------
 
 private:

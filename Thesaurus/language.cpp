@@ -3,7 +3,7 @@
 Language::Language(Carcass *_carcass, bool &flag_good)
 {
     carcass = _carcass;
-    adress = carcass->adr.users_dir + carcass->current_account + "\\lang1.lang"  /* + carcass->current_language*/;
+    adress = carcass->adr.users_dir + carcass->current_account + "\\" + carcass->current_language;
 
     date = QDate::currentDate();
 
@@ -21,7 +21,6 @@ bool Language::ReadFile()
         carcass->message(carcass->enumRToQStr(rr)+ "  "+ adress);
         return false;
     }
-
 }
 
 bool Language::WriteFile()
@@ -31,29 +30,19 @@ bool Language::WriteFile()
     case Carcass::ReadResult::OK:
         return true;
     default:
-        carcass->message(carcass->enumWToQStr(wr) + "  "+ adress);
+        carcass->message(carcass->enumWToQStr(wr) + "  " + adress);
         return false;
     }
 }
 
-bool Language::AddNewWord()
+void Language::AddNewWord(Word& _word)
 {
-//    Word w1;
-//    w1.word = "word1";
-//    w1.transcription = "tr1";
-//    w1.note = "note1";
-//    w1.priority = 3.98;
-//    Word w2;
-//    w2.word = "中國";
-//    w2.transcription = "tr2";
-//    w2.note = "note2";
-//    w2.priority = 5.66;
-
-//    words << w1 << w2;
-    return true;
+    int n = indexOf(_word.word);
+    if (n < 0) words <<_word;
+    else words[n] += _word;
 }
 
-bool Language::contains(const QString)
+bool Language::contains(const QString str)
 {
     QList<Word>::iterator i = words.begin();
     while(i != words.end()){
@@ -63,7 +52,7 @@ bool Language::contains(const QString)
     return false;
 }
 
-int Language::indexOf(const QString)
+int Language::indexOf(const QString str)
 {
     for(int i = 0; i < words.size(); ++i){
         if(words.at(i).word == str) return i;

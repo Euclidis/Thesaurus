@@ -10,12 +10,20 @@ struct Word
     QStringList translates;
     QStringList dictionaryes;
     QString note;
+private:
     QDate date;
     double priority;
+public:
+    Word();
+    Word(QString& _word,
+         QString& _transcription,
+         QStringList& _translates,
+         QStringList& _dictionaryes,
+         QString& _note);
+    Word& operator+=(const Word& _word);
+    friend QDataStream& operator>>(QDataStream& out, Word& w);
+    friend QDataStream& operator<<(QDataStream& in, const Word& w);
 };
-
-QDataStream& operator>>(QDataStream& out, Word& w);
-QDataStream& operator<<(QDataStream& in, const Word& w);
 
 class Carcass : public QObject
 {
@@ -34,11 +42,15 @@ public: //структуры данных
     ControlSymbol symb;         //структура символов
     WidgetsTexts wg_tx;         //структура текстов виджетов
 
+//===========================================================
+//               методы вывода месседж окон
+//===========================================================
 signals:
     void mesOKCancelShow(QString);
-public: //метод вывода месседж окна
+public:
     void message(QString, bool _modal = true);
     void mesOKCancel(QString str);
+//===========================================================
 
 public: //методы записи и чтения файлов
     enum class WriteResult  {OK, Write, Open, Copy, DelTmpWhileCopy, DelSource, DelTmp, RenameTmp};

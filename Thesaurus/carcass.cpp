@@ -1,5 +1,8 @@
 #include "carcass.h"
 
+//===============================================================================
+//                     Чтение и запись файла конфигурации
+//===============================================================================
 void Carcass::conf_write()
 {
     WriteResult wr = WriteFile(adr.config, QMapAccounts);
@@ -24,6 +27,10 @@ void Carcass::conf_read()
         message(enumRToQStr(rr));
     }
 }
+
+//===============================================================================
+//                     Чтение и запись файла конфигурации юзера
+//===============================================================================
 void Carcass::confUser_write()
 {
     QStringList data;
@@ -73,6 +80,9 @@ void Carcass::confUser_read()
     }
 }
 
+//===============================================================================
+//                                  Месседжи
+//===============================================================================
 void Carcass::message(QString str, bool _modal)
 {
     MessageWindow* ms = new MessageWindow(str, _modal);
@@ -83,7 +93,9 @@ void Carcass::mesOKCancel(QString str)
     emit mesOKCancelShow(str);
 }
 
-
+//===============================================================================
+//              Преобразование enum ReadResult и WriteResult в QString
+//===============================================================================
 QString Carcass::enumWToQStr (WriteResult wr)
 {
     switch (wr) {
@@ -107,7 +119,6 @@ QString Carcass::enumWToQStr (WriteResult wr)
         return "Error";
     }
 }
-
 QString Carcass::enumRToQStr (ReadResult rr)
 {
     switch (rr) {
@@ -128,6 +139,9 @@ QString Carcass::enumRToQStr (ReadResult rr)
     }
 }
 
+//===============================================================================
+//                            Перешрузка QDataStream
+//===============================================================================
 QDataStream& operator>>(QDataStream& out, Word& w)
 {
     out >> w.word;
@@ -139,7 +153,6 @@ QDataStream& operator>>(QDataStream& out, Word& w)
     out >> w.priority;
     return out;
 }
-
 QDataStream& operator<<(QDataStream& in, const Word& w)
 {
     in << w.word;
@@ -150,4 +163,41 @@ QDataStream& operator<<(QDataStream& in, const Word& w)
     in << w.date;
     in << w.priority;
     return in;
+}
+
+//===============================================================================
+//                               Методы Word
+//===============================================================================
+Word::Word(QString &_word,
+           QString &_transcription,
+           QStringList &_translates,
+           QStringList &_dictionaryes,
+           QString &_note)
+{
+    date = QDate::currentDate();
+    priority = 1;
+    word = _word;
+    transcription = _transcription;
+    translates = _translates;
+    dictionaryes = _dictionaryes;
+    note = _note;
+}
+Word& Word::operator+=(const Word& _word)
+{
+    if(&_word != this){
+        if (this->word == _word.word){
+            for(int i = 0; i < _word.translates.size(); ++i){
+                if(!(this->translates.contains(_word.translates.at(i)))) this->translates << _word.translates.at(i);
+            }
+            for(int i = 0; i < _word.dictionaryes.size(); ++i){
+                if(!(this->dictionaryes.contains(_word.dictionaryes.at(i)))) this->dictionaryes << _word.dictionaryes.at(i);
+            }
+            if((*this).note != _word.note) (*this).note += "\n" + _word.note;
+        }
+    }
+    return *this;
+}
+Word::Word()
+{
+
 }
