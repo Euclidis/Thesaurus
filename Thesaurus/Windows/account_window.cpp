@@ -261,7 +261,7 @@ void AccountWindow::on_OK_Button_clicked()
     if (!dir.exists()){
 
         dir.mkpath(".");
-        carcass->confUser_write(carcass->current_account);
+        carcass->confUser_write();
       }
     else {
         carcass->message(tr("Something is wrong!\n Programm will shutdown"));
