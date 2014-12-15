@@ -139,9 +139,44 @@ QString Carcass::enumRToQStr (ReadResult rr)
     }
 }
 
+
 //===============================================================================
-//                            Перешрузка QDataStream
+//                               Методы Word
 //===============================================================================
+Word::Word()
+{
+    date = QDate::currentDate();
+    priority = 1;
+}
+Word::Word(QString &_word,
+           QString &_transcription,
+           QStringList &_translates,
+           QStringList &_dictionaryes,
+           QString &_note)
+{
+    date = QDate::currentDate();
+    priority = 1;
+    word = _word;
+    transcription = _transcription;
+    translates = _translates;
+    dictionaryes = _dictionaryes;
+    note = _note;
+}
+Word& Word::operator+=(const Word& _word)
+{
+    if(&_word != this){
+        if (this->word == _word.word){
+            for(int i = 0; i < _word.translates.size(); ++i){
+                if(!(this->translates.contains(_word.translates[i]))) this->translates << _word.translates[i];
+            }
+            for(int i = 0; i < _word.dictionaryes.size(); ++i){
+                if(!(this->dictionaryes.contains(_word.dictionaryes[i]))) this->dictionaryes << _word.dictionaryes[i];
+            }
+            if(this->note != _word.note) this->note += "\n" + _word.note;
+        }
+    }
+    return *this;
+}
 QDataStream& operator>>(QDataStream& out, Word& w)
 {
     out >> w.word;
@@ -163,41 +198,4 @@ QDataStream& operator<<(QDataStream& in, const Word& w)
     in << w.date;
     in << w.priority;
     return in;
-}
-
-//===============================================================================
-//                               Методы Word
-//===============================================================================
-Word::Word(QString &_word,
-           QString &_transcription,
-           QStringList &_translates,
-           QStringList &_dictionaryes,
-           QString &_note)
-{
-    date = QDate::currentDate();
-    priority = 1;
-    word = _word;
-    transcription = _transcription;
-    translates = _translates;
-    dictionaryes = _dictionaryes;
-    note = _note;
-}
-Word& Word::operator+=(const Word& _word)
-{
-    if(&_word != this){
-        if (this->word == _word.word){
-            for(int i = 0; i < _word.translates.size(); ++i){
-                if(!(this->translates.contains(_word.translates.at(i)))) this->translates << _word.translates.at(i);
-            }
-            for(int i = 0; i < _word.dictionaryes.size(); ++i){
-                if(!(this->dictionaryes.contains(_word.dictionaryes.at(i)))) this->dictionaryes << _word.dictionaryes.at(i);
-            }
-            if((*this).note != _word.note) (*this).note += "\n" + _word.note;
-        }
-    }
-    return *this;
-}
-Word::Word()
-{
-
 }

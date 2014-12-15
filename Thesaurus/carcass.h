@@ -15,14 +15,14 @@ private:
     double priority;
 public:
     Word();
-    Word(QString& _word,
-         QString& _transcription,
-         QStringList& _translates,
-         QStringList& _dictionaryes,
-         QString& _note);
-    Word& operator+=(const Word& _word);
-    friend QDataStream& operator>>(QDataStream& out, Word& w);
-    friend QDataStream& operator<<(QDataStream& in, const Word& w);
+    Word(QString &_word,
+         QString &_transcription,
+         QStringList &_translates,
+         QStringList &_dictionaryes,
+         QString &_note);
+    Word& operator+= (const Word& _word);
+    friend QDataStream& operator>> (QDataStream& out, Word& w);
+    friend QDataStream& operator<< (QDataStream& in, const Word& w);
 };
 
 class Carcass : public QObject
