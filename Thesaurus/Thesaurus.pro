@@ -30,6 +30,7 @@ SOURCES += main.cpp\
     Windows/MyWidgets/label.cpp \
     sloter.cpp \
     Windows/reset_pass_window.cpp \
+    Windows/mesokcancel.cpp \
     language.cpp
 
 HEADERS  += \
@@ -53,7 +54,9 @@ HEADERS  += \
     Windows/MyWidgets/label.h \
     sloter.h \
     Windows/reset_pass_window.h \
+    Windows/mesokcancel.h \
     language.h
+
 
 FORMS    += \
     base_window.ui \
@@ -63,6 +66,7 @@ FORMS    += \
     Exceptions/exception_window.ui \
     Windows/lang_selection_window.ui \
     Windows/menu_window.ui \
+    Windows/mesokcancel.ui \
     Windows/reset_pass_window.ui
 
 RESOURCES += \
