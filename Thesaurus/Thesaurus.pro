@@ -21,7 +21,7 @@ SOURCES += main.cpp\
     Exceptions/ex_file_not_open.cpp \
     Windows/write_words_window.cpp \
     Exceptions/ex_unexpected.cpp \
-    message_window.cpp \
+    Windows/message_window.cpp \
     Exceptions/ex_config_error.cpp \
     Exceptions/exception_window.cpp \
     Exceptions/ex_some_show.cpp \
@@ -45,7 +45,7 @@ HEADERS  += \
     Exceptions/ex_file_not_open.h \
     Windows/write_words_window.h \
     Exceptions/ex_unexpected.h \
-    message_window.h \
+    Windows/message_window.h \
     Exceptions/ex_config_error.h \
     Exceptions/exception_window.h \
     Exceptions/ex_some_show.h \
@@ -62,7 +62,7 @@ FORMS    += \
     base_window.ui \
     Windows/account_window.ui \
     Windows/write_words_window.ui \
-    message_window.ui \
+    Windows/message_window.ui \
     Exceptions/exception_window.ui \
     Windows/lang_selection_window.ui \
     Windows/menu_window.ui \
