@@ -8,6 +8,7 @@ Sloter::Sloter()
     WWW = nullptr;
     MW = nullptr;
     LSW = nullptr;
+    MOCW = nullptr;
 
     bool flag_good = true;
     Language lg(carcass, flag_good);
@@ -49,6 +50,13 @@ Sloter::Sloter()
             AW_show();
         }
     }
+    WWW_show();
+    connector();
+}
+
+void Sloter::connector()
+{
+    connect(carcass, SIGNAL(mesOKCancelShow(QString)), SLOT(MOCW_show(QString)));
 }
 
 void Sloter::AW_show(bool mode)
@@ -79,4 +87,13 @@ void Sloter::LSW_show()
         LSW = new LangSelectionWindow(carcass);
     }
     LSW->show();
+}
+void Sloter::MOCW_show(QString str)
+{
+    if(!MOCW){
+        MOCW = new MesOKCancel(str);
+        //connect(MOCW, SIGNAL(MesOKCancelResult(bool)), /*some obj*/, /*some SLOT*/);
+        connect(MOCW, SIGNAL(MesOKCancelResult(bool)), WWW, SLOT(msOC(bool)));
+    }
+    MOCW->show();
 }

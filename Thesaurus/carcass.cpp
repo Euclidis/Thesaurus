@@ -76,6 +76,11 @@ void Carcass::message(QString str, bool _modal)
     MessageWindow* ms = new MessageWindow(str, _modal);
     ms->show();
 }
+void Carcass::mesOKCancel(QString str)
+{
+    emit mesOKCancelShow(str);
+}
+
 
 QString Carcass::enumWToQStr (WriteResult wr)
 {
@@ -121,26 +126,26 @@ QString Carcass::enumRToQStr (ReadResult rr)
     }
 }
 
-QDataStream& operator>>(QDataStream& out, LanguageForDataStream& lang)
+QDataStream& operator>>(QDataStream& out, Word& w)
 {
-    out >> lang.words;
-    out >> lang.transcriptions;
-    out >> lang.translates;
-    out >> lang.dictionaryes;
-    out >> lang.notes;
-    out >> lang.dates;
-    out >> lang.priorities;
+    out >> w.word;
+    out >> w.transcription;
+    out >> w.translates;
+    out >> w.dictionaryes;
+    out >> w.note;
+    out >> w.date;
+    out >> w.priority;
     return out;
 }
 
-QDataStream& operator<<(QDataStream& in, LanguageForDataStream& lang)
+QDataStream& operator<<(QDataStream& in, const Word& w)
 {
-    in << lang.words;
-    in << lang.transcriptions;
-    in << lang.translates;
-    in << lang.dictionaryes;
-    in << lang.notes;
-    in << lang.dates;
-    in << lang.priorities;
+    in << w.word;
+    in << w.transcription;
+    in << w.translates;
+    in << w.dictionaryes;
+    in << w.note;
+    in << w.date;
+    in << w.priority;
     return in;
 }

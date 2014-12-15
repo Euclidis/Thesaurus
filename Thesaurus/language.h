@@ -9,12 +9,10 @@ class Language
 //INTERFACE
 //-----------------------------------------
 public:
-    QString newWord;
-    QString newTranscription;
-    QStringList newTranslates;
-    QStringList newDictionarys;
-    QString newNote;
+    QList<Word> words;
 public:
+    bool contains(QString);
+    int  indexOf(QString);
     bool WriteFile();
     bool ReadFile();
     bool AddNewWord();
@@ -25,11 +23,8 @@ private:
     QString adress;
     QDate date;
 
-    LanguageForDataStream language;
-
 public:
     Language(Carcass *_carcass, bool &flag_good);
-
 };
 
 

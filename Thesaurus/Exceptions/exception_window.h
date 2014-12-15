@@ -1,7 +1,7 @@
 #ifndef EXCEPTION_WINDOW_H
 #define EXCEPTION_WINDOW_H
 
-#include "../message_window.h"
+#include "../Windows/mesokcancel.h"
 
 namespace Ui {
 class ExceptionWindow;

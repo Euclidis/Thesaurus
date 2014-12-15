@@ -3,22 +3,23 @@
 
 #include "exceptions_list.h"
 
-struct LanguageForDataStream
+struct Word
 {
-    QList<QString> words;
-    QList<QString> transcriptions;
-    QList<QStringList> translates;
-    QList<QStringList> dictionaryes;
-    QList<QString> notes;
-    QList<QDate> dates;
-    QList<double> priorities;
+    QString word;
+    QString transcription;
+    QStringList translates;
+    QStringList dictionaryes;
+    QString note;
+    QDate date;
+    double priority;
 };
 
-QDataStream& operator>>(QDataStream& out, LanguageForDataStream& lang);
-QDataStream& operator<<(QDataStream& in, LanguageForDataStream& lang);
+QDataStream& operator>>(QDataStream& out, Word& w);
+QDataStream& operator<<(QDataStream& in, const Word& w);
 
-struct Carcass
+class Carcass : public QObject
 {
+Q_OBJECT
 
 public: //метки
     QString current_account;
@@ -33,8 +34,11 @@ public: //структуры данных
     ControlSymbol symb;         //структура символов
     WidgetsTexts wg_tx;         //структура текстов виджетов
 
+signals:
+    void mesOKCancelShow(QString);
 public: //метод вывода месседж окна
     void message(QString, bool _modal = true);
+    void mesOKCancel(QString str);
 
 public: //методы записи и чтения файлов
     enum class WriteResult  {OK, Write, Open, Copy, DelTmpWhileCopy, DelSource, DelTmp, RenameTmp};

@@ -16,6 +16,10 @@ public:
     explicit WriteWordsWindow(Carcass * _carcass);
     ~WriteWordsWindow();
 
+private slots:
+    void on_pushButton_clicked();
+    void msOC(bool);
+
 private:
     Ui::WriteWordsWindow *ui;
 };
