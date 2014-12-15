@@ -79,6 +79,7 @@ void Sloter::AW_show(bool mode)
     if(!AW){
         AW = new AccountWindow(carcass, mode);
         connect(AW, SIGNAL(LSW_open()), SLOT(LSW_show()));
+        connect (AW, SIGNAL(MW_open()), SLOT(MW_show()));
     }
     AW->show();
 }

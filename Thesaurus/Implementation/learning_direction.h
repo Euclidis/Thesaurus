@@ -3,8 +3,9 @@
 
 #include "../carcass.h"
 
-class LearningDirection
+class LearningDirection: public QObject
 {
+  Q_OBJECT
 public:
   LearningDirection(Carcass &);
   Carcass * carcass;
