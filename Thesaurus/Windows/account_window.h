@@ -1,7 +1,9 @@
 #ifndef ACCOUNT_WINDOW_H
 #define ACCOUNT_WINDOW_H
 
+#ifndef CARCASS_H
 #include "../carcass.h"
+#endif
 #include "reset_pass_window.h"
 
 

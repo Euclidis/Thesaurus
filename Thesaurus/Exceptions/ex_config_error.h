@@ -1,7 +1,9 @@
 #ifndef EX_CONFIG_ERROR_H
 #define EX_CONFIG_ERROR_H
 
+#ifndef BASEEXCEPTION_H
 #include "base_exception.h"
+#endif
 
 class ex_config_error: public BaseException
 {

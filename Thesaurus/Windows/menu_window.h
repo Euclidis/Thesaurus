@@ -1,7 +1,9 @@
 #ifndef MENU_WINDOW_H
 #define MENU_WINDOW_H
 
+#ifndef CARCASS_H
 #include "../carcass.h"
+#endif
 
 namespace Ui {
 class MenuWindow;

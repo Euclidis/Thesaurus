@@ -1,7 +1,9 @@
 #ifndef RESET_PASS_WINDOW_H
 #define RESET_PASS_WINDOW_H
 
+#ifndef CARCASS_H
 #include "../carcass.h"
+#endif
 
 namespace Ui {
   class ResetPassWindow;

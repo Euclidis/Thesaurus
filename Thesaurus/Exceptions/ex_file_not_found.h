@@ -1,7 +1,9 @@
 #ifndef EX_FILE_NOT_FOUND_H
 #define EX_FILE_NOT_FOUND_H
 
+#ifndef BASEEXCEPTION_H
 #include "base_exception.h"
+#endif
 
 class ex_file_not_found: public BaseException
 {

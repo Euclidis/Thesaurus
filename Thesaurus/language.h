@@ -1,7 +1,9 @@
 #ifndef LANGUAGE_METHODS_H
 #define LANGUAGE_METHODS_H
 
+#ifndef CARCASS_H
 #include "carcass.h"
+#endif
 
 class Language
 {
