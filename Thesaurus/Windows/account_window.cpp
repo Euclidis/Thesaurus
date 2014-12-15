@@ -216,11 +216,14 @@ void AccountWindow::on_OK_Button_clicked()
           if (name_pass[UserName] == ui->lineEdit_2->text()){
                 carcass->current_account = UserName;
                 carcass->QMapAccounts.insert(carcass->current_accountOS, carcass->current_account);
+                carcass->conf_read();
                 carcass->conf_write();
-
-              //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                emit LSW_open();
-              //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-END--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+              //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-STARTS--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                if (carcass->current_language == carcass->symb.lang_empty)
+                  emit LSW_open();
+                else
+                  emit MW_open();
+              //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-ENDS--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                   close();}
           else {
                 carcass->message(tr("Incorrect Password"));
@@ -255,7 +258,6 @@ void AccountWindow::on_OK_Button_clicked()
 
     //Загрузка конфиг-файла QMapAccounts
     carcass->QMapAccounts.insert(carcass->current_accountOS, carcass->current_account);
-    carcass->flag_AWIgnore = true;
     carcass->conf_write();
 
     // create dir and files for new user

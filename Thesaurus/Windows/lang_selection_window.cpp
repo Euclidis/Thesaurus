@@ -1,15 +1,19 @@
 #include "lang_selection_window.h"
 #include "ui_lang_selection_window.h"
 
-LangSelectionWindow::LangSelectionWindow(Carcass * _carcass) :
+LangSelectionWindow::LangSelectionWindow() :
   ui(new Ui::LangSelectionWindow)
 {
   ui->setupUi(this);
-  Lang << "English" << "Russian" << "Chines";
-  carcass = _carcass;
 
-  ui->comboBox->addItems(Lang);
-  ui->comboBox_2->addItems(Lang);
+  carcass = carcass;
+  QStringList temp1 = Lang;
+  QStringList temp2 = Lang;
+  temp1.removeAt(1);
+  temp2.removeAt(0);
+
+  ui->comboBox->addItems(temp1);
+  ui->comboBox_2->addItems(temp2);
 }
 
 LangSelectionWindow::~LangSelectionWindow()
@@ -22,8 +26,6 @@ void LangSelectionWindow::on_label_3_clicked()
 
   carcass->current_language = ui->comboBox->currentText() + "-" + ui->comboBox_2->currentText();
   carcass->confUser_write();
-
-
 
   emit MW_open();
   close();
@@ -46,5 +48,8 @@ bool LangSelectionWindow::is_Lang_exists(QString * checkLang){
   }
 return 0;
 }
+
+
+
 
 

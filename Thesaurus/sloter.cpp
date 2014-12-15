@@ -99,7 +99,7 @@ void Sloter::WWW_show()
 void Sloter::LSW_show()
 {
     if(!LSW){
-        LSW = new LangSelectionWindow(carcass);
+        LSW = new LangSelectionWindow();
     }
     connect (LSW, SIGNAL(MW_open()), SLOT(MW_show()));
     LSW->show();

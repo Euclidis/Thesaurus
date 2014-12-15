@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     sloter.cpp \
     Windows/reset_pass_window.cpp \
     Windows/mesokcancel.cpp \
-    language.cpp
+    language.cpp \
+    Implementation/learning_direction.cpp
 
 HEADERS  += \
     carcass.h \
@@ -55,7 +56,8 @@ HEADERS  += \
     sloter.h \
     Windows/reset_pass_window.h \
     Windows/mesokcancel.h \
-    language.h
+    language.h \
+    Implementation/learning_direction.h
 
 
 FORMS    += \
