@@ -41,13 +41,13 @@ Sloter::Sloter()
 
             //читаем user config
             carcass->confUser_read();
-            if(carcass->flag_AWIgnore) MW = new MenuWindow(carcass);
+            if(carcass->flag_AWIgnore) MW_show();
             else {
-                AW_show();
+                AW_show(1);
             }
         }
         else {
-            AW_show();
+            AW_show(1);
         }
     }
     connector();

@@ -82,7 +82,7 @@ AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
     //--------------------------------------------------------//
     setFixedSize(400,300);
 
-    ui->lineEdit->setFrame(false);
+    ui->lineEdit->  setFrame(false);
     ui->lineEdit_2->setFrame(false);
     ui->lineEdit_3->setFrame(false);
 
@@ -199,7 +199,9 @@ void AccountWindow::RPW_open(QMap<QString, QString>& names){
 }
 void AccountWindow::on_label_clicked()
 {
+  if (!name_pass.isEmpty())
    RPW_open(name_pass);
+  else {carcass->message(tr("No users found"));}
 }
 
 void AccountWindow::on_OK_Button_clicked()
@@ -253,6 +255,7 @@ void AccountWindow::on_OK_Button_clicked()
 
     //Загрузка конфиг-файла QMapAccounts
     carcass->QMapAccounts.insert(carcass->current_accountOS, carcass->current_account);
+    carcass->flag_AWIgnore = true;
     carcass->conf_write();
 
     // create dir and files for new user
