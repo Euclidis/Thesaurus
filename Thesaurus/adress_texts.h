@@ -9,7 +9,7 @@ struct Adr
     const QString lext = ".lang";
     const QString config = "settings\\configuration" + ext;
     const QString User = "data\\users\\UsersList" + ext;
-    const QString Lang = "data\\users\\LangList" + ext;
+    const QString Lang = "\\LangList" + ext;
     const QString users_dir = "data\\users\\";
     const QString user_config = "\\User" + ext;
     const QString EndingTemp = ".temp";
