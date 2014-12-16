@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     Windows/reset_pass_window.cpp \
     Windows/mesokcancel.cpp \
     language.cpp \
-    Implementation/learning_direction.cpp
+    Implementation/learning_direction.cpp \
+    Implementation/www_realization.cpp
 
 HEADERS  += \
     carcass.h \
@@ -57,7 +58,8 @@ HEADERS  += \
     Windows/reset_pass_window.h \
     Windows/mesokcancel.h \
     language.h \
-    Implementation/learning_direction.h
+    Implementation/learning_direction.h \
+    Implementation/www_realization.h
 
 
 FORMS    += \

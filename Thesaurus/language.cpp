@@ -3,7 +3,7 @@
 Language::Language(Carcass *_carcass, bool &flag_good)
 {
     carcass = _carcass;
-    adress = carcass->adr.users_dir + carcass->current_account + "\\" + carcass->current_language;
+    adress = carcass->adr.users_dir + carcass->current_account.toLower() + "\\" + carcass->current_language + carcass->adr.lext;
 
     flag_good = true;
     if(!ReadFile()) flag_good = false;
@@ -36,7 +36,7 @@ bool Language::WriteFile()
 void Language::AddNewWord(Word& _word)
 {
     int n = indexOf(_word.word);
-    if (n < 0) words <<_word;
+    if (n < 0) words << _word;
     else words[n] += _word;
 }
 
