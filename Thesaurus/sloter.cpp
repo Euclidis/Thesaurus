@@ -100,9 +100,13 @@ void Sloter::WWW_show()
 void Sloter::LSW_show()
 {
     if(!LSW){
-        LSW = new LangSelectionWindow();
+        LSW = new LangSelectionWindow(carcass);
     }
     connect (LSW, SIGNAL(MW_open()), SLOT(MW_show()));
+
+    //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    connect (LSW, SIGNAL(WWW_open()), SLOT(WWW_show()));
+    //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     LSW->show();
 }
 
