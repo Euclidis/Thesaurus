@@ -33,7 +33,7 @@ private:
     void DctInitializ();
 
 signals:
-    void DctShow(QMap<QString, bool>);
+    void DctShow();
     //void DctCheckChange(QMap<QString, bool>);
 };
 

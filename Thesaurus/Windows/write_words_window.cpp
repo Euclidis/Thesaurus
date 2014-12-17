@@ -21,7 +21,7 @@ WriteWordsWindow::WriteWordsWindow(Carcass * _carcass) :
 
 void WriteWordsWindow::ConnectRealizator()
 {
-    connect(realiz, SIGNAL(DctShow(QMap<QString,bool>)),SLOT(DW_open(QMap<QString,bool>)));
+    connect(realiz, SIGNAL(DctShow()),SLOT(DW_open()));
 }
 
 //*******************************************************************
@@ -32,6 +32,7 @@ void WriteWordsWindow::ConnectRealizator()
 void WriteWordsWindow::ConnectWidgets()
 {
     connect(ui->pushButton, SIGNAL(clicked()), SLOT(SaveWord()));
+    connect(ui->pushButton_2, SIGNAL(clicked()), SLOT(DW_open()));
 }
 //--------Функции получения информации от виджетов
 void WriteWordsWindow::TakeTexts()
@@ -42,9 +43,9 @@ void WriteWordsWindow::TakeTexts()
     note            = ui->textEdit_2->toPlainText();
 }
 //--------Функции работы с дополнительным окном
-void WriteWordsWindow::DW_open(QMap<QString, bool> _dct)
+void WriteWordsWindow::DW_open()
 {
-    if(!DW) DW = new DctWindow(realiz, _dct);
+    if(!DW) DW = new DctWindow(realiz);
     DW->show();
 }
 //*******************************************************************

@@ -15,6 +15,9 @@
 #include <QPoint>
 #include <QFontDatabase>
 #include <QLineEdit>
+#include <QCheckBox>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 
 
 #include "Windows/MyWidgets/label.h"

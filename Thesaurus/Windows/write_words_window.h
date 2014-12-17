@@ -34,7 +34,7 @@ signals:
 
 private slots:
     void SaveWord();
-    void DW_open(QMap<QString, bool>);
+    void DW_open();
 
 private:
     Ui::WriteWordsWindow *ui;

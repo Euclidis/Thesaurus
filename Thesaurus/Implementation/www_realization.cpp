@@ -42,12 +42,12 @@ void WWWRealization::SaveWord(QString _word,
                         language->WriteFile();
                     }
                     else {
-                        emit DctShow(DctCheck);
+                        emit DctShow();
                         carcass->message(tr("Select a Dictionary"));
                     }
                 }
                 else{
-                    emit DctShow(DctCheck);
+                    emit DctShow();
                     carcass->message(tr("Create a Dictionary"));
                 }
             }

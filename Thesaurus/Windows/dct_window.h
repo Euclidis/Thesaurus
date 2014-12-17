@@ -14,12 +14,13 @@ class DctWindow : public BaseWindow
     Q_OBJECT
 
 public:
-    explicit DctWindow(WWWRealization*, QMap<QString, bool>);
+    explicit DctWindow(WWWRealization*);
     ~DctWindow();
 
 private:
     WWWRealization* realiz;
-    QMap<QString, bool> DctCheck;
+private:
+    void BoxFilling();
 
 private:
     Ui::DctWindow *ui;
