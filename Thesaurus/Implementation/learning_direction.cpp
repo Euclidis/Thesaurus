@@ -2,7 +2,7 @@
 
 LearningDirection::LearningDirection(Carcass * _car) : carcass(_car)
 {
-  Lang_Initializ();
+
 }
 
 void LearningDirection::Lang_Initializ(){
@@ -12,7 +12,7 @@ void LearningDirection::Lang_Initializ(){
   temp1.removeAt(1);
 }
 
-bool LearningDirection::is_Lang_exists(QString * checkLang){
+bool LearningDirection::is_Lang_exists(QString checkLang){
 
 //      QStringList LearnDicrectLang;
 //      if (carcass->ReadFile(carcass->adr.Lang, LearnDicrectLang) == Carcass::ReadResult::OK){
@@ -27,12 +27,12 @@ bool LearningDirection::is_Lang_exists(QString * checkLang){
 //  }
 return 0;
 }
-
+// Если нет ЛэнгЛиста, то создать его
 void LearningDirection::Load_Directions(){
 
   QFile LangList (carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.Lang);
-  if (!LangList.exists()){
 
+  if (!LangList.exists()){
       LangList.open(QFile::WriteOnly);
       LangList.close();
       NewDirection = TargLang +"-"+ KnownLang;
@@ -43,7 +43,10 @@ void LearningDirection::Load_Directions(){
     }
 
 }
-void LearningDirection::createLD(){
+void LearningDirection::createLD(QString tar, QString know){
+
+  TargLang = tar;
+  KnownLang = know;
 
   Load_Directions();
 

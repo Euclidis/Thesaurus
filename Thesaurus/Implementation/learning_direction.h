@@ -3,9 +3,9 @@
 
 #include "../carcass.h"
 
-class LearningDirection: public QObject
+class LearningDirection
 {
-  Q_OBJECT
+
 public:
   LearningDirection(Carcass *);
 
@@ -18,20 +18,16 @@ public:
 
   QString NewDirection;
 
-private:
+
    Carcass * carcass;
    QStringList Lang;
    QStringList Direction;
 
-private:
-  bool is_Lang_exists(QString *);
+
+  bool is_Lang_exists(QString);
   void Lang_Initializ();
   void Load_Directions();
-
-signals:
-  //void MW_open();
-public slots:
-  void createLD();
+  void createLD(QString, QString);
 
 };
 

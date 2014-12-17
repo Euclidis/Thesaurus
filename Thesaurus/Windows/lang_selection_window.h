@@ -8,30 +8,22 @@ namespace Ui {
   class LangSelectionWindow;
 }
 
-class LangSelectionWindow : public BaseWindow
+class LangSelectionWindow : public BaseWindow, public LearningDirection
 {
   Q_OBJECT
-
-public:
-  explicit LangSelectionWindow(Carcass *_carcass);
-  ~LangSelectionWindow();
-
-
-LearningDirection *LD;
-
 private:
 
   Ui::LangSelectionWindow *ui;
-  Carcass * carcass;
-
 
 public:
-  void Connector();
+  LangSelectionWindow(Carcass *_carcass);
+  ~LangSelectionWindow();
+
+
 
 public slots:
     void on_label_3_clicked();
  signals:
-    void OK_pushed();
     void MW_open();
     //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     void WWW_open();
