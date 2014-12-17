@@ -1,23 +1,60 @@
 #include "www_realization.h"
 
-WWWRealization::WWWRealization(Carcass* _carcass, bool& flag_good)
+//**************************************************************************
+//                               INTERFACE
+//**************************************************************************
+
+WWWRealization::WWWRealization(Carcass* _carcass)
 {
-    flag_good = true;
     carcass = _carcass;
-    language = new Language(carcass, flag_good);
-    if (flag_good){
-        DctInitializ();
-    }
+    language = new Language(carcass);
+    initialized = false;
 }
 
-void WWWRealization::DctInitializ()
+bool WWWRealization::Initialize()
 {
-    if(!language->words.isEmpty()){
-        for (int i = 0; i < language->words.size(); ++i){
-            for (int u = 0; u < language->words[i].dictionaryes.size(); ++u){
-                if(!DctCheck.contains(language->words[i].dictionaryes[u])) DctCheck.insert(language->words[i].dictionaryes[u], false);
+    if(language->Initialize()){
+        initialized = true;
+        DctInitializ();
+        return true;
+    }
+    else return false;
+}
+
+void WWWRealization::SaveWord(QString _word,
+                              QString _transcription,
+                              QStringList _translates,
+                              QString _note)
+{
+    if(initialized){
+        if(_word != ""){
+            if(!_translates.isEmpty()){
+                if(DctCheck.isEmpty()){   //Добавить !
+                    QStringList dct;
+    //                QMap<QString, bool>::const_iterator i = DctCheck.constBegin();
+    //                while (i != DctCheck.constEnd()) {
+    //                    if(i.value()) dct << i.key();
+    //                }
+                    //dct << "Dct";        //Удалить
+                    if(!dct.isEmpty()){
+                        Word w(_word, _transcription, _translates, dct, _note);
+                        language->AddNewWord(w);
+                        language->WriteFile();
+                    }
+                    else {
+                        emit DctShow(DctCheck);
+                        carcass->message(tr("Select a Dictionary"));
+                    }
+                }
+                else{
+                    emit DctShow(DctCheck);
+                    carcass->message(tr("Create a Dictionary"));
+                }
             }
         }
+    }
+    else{
+        carcass->message("Не инициализирован абстрактор WWW");
     }
 }
 
@@ -26,33 +63,21 @@ WWWRealization::~WWWRealization()
     delete language;
 }
 
-void WWWRealization::SaveWord1(QString _word,
-                              QString _transcription,
-                              QStringList _translates,
-                              QString _note)
+//********************************************************************************
+//********************************************************************************
+
+void WWWRealization::DctInitializ()
 {
-    carcass->message("OK3");
-    if(_word != ""){
-        if(!_translates.isEmpty()){
-            if(DctCheck.isEmpty()){   //Добавить !
-                QStringList dct;
-//                QMap<QString, bool>::const_iterator i = DctCheck.constBegin();
-//                while (i != DctCheck.constEnd()) {
-//                    if(i.value()) dct << i.key();
-//                }
-                dct << "Dct";        //Удалить
-                if(!dct.isEmpty()){
-                    Word w(_word, _transcription, _translates, dct, _note);
-                    language->AddNewWord(w);
-                    language->WriteFile();
+    if (initialized){
+        if(!language->words.isEmpty()){
+            for (int i = 0; i < language->words.size(); ++i){
+                for (int u = 0; u < language->words[i].dictionaryes.size(); ++u){
+                    if(!DctCheck.contains(language->words[i].dictionaryes[u])) DctCheck.insert(language->words[i].dictionaryes[u], false);
                 }
-                else {
-                    carcass->message(tr("Select a Dictionary"));
-                }
-            }
-            else{
-                carcass->message(tr("Create a Dictionary"));
             }
         }
+    }
+    else{
+        carcass->message("Не инициализирован абстрактор WWW");
     }
 }

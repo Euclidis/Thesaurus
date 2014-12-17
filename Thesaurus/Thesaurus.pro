@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     Windows/mesokcancel.cpp \
     language.cpp \
     Implementation/learning_direction.cpp \
-    Implementation/www_realization.cpp
+    Implementation/www_realization.cpp \
+    Windows/dct_window.cpp
 
 HEADERS  += \
     carcass.h \
@@ -59,7 +60,8 @@ HEADERS  += \
     Windows/mesokcancel.h \
     language.h \
     Implementation/learning_direction.h \
-    Implementation/www_realization.h
+    Implementation/www_realization.h \
+    Windows/dct_window.h
 
 
 FORMS    += \
@@ -71,7 +73,8 @@ FORMS    += \
     Windows/lang_selection_window.ui \
     Windows/menu_window.ui \
     Windows/mesokcancel.ui \
-    Windows/reset_pass_window.ui
+    Windows/reset_pass_window.ui \
+    Windows/dct_window.ui
 
 RESOURCES += \
     Fonts.qrc

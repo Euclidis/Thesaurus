@@ -1,7 +1,7 @@
 #ifndef WRITE_WORDS_WINDOW_H
 #define WRITE_WORDS_WINDOW_H
 
-#include "../Implementation/www_realization.h"
+#include "dct_window.h"
 
 namespace Ui {
 class WriteWordsWindow;
@@ -10,28 +10,31 @@ class WriteWordsWindow;
 class WriteWordsWindow : public BaseWindow
 {
     Q_OBJECT
+//************************************************
+//************************************************
+public:
+    explicit WriteWordsWindow(Carcass * _carcass);
+    ~WriteWordsWindow();
+//************************************************
+
 private:
     Carcass * carcass;
     WWWRealization* realiz;
+    DctWindow* DW;
     QString word;
     QString transcription;
     QStringList translates;
     QString note;
-public:
-    explicit WriteWordsWindow(Carcass * _carcass);
-    ~WriteWordsWindow();
 private:
-    void connector();
-
+    void ConnectRealizator();
+    void ConnectWidgets();
+    void ConnectDctWindow();
+    void TakeTexts();
 signals:
-    void SaveWord(QString _word,
-                  QString _transcription,
-                  QStringList _translates,
-                  QString _note);
+
 private slots:
-
-
-    void on_pushButton_clicked();
+    void SaveWord();
+    void DW_open(QMap<QString, bool>);
 
 private:
     Ui::WriteWordsWindow *ui;

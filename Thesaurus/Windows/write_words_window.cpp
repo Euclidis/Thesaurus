@@ -7,11 +7,11 @@ WriteWordsWindow::WriteWordsWindow(Carcass * _carcass) :
 {
     ui->setupUi(this);
     carcass = _carcass;
-    bool flag_good = true;
-    realiz = new WWWRealization(carcass, flag_good);
-    if(flag_good){
-        connector();
-        carcass->message("ОК1");
+    realiz = new WWWRealization(carcass);
+    DW = nullptr;
+    if(realiz->Initialize()){
+        ConnectRealizator();
+        ConnectWidgets();
     }
     else{
         //*********** Добавить эксепшн ***************
@@ -19,23 +19,46 @@ WriteWordsWindow::WriteWordsWindow(Carcass * _carcass) :
     }
 }
 
+void WriteWordsWindow::ConnectRealizator()
+{
+    connect(realiz, SIGNAL(DctShow(QMap<QString,bool>)),SLOT(DW_open(QMap<QString,bool>)));
+}
+
+//*******************************************************************
+//                 Функции "присоединения" виджетов
+//*******************************************************************
+
+//--------Сигналы от виджетов
+void WriteWordsWindow::ConnectWidgets()
+{
+    connect(ui->pushButton, SIGNAL(clicked()), SLOT(SaveWord()));
+}
+//--------Функции получения информации от виджетов
+void WriteWordsWindow::TakeTexts()
+{
+    word            = ui->lineEdit->text();
+    transcription   = ui->lineEdit_2->text();
+    translates      = ui->textEdit->toPlainText().split("\n");
+    note            = ui->textEdit_2->toPlainText();
+}
+//--------Функции работы с дополнительным окном
+void WriteWordsWindow::DW_open(QMap<QString, bool> _dct)
+{
+    if(!DW) DW = new DctWindow(realiz, _dct);
+    DW->show();
+}
+//*******************************************************************
+//*******************************************************************
+
+
+void WriteWordsWindow::SaveWord()
+{
+    TakeTexts();
+    realiz->SaveWord(word, transcription, translates, note);
+}
+
 WriteWordsWindow::~WriteWordsWindow()
 {
     delete ui;
     delete realiz;
-}
-
-void WriteWordsWindow::connector()
-{
-    connect(this, SIGNAL(SaveWord(QString,QString,QStringList,QString)), realiz, SLOT(SaveWord1(QString,QString,QStringList,QString)));
-}
-
-void WriteWordsWindow::on_pushButton_clicked()
-{
-    carcass->message("OK2");
-    QString _word = ui->lineEdit->text();
-    QString _transcription = ui->lineEdit_2->text();
-    QStringList _translates = ui->textEdit->toPlainText().split("\n");
-    QString _note = ui->textEdit_2->toPlainText();
-    emit SaveWord(_word, _transcription, _translates, _note);
 }

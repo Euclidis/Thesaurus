@@ -13,8 +13,9 @@ class Language
 public:
     QList<Word> words;
 public:
-    bool contains(const QString str);
-    int  indexOf(const QString str);
+    bool Initialize();
+    bool Contains(const QString str);
+    int  IndexOf(const QString str);
     bool WriteFile();
     bool ReadFile();
     void AddNewWord(Word &_word);
@@ -23,9 +24,10 @@ public:
 private:
     Carcass* carcass;
     QString adress;
+    bool initialized;
 
 public:
-    Language(Carcass *_carcass, bool &flag_good);
+    Language(Carcass *_carcass);
 };
 
 

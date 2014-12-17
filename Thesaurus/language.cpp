@@ -1,12 +1,21 @@
 #include "language.h"
 
-Language::Language(Carcass *_carcass, bool &flag_good)
+Language::Language(Carcass *_carcass)
 {
     carcass = _carcass;
     adress = carcass->adr.users_dir + carcass->current_account.toLower() + "\\" + carcass->current_language + carcass->adr.lext;
+    initialized = false;
+}
 
-    flag_good = true;
-    if(!ReadFile()) flag_good = false;
+bool Language::Initialize()
+{
+    if(ReadFile()){
+        initialized = true;
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 bool Language::ReadFile()
@@ -23,41 +32,64 @@ bool Language::ReadFile()
 
 bool Language::WriteFile()
 {
-    Carcass::WriteResult wr = carcass->WriteFile(adress, words);
-    switch (wr) {
-    case Carcass::ReadResult::OK:
-        return true;
-    default:
-        carcass->message(carcass->enumWToQStr(wr) + "  " + adress);
+    if(initialized){
+        Carcass::WriteResult wr = carcass->WriteFile(adress, words);
+        switch (wr) {
+        case Carcass::ReadResult::OK:
+            return true;
+        default:
+            carcass->message(carcass->enumWToQStr(wr) + "  " + adress);
+            return false;
+        }
+    }
+    else{
+        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
         return false;
     }
 }
 
 void Language::AddNewWord(Word& _word)
 {
-    int n = indexOf(_word.word);
-    if (n < 0) words << _word;
-    else words[n] += _word;
+    if(initialized){
+        int n = IndexOf(_word.word);
+        if (n < 0) words << _word;
+        else words[n] += _word;
+    }
+    else{
+        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+    }
 }
 
-bool Language::contains(const QString str)
+bool Language::Contains(const QString str)
 {
-    if(!words.isEmpty()){
-        QList<Word>::iterator i = words.begin();
-        while(i != words.end()){
-            if((*i).word == str) return true;
-            ++i;
+    if(initialized){
+        if(!words.isEmpty()){
+            QList<Word>::iterator i = words.begin();
+            while(i != words.end()){
+                if((*i).word == str) return true;
+                ++i;
+            }
         }
+        return false;
     }
-    return false;
+    else{
+        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+        return false;
+    }
 }
 
-int Language::indexOf(const QString str)
+int Language::IndexOf(const QString str)
 {
-    if(!words.isEmpty()){
-        for(int i = 0; i < words.size(); ++i){
-            if(words.at(i).word == str) return i;
+    if (initialized){
+        if(!words.isEmpty()){
+            for(int i = 0; i < words.size(); ++i){
+                if(words.at(i).word == str) return i;
+            }
         }
+        return -1;
     }
-    return -1;
+    else{
+        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+        return -1;
+    }
 }
