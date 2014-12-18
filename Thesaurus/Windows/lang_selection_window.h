@@ -16,8 +16,11 @@ private:
   Ui::LangSelectionWindow *ui;
 
 public:
+  bool ini_flag = 0;
   LangSelectionWindow(Carcass *_carcass);
+
   ~LangSelectionWindow();
+
 
 
 
@@ -29,6 +32,9 @@ public slots:
     void WWW_open();
     //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+private slots:
+    void on_comboBox_2_currentTextChanged();
+    void on_comboBox_currentTextChanged();
 };
 
 #endif // LangSelectionWindow_H

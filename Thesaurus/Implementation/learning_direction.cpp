@@ -8,8 +8,8 @@ LearningDirection::LearningDirection(Carcass * _car) : carcass(_car)
 void LearningDirection::Lang_Initializ(){
   Lang << "English" << "Russian" << "Chines";
   temp1 = temp2 = Lang;
-  temp2.removeAt(0);
   temp1.removeAt(1);
+  temp2.removeAt(0);
 }
 
 bool LearningDirection::is_Lang_exists(QString checkLang){
@@ -43,12 +43,24 @@ void LearningDirection::Load_Directions(){
     }
 
 }
-void LearningDirection::createLD(QString tar, QString know){
-
-  TargLang = tar;
-  KnownLang = know;
+void LearningDirection::createLD(){
 
   Load_Directions();
 
+}
+
+void LearningDirection::choose_avoider(QString knownL, QString targetL){
+
+  if (KnownLang != knownL){
+
+      KnownLang = knownL;
+      temp2 = Lang;
+      temp2.filter(KnownLang);
+    }
+  else if (TargLang != targetL){
+      TargLang = targetL;
+      temp1 = Lang;
+      temp1.filter(TargLang);
+    }
 }
 

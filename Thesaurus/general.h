@@ -18,6 +18,8 @@
 #include <QCheckBox>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QTimer>
+#include <QStringListModel>
 
 
 #include "Windows/MyWidgets/label.h"
