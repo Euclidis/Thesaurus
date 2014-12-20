@@ -4,24 +4,23 @@
 //                               INTERFACE
 //**************************************************************************
 
-WWWRealization::WWWRealization(Carcass* _carcass)
+WWWAbstraction::WWWAbstraction(Carcass* _carcass)
 {
     carcass = _carcass;
     language = new Language(carcass);
     initialized = false;
 }
 
-bool WWWRealization::Initialize()
+bool WWWAbstraction::Initialize()
 {
     if(language->Initialize()){
         initialized = true;
-        DctInitializ();
         return true;
     }
-    else return false;
+    return false;
 }
 
-void WWWRealization::SaveWord(QString _word,
+bool WWWAbstraction::SaveWord(QString _word,
                               QString _transcription,
                               QStringList _translates,
                               QString _note)
@@ -29,55 +28,56 @@ void WWWRealization::SaveWord(QString _word,
     if(initialized){
         if(_word != ""){
             if(!_translates.isEmpty()){
-                if(DctCheck.isEmpty()){   //Добавить !
-                    QStringList dct;
-    //                QMap<QString, bool>::const_iterator i = DctCheck.constBegin();
-    //                while (i != DctCheck.constEnd()) {
-    //                    if(i.value()) dct << i.key();
-    //                }
-                    //dct << "Dct";        //Удалить
-                    if(!dct.isEmpty()){
-                        Word w(_word, _transcription, _translates, dct, _note);
-                        language->AddNewWord(w);
-                        language->WriteFile();
+//                if(!language->dictionaries.isEmpty()){
+                    if(!DctCheck.isEmpty()){
+                        Word w(_word, _transcription, _translates, DctCheck, _note);
+                        language->AddWord(w);
+                        return true;
                     }
-                    else {
+                    else{
                         emit DctShow();
                         carcass->message(tr("Select a Dictionary"));
                     }
-                }
-                else{
-                    emit DctShow();
-                    carcass->message(tr("Create a Dictionary"));
-                }
+//                }
+//                else{
+//                    emit DctShow(); //нужно вызывать меню ****************************
+//                    carcass->message(tr("Create a Dictionary"));
+//                }
             }
         }
     }
     else{
         carcass->message("Не инициализирован абстрактор WWW");
     }
+    return false;
 }
 
-WWWRealization::~WWWRealization()
+bool WWWAbstraction::AddDictionary(QString str)
 {
-    delete language;
-}
-
-//********************************************************************************
-//********************************************************************************
-
-void WWWRealization::DctInitializ()
-{
-    if (initialized){
-        if(!language->words.isEmpty()){
-            for (int i = 0; i < language->words.size(); ++i){
-                for (int u = 0; u < language->words[i].dictionaryes.size(); ++u){
-                    if(!DctCheck.contains(language->words[i].dictionaryes[u])) DctCheck.insert(language->words[i].dictionaryes[u], false);
-                }
-            }
-        }
+    if(initialized){
+        if(language->AddDictionary(str)) return true;
     }
     else{
         carcass->message("Не инициализирован абстрактор WWW");
     }
+    return false;
 }
+
+void WWWAbstraction::addDctCheck(QString str)
+{
+    if(!DctCheck.contains(str)) DctCheck << str;
+}
+
+void WWWAbstraction::removeDctCheck(QString str)
+{
+    int i = DctCheck.indexOf(str);
+    if(i > -1) DctCheck.removeAt(i);
+}
+
+WWWAbstraction::~WWWAbstraction()
+{
+
+}
+
+//********************************************************************************
+//********************************************************************************

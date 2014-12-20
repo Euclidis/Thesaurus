@@ -22,7 +22,8 @@ struct Adr
 
 struct ControlSymbol
 {
-    const QString lang_empty = "⚜";       //символ для обозначения в файле конфигурации отсутствия созданных аккаунтов
+    const QString lang_empty = "⚜";         //символ для обозначения в файле конфигурации отсутствия созданных аккаунтов
+    const QString new_dictionary = "⚜";     //символ для "пустого" слова в новом, созданном словаре
 };
 
 struct WidgetsTexts

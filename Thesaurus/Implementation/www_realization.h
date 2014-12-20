@@ -3,7 +3,7 @@
 
 #include "../language.h"
 
-class WWWRealization : public QObject
+class WWWAbstraction : public QObject
 {
     Q_OBJECT
 
@@ -13,24 +13,25 @@ class WWWRealization : public QObject
 public:
     Carcass* carcass;
     Language* language;
-    QMap<QString, bool> DctCheck;
+    QStringList DctCheck;
 public:
     //-----------------------------------------
-    explicit WWWRealization(Carcass* _carcass);
-    virtual ~WWWRealization();
+    explicit WWWAbstraction(Carcass* _carcass);
+    virtual ~WWWAbstraction();
     //-----------------------------------------
     bool Initialize();
+    void addDctCheck(QString);
+    void removeDctCheck(QString);
 public slots:
-    void SaveWord(QString _word,
+    bool SaveWord(QString _word,
                   QString _transcription,
                   QStringList _translates,
                   QString _note);
+    bool AddDictionary(QString str);
 //*********************************************
 
 private:
     bool initialized;
-private:
-    void DctInitializ();
 
 signals:
     void DctShow();

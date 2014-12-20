@@ -3,7 +3,8 @@
 Language::Language(Carcass *_carcass)
 {
     carcass = _carcass;
-    adress = carcass->adr.users_dir + carcass->current_account.toLower() + "\\" + carcass->current_language + carcass->adr.lext;
+    adress = carcass->adr.users_dir + carcass->current_account.toLower() + "\\English-Russian.lang" /*+ carcass->current_language + carcass->adr.lext*/;
+    name = carcass->current_language;
     initialized = false;
 }
 
@@ -11,6 +12,18 @@ bool Language::Initialize()
 {
     if(ReadFile()){
         initialized = true;
+        if (initialized){
+            if(!words.isEmpty()){
+                for (int i = 0; i < words.size(); ++i){
+                    for (int u = 0; u < words[i].dictionaries.size(); ++u){
+                        if(!dictionaries.contains(words[i].dictionaries[u])) dictionaries << words[i].dictionaries[u];
+                    }
+                }
+            }
+        }
+        else{
+            carcass->message("Не инициализирован абстрактор WWW");
+        }
         return true;
     }
     else{
@@ -25,11 +38,10 @@ bool Language::ReadFile()
     case Carcass::ReadResult::OK:
         return true;
     default:
-        carcass->message(carcass->enumRToQStr(rr)+ "  "+ adress);
+        //carcass->message(carcass->enumRToQStr(rr)+ "  "+ adress);
         return false;
     }
 }
-
 bool Language::WriteFile()
 {
     if(initialized){
@@ -38,7 +50,7 @@ bool Language::WriteFile()
         case Carcass::ReadResult::OK:
             return true;
         default:
-            carcass->message(carcass->enumWToQStr(wr) + "  " + adress);
+            //carcass->message(carcass->enumWToQStr(wr) + "  " + adress);
             return false;
         }
     }
@@ -48,12 +60,67 @@ bool Language::WriteFile()
     }
 }
 
-void Language::AddNewWord(Word& _word)
+void Language::AddWord(Word& _word)
 {
     if(initialized){
-        int n = IndexOf(_word.word);
-        if (n < 0) words << _word;
-        else words[n] += _word;
+        if(_word.word != ""){
+            if(!_word.translates.isEmpty()){
+                int n = IndexOf(_word.word);
+                if (n < 0) words << _word;
+                else words[n] += _word;
+                WriteFile();
+                QStringList::iterator i = _word.dictionaries.begin();
+                while(i != _word.dictionaries.end()){
+                    if(!dictionaries.contains(*i)) dictionaries << (*i);
+                    ++i;
+                }
+            }
+        }
+    }
+    else{
+        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+    }
+}
+void Language::RemoveWord(QString str)
+{
+    if(initialized){
+        str = str.trimmed();
+        int n = IndexOf(str);
+        if(n > -1){
+            if(str != carcass->symb.new_dictionary){
+                words.removeAt(n);
+                WriteFile();
+            }
+        }
+    }
+    else{
+        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+    }
+}
+bool Language::AddDictionary(QString str)
+{
+    if(initialized){
+        str = str.trimmed();
+        if(str != ""){
+            if(!dictionaries.contains(str)){
+                dictionaries << str;
+                QStringList empty;
+                empty << str;
+                Word w(carcass->symb.new_dictionary, "", empty, empty, "");
+                AddWord(w);
+                return true;
+            }
+        }
+    }
+    else{
+        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+    }
+    return false;
+}
+void Language::RemoveDictionary(QString str)
+{
+    if(initialized){
+
     }
     else{
         carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************

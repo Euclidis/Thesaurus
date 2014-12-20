@@ -7,7 +7,7 @@ WriteWordsWindow::WriteWordsWindow(Carcass * _carcass) :
 {
     ui->setupUi(this);
     carcass = _carcass;
-    realiz = new WWWRealization(carcass);
+    realiz = new WWWAbstraction(carcass);
     DW = nullptr;
     if(realiz->Initialize()){
         ConnectRealizator();
@@ -34,19 +34,31 @@ void WriteWordsWindow::ConnectWidgets()
     connect(ui->pushButton, SIGNAL(clicked()), SLOT(SaveWord()));
     connect(ui->pushButton_2, SIGNAL(clicked()), SLOT(DW_open()));
 }
-//--------Функции получения информации от виджетов
+//--------Функции для текстовых полей
 void WriteWordsWindow::TakeTexts()
 {
-    word            = ui->lineEdit->text();
-    transcription   = ui->lineEdit_2->text();
+    word            = ui->lineEdit->text().trimmed();
+    transcription   = ui->lineEdit_2->text().trimmed();
     translates      = ui->textEdit->toPlainText().split("\n");
-    note            = ui->textEdit_2->toPlainText();
+    note            = ui->textEdit_2->toPlainText().trimmed();
+}
+void WriteWordsWindow::ClearTexts()
+{
+    ui->lineEdit->setText   ("");
+    ui->lineEdit_2->setText ("");
+    ui->textEdit->setText   ("");
+    ui->textEdit_2->setText ("");
 }
 //--------Функции работы с дополнительным окном
 void WriteWordsWindow::DW_open()
 {
     if(!DW) DW = new DctWindow(realiz);
     DW->show();
+}
+void WriteWordsWindow::closeEvent(QCloseEvent * event)
+{
+    if(DW) DW->close();
+    event->accept();
 }
 //*******************************************************************
 //*******************************************************************
@@ -55,7 +67,7 @@ void WriteWordsWindow::DW_open()
 void WriteWordsWindow::SaveWord()
 {
     TakeTexts();
-    realiz->SaveWord(word, transcription, translates, note);
+    if(realiz->SaveWord(word, transcription, translates, note)) ClearTexts();
 }
 
 WriteWordsWindow::~WriteWordsWindow()

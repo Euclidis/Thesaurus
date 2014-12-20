@@ -148,19 +148,27 @@ Word::Word()
     date = QDate::currentDate();
     priority = 1;
 }
-Word::Word(QString &_word,
-           QString &_transcription,
+Word::Word(QString _word,
+           QString _transcription,
            QStringList &_translates,
-           QStringList &_dictionaryes,
-           QString &_note)
+           QStringList &_dictionaries,
+           QString _note)
 {
     date = QDate::currentDate();
     priority = 1;
-    word = _word;
-    transcription = _transcription;
-    translates = _translates;
-    dictionaryes = _dictionaryes;
-    note = _note;
+    word = _word.trimmed();
+    transcription = _transcription.trimmed();
+    if(!_translates.isEmpty()){
+        for(int i = 0; i < _translates.size(); ++i){
+            translates << _translates.at(i).trimmed();
+        }
+    }
+    if(!_dictionaries.isEmpty()){
+        for(int i = 0; i < _dictionaries.size(); ++i){
+            dictionaries << _dictionaries.at(i).trimmed();
+        }
+    }
+    note = _note/*.trimmed()*/;
 }
 Word& Word::operator+=(const Word& _word)
 {
@@ -169,8 +177,8 @@ Word& Word::operator+=(const Word& _word)
             for(int i = 0; i < _word.translates.size(); ++i){
                 if(!(this->translates.contains(_word.translates[i]))) this->translates << _word.translates[i];
             }
-            for(int i = 0; i < _word.dictionaryes.size(); ++i){
-                if(!(this->dictionaryes.contains(_word.dictionaryes[i]))) this->dictionaryes << _word.dictionaryes[i];
+            for(int i = 0; i < _word.dictionaries.size(); ++i){
+                if(!(this->dictionaries.contains(_word.dictionaries[i]))) this->dictionaries << _word.dictionaries[i];
             }
             if(this->note != _word.note) this->note += "\n" + _word.note;
         }
@@ -182,7 +190,7 @@ QDataStream& operator>>(QDataStream& out, Word& w)
     out >> w.word;
     out >> w.transcription;
     out >> w.translates;
-    out >> w.dictionaryes;
+    out >> w.dictionaries;
     out >> w.note;
     out >> w.date;
     out >> w.priority;
@@ -193,7 +201,7 @@ QDataStream& operator<<(QDataStream& in, const Word& w)
     in << w.word;
     in << w.transcription;
     in << w.translates;
-    in << w.dictionaryes;
+    in << w.dictionaries;
     in << w.note;
     in << w.date;
     in << w.priority;

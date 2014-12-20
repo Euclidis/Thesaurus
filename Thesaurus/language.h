@@ -7,27 +7,32 @@
 
 class Language
 {
-//-----------------------------------------
-//INTERFACE
-//-----------------------------------------
+//*****************************************
+//               INTERFACE
+//*****************************************
 public:
-    QList<Word> words;
+    QString name;                       //Имя языка
+    QList<Word> words;                  //Список слов языка
+    QList<QString> dictionaries;        //Спиок словарей
 public:
-    bool Initialize();
+    bool Initialize();                  //Обязательно необходимо вызвать при создании экземпляра класса
     bool Contains(const QString str);
     int  IndexOf(const QString str);
     bool WriteFile();
     bool ReadFile();
-    void AddNewWord(Word &_word);
+    void AddWord(Word &_word);
+    void RemoveWord(QString);
+    bool AddDictionary(QString);
+    void RemoveDictionary(QString);
 //-----------------------------------------
+public:
+    Language(Carcass *_carcass);
+//*****************************************
 
 private:
     Carcass* carcass;
     QString adress;
     bool initialized;
-
-public:
-    Language(Carcass *_carcass);
 };
 
 

@@ -14,13 +14,22 @@ class DctWindow : public BaseWindow
     Q_OBJECT
 
 public:
-    explicit DctWindow(WWWRealization*);
+    explicit DctWindow(WWWAbstraction*);
     ~DctWindow();
 
 private:
-    WWWRealization* realiz;
+    WWWAbstraction* realiz;
 private:
     void BoxFilling();
+    void CreateNewCheckBox(QString str);
+    void mousePressEvent(QMouseEvent *event);
+    void ContextMenuShow();
+private slots:
+    void CheckChange(bool b);
+    void AddDictionary();
+    void TextShow();
+
+    void on_lineEdit_returnPressed();
 
 private:
     Ui::DctWindow *ui;

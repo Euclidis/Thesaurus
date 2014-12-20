@@ -6,21 +6,39 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>339</width>
-    <height>352</height>
+    <width>161</width>
+    <height>299</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <widget class="QScrollArea" name="scrollArea">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>30</y>
      <width>141</width>
-     <height>231</height>
+     <height>251</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>141</horstretch>
+     <verstretch>251</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="baseSize">
+    <size>
+     <width>141</width>
+     <height>251</height>
+    </size>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
    </property>
    <property name="widgetResizable">
     <bool>true</bool>
@@ -30,26 +48,54 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>139</width>
-      <height>229</height>
+      <width>141</width>
+      <height>251</height>
      </rect>
     </property>
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinimumSize</enum>
+      </property>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>270</y>
-     <width>61</width>
-     <height>23</height>
+     <x>0</x>
+     <y>130</y>
+     <width>161</width>
+     <height>20</height>
     </rect>
    </property>
-   <property name="text">
-    <string>OK</string>
-   </property>
-   <property name="flat">
-    <bool>true</bool>
+   <property name="frame">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>

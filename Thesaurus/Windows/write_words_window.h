@@ -19,7 +19,7 @@ public:
 
 private:
     Carcass * carcass;
-    WWWRealization* realiz;
+    WWWAbstraction* realiz;
     DctWindow* DW;
     QString word;
     QString transcription;
@@ -30,6 +30,8 @@ private:
     void ConnectWidgets();
     void ConnectDctWindow();
     void TakeTexts();
+    void ClearTexts();
+    void closeEvent(QCloseEvent * event);
 signals:
 
 private slots:
