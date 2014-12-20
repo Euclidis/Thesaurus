@@ -67,6 +67,8 @@ AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
     InstallFont();
     ui->setupUi(this);
     carcass = _carcass;
+    timer_for_anim = new QTimer;
+    connect(timer_for_anim, SIGNAL(timeout()), this, SLOT(change_timer_flag()));
 
     //--------------------------------------------------------//
     //Read File-----------------------------------------------//
@@ -199,6 +201,7 @@ void AccountWindow::RPW_open(QMap<QString, QString>& names){
 }
 void AccountWindow::on_label_clicked()
 {
+
   if (!name_pass.isEmpty())
    RPW_open(name_pass);
   else {carcass->message(tr("No users found"));}
@@ -290,12 +293,16 @@ void AccountWindow::on_OK_Button_clicked()
 // Login-Registration Button clicked
 void AccountWindow::on_LogReg_Button_clicked()
 {
+  if (timer_flag){
+  this->timer_for_anim->start(520);
+  timer_flag = false;
   if (!mode_flag){
       Login();
     }
   else{
     Registration();
-  }
+      }
+     }
 }
 //---------------------------------------------------------------
 void AccountWindow::on_OK_Button_mouseEnter()
@@ -387,4 +394,9 @@ void AccountWindow::InstallFont(){
     }
 
 
+}
+
+void AccountWindow::change_timer_flag(){
+
+  timer_flag = true;
 }

@@ -19,15 +19,16 @@ public:
   QString NewDirection;
 
 
-   Carcass * carcass;
-   QStringList Lang;
-   QStringList Direction;
+  Carcass * carcass;
+  QStringList Lang;
+  QStringList Direction;
 
 
+  void choose_avoider(QString, QString);
   bool is_Lang_exists(QString);
   void Lang_Initializ();
   void Load_Directions();
-  void createLD(QString, QString);
+  void createLD();
 
 };
 

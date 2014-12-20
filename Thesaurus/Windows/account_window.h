@@ -36,6 +36,7 @@ private slots:
     void on_OK_Button_mouseLeave();
     void on_LogReg_Button_mouseEnter();
     void on_LogReg_Button_mouseLeave();
+    void change_timer_flag();
 
 private:
     void Registration();
@@ -43,19 +44,22 @@ private:
     bool mode_flag;
     void Login_Anim();
     void Regis_Anim();
-
+    bool is_User_Name_exists_here();
     void InstallFont();
-    void RPW_open(QMap<QString, QString> &);
 
+    void RPW_open(QMap<QString, QString> &);
     QString UserName;
     QMap <QString, QString> name_pass;  //имена и пароли пользователей
     QPropertyAnimation *lineedit_anim;
     QPropertyAnimation *lineedit_2_anim;
     QPropertyAnimation *lineedit_3_anim;
     QPropertyAnimation *OK_Butt_anim;
+    QTimer *timer_for_anim;
+    bool timer_flag = 1;
+
     ResetPassWindow *RPW;
     Ui::AccountWindow *ui;
-    bool is_User_Name_exists_here();
+
 
 
 signals:
