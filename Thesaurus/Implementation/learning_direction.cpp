@@ -9,13 +9,10 @@ void LearningDirection::Lang_Initializ(){
 
   Lang = new QStringList;
   Direction = new QStringList;
-  temp1 = new QStringList;
-  temp2 = new QStringList;
 
-  *Lang << "English" << "Russian" << "Chines";
-  *temp1 = *temp2 = *Lang;
-  temp1->removeAt(1);
-  temp2->removeAt(0);
+  *Lang << "English" << "Russian" << "Chines" << "Khmer" << "Azerbajanian" << "Ephiopian";
+
+
 }
 
 bool LearningDirection::is_Lang_exists(QString checkLang){
@@ -44,12 +41,18 @@ void LearningDirection::Load_Directions(){
       NewDirection = TargLang +"-"+ KnownLang;
       carcass->current_language = NewDirection;
       QString str = "";
-      carcass->message(carcass->enumWToQStr(carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.Lang, NewDirection)));
-      carcass->message(carcass->enumWToQStr(carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + "//" + NewDirection + carcass->adr.lext, str )));
+      carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.Lang, NewDirection);
+      carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + "//" + NewDirection + carcass->adr.lext, str);
+    }
+  else {
+
     }
 
 }
-void LearningDirection::createLD(){
+void LearningDirection::createLD(const QString &knownL, const QString &targL){
+
+  KnownLang = knownL;
+  TargLang = targL;
 
   Load_Directions();
 
@@ -57,16 +60,20 @@ void LearningDirection::createLD(){
 
 void LearningDirection::choose_avoider(QString knownL, QString targetL){
 
-  if (KnownLang != knownL){
+//  if (KnownLang != knownL){
 
-      KnownLang = knownL;
-      temp2 = Lang;
-      temp2->filter(KnownLang);
-    }
-  else if (TargLang != targetL){
-      TargLang = targetL;
-      temp1 = Lang;
-      temp1->filter(TargLang);
-    }
+//      KnownLang = knownL;
+//      temp2 = Lang;
+//      temp2->filter(KnownLang);
+//    }
+//  else if (TargLang != targetL){
+//      TargLang = targetL;
+//      temp1 = Lang;
+//      temp1->filter(TargLang);
+//    }
 }
+void LearningDirection::LoadAllLD(){
 
+
+
+}
