@@ -33,7 +33,7 @@ bool LearningDirection::is_Lang_exists(QString checkLang){
 // Если нет ЛэнгЛиста, то создать его
 void LearningDirection::Load_Directions(){
 
-  QFile LangList (carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.Lang);
+  QFile LangList (carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.CurLearnDirList);
 
   if (!LangList.exists()){
       LangList.open(QFile::WriteOnly);
@@ -41,7 +41,7 @@ void LearningDirection::Load_Directions(){
       NewDirection = TargLang +"-"+ KnownLang;
       carcass->current_language = NewDirection;
       QString str = "";
-      carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.Lang, NewDirection);
+      carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.CurLearnDirList, NewDirection);
       carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + "//" + NewDirection + carcass->adr.lext, str);
     }
   else {

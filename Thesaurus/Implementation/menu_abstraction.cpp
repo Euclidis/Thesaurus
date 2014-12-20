@@ -2,5 +2,5 @@
 
 MenuAbstraction::MenuAbstraction(Carcass* _carcass) : carcass(_carcass)
 {
-    if()
+
 }

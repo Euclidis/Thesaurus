@@ -6,26 +6,32 @@
 class Carcass;
 class LangList{
 public:
-  struct Lang{
-    Lang(QString, QIcon, int,  QList<QChar>);
-    QString name;
-    QIcon ico;
-    int keyboard;
-    QList<QChar> transcript;
-  };
-  struct StrIco{
-    QString *name;
-    QIcon *icon;
-  };
-  private:
-  Carcass* carcass;
-
-    QList <Lang> Lang_List;
-  public:
+    struct Lang{
+        QString name_eng;
+        QString name_native;
+        QIcon ico;
+        int keyboard;
+        QList<QChar> transcript;
+    };
+    struct StrIco{
+        QString *name;
+        QIcon *icon;
+    };
+private:
+    Carcass* carcass;
+    QList<Lang> Lang_List;
+    bool initialized;
+public:
     LangList(Carcass*);
-    const Lang& getLang(QString) const;
-    const QList<StrIco> getStrIcoList() const;
-  };
+    const Lang* getLang(QString);
+    const QList<StrIco> getStrIcoList();
+    bool Initialize();
+    friend QDataStream& operator>> (QDataStream& out, Lang& l);
+    friend QDataStream& operator<< (QDataStream& in, const Lang& l);
+private:
+    bool ReadFile();
+    bool WriteFile();
+};
 
 class L_D_List{
 public:
@@ -70,6 +76,7 @@ public: //метки
     QString current_language_interface;
     QString current_language;
     QString current_accountOS;
+    LangList* lang_list;
     QMap<QString, QString> QMapAccounts;
     bool flag_AWIgnore;
 

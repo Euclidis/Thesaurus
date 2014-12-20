@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     Implementation/learning_direction.cpp \
     Implementation/www_realization.cpp \
     Windows/dct_window.cpp \
-    lang_list.cpp
+    lang_list.cpp \
+    Implementation/menu_abstraction.cpp
 
 HEADERS  += \
     carcass.h \
@@ -62,7 +63,8 @@ HEADERS  += \
     language.h \
     Implementation/learning_direction.h \
     Implementation/www_realization.h \
-    Windows/dct_window.h
+    Windows/dct_window.h \
+    Implementation/menu_abstraction.h
 
 
 FORMS    += \
