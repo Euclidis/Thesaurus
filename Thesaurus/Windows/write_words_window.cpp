@@ -15,7 +15,7 @@ WriteWordsWindow::WriteWordsWindow(Carcass * _carcass) :
     }
     else{
         //*********** Добавить эксепшн ***************
-        deleteLater();
+       deleteLater();
     }
 }
 

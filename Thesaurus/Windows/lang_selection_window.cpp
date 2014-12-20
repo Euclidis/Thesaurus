@@ -4,8 +4,8 @@
 LangSelectionWindow::LangSelectionWindow(Carcass *_carcass) : LearningDirection(_carcass),
   ui(new Ui::LangSelectionWindow)
 {
-  ui->setupUi(this);
 
+  ui->setupUi(this);
   Lang_Initializ();
 
   ui->comboBox->addItems(*Lang);

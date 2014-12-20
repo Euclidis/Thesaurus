@@ -3,6 +3,42 @@
 
 #include "exceptions_list.h"
 
+class Carcass;
+class LangList{
+public:
+  struct Lang{
+    Lang(QString, QIcon, int,  QList<QChar>);
+    QString name;
+    QIcon ico;
+    int keyboard;
+    QList<QChar> transcript;
+  };
+  struct StrIco{
+    QString *name;
+    QIcon *icon;
+  };
+  private:
+  Carcass* carcass;
+
+    QList <Lang> Lang_List;
+  public:
+    LangList(Carcass*);
+    const Lang& getLang(QString) const;
+    const QList<StrIco> getStrIcoList() const;
+  };
+
+class L_D_List{
+public:
+  
+private:
+  struct L_Direct{
+    QString knownL;
+    QString targL;
+  };
+  QList <LangList::Lang> AllLD;
+  
+};
+
 struct Word
 {
     QString word;
