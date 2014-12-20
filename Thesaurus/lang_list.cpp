@@ -1,4 +1,5 @@
 #include "carcass.h"
+#include <QPixmap>
 
 LangList::LangList(Carcass *_carcass){
     carcass = _carcass;
@@ -79,13 +80,16 @@ bool LangList::WriteFile()
 {
     Lang temp;
     temp.name_eng = "English";
-    temp.ico = QIcon("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\en.png");
+    QPixmap p1("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\en.png");
+    temp.ico.addPixmap(p1);
     Lang_List << temp;
     temp.name_eng = "Russian";
-    temp.ico = QIcon("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\ru.png");
+    QPixmap p2("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\ru.png");
+    temp.ico.addPixmap(p2);
     Lang_List << temp;
     temp.name_eng = "Germany";
-    temp.ico = QIcon("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\ger.png");
+    QPixmap p3("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\ger.png");
+    temp.ico.addPixmap(p3);
     Lang_List << temp;
 
     Carcass::WriteResult wr = carcass->WriteFile(carcass->adr.LangList, Lang_List);
