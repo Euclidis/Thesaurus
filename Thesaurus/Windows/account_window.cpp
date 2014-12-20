@@ -131,13 +131,13 @@ AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
 
     //-------------------------------------------------------
     //-------------------------------------------------------
-    QMenu m;
-    QList<LangList::StrIco> i;
-    i = carcass->lang_list->getStrIcoList();
-    m.addAction(*i.at(0).icon, *i.at(0).name);
-    m.addAction(*i.at(1).icon, *i.at(1).name);
-    m.addAction(*i.at(2).icon, *i.at(2).name);
-    m.exec(QCursor::pos());
+//    QMenu m;
+//    QList<LangList::StrIco> i;
+//    i = carcass->lang_list->getStrIcoList();
+//    m.addAction(*i.at(0).icon, *i.at(0).name);
+//    m.addAction(*i.at(1).icon, *i.at(1).name);
+//    m.addAction(*i.at(2).icon, *i.at(2).name);
+//    m.exec(QCursor::pos());
 }
 
 AccountWindow::~AccountWindow()
