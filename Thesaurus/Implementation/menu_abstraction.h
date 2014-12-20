@@ -1,13 +1,17 @@
 #ifndef MENU_ABSTRACTION_H
 #define MENU_ABSTRACTION_H
 
-#include <QObject>
+#include "../language.h"
 
 class MenuAbstraction : public QObject
 {
     Q_OBJECT
+
+private:
+    Carcass* carcass;
+    Language* language;
 public:
-    explicit MenuAbstraction(QObject *parent = 0);
+    explicit MenuAbstraction(Carcass* _carcass);
 
 signals:
 

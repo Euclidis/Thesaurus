@@ -1,6 +1,6 @@
 #include "menu_abstraction.h"
 
-MenuAbstraction::MenuAbstraction(QObject *parent) :
-    QObject(parent)
+MenuAbstraction::MenuAbstraction(Carcass* _carcass) : carcass(_carcass)
 {
+    if()
 }
