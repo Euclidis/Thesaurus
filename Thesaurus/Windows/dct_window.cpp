@@ -1,6 +1,5 @@
 #include "dct_window.h"
 #include "ui_dct_window.h"
-#include <QMenu>
 
 DctWindow::DctWindow(WWWAbstraction* _realiz) :
     ui(new Ui::DctWindow)

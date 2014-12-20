@@ -20,6 +20,7 @@
 #include <QHBoxLayout>
 #include <QTimer>
 #include <QStringListModel>
+#include <QMenu>
 
 
 #include "Windows/MyWidgets/label.h"

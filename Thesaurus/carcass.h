@@ -4,6 +4,7 @@
 #include "exceptions_list.h"
 
 class Carcass;
+
 class LangList{
 public:
     struct Lang{
@@ -14,8 +15,8 @@ public:
         QList<QChar> transcript;
     };
     struct StrIco{
-        QString *name;
-        QIcon *icon;
+        QString name;
+        QIcon icon;
     };
 private:
     Carcass* carcass;
@@ -32,6 +33,7 @@ private:
     bool ReadFile();
     bool WriteFile();
 };
+
 
 class L_D_List{
 public:

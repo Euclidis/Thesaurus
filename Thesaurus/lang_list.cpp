@@ -3,7 +3,7 @@
 LangList::LangList(Carcass *_carcass){
     carcass = _carcass;
     initialized = false;
-    if(!WriteFile()) carcass->message("Error");
+    //if(!WriteFile()) carcass->message("Error");
 }
 
 bool LangList::Initialize()
@@ -35,8 +35,8 @@ const QList<LangList::StrIco> LangList::getStrIcoList()
         if(!Lang_List.isEmpty()){
             StrIco temp;
             for(int i = 0; i < Lang_List.size(); ++i){
-                temp.icon = &(Lang_List.at(i).ico);
-                temp.name = &(Lang_List.at(i).name_eng);
+                temp.icon = Lang_List.at(i).ico;
+                temp.name = Lang_List.at(i).name_eng;
                 tempList << temp;
             }
             return tempList;
@@ -66,28 +66,28 @@ QDataStream& operator<<(QDataStream& in, const LangList::Lang& l)
 
 bool LangList::ReadFile()
 {
-    Carcass::ReadResult rr = Carcass::ReadFile(carcass->adr.LangList, Lang_List);
+    Carcass::ReadResult rr = carcass->ReadFile(carcass->adr.LangList, Lang_List);
     switch (rr) {
     case Carcass::ReadResult::OK:
         return true;
     default:
         ex_some_show ex(QObject::tr("Problems reading the file ") + carcass->adr.LangList);
         ex.show();
-        carcass->message(Carcass::enumRToQStr(rr));
+        carcass->message(carcass->enumRToQStr(rr));
     }
     return false;
 }
 bool LangList::WriteFile()
 {
-    StrIco temp;
-    *(temp.name) = "English";
-    temp.icon = new QIcon("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\en.png");
+    Lang temp;
+    temp.name_eng = "English";
+    temp.ico = QIcon("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\en.png");
     Lang_List << temp;
-    *(temp.name) = "Russian";
-    temp.icon = new QIcon("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\ru.png");
+    temp.name_eng = "Russian";
+    temp.ico = QIcon("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\ru.png");
     Lang_List << temp;
-    *(temp.name) = "Germany";
-    temp.icon = new QIcon("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\ger.png");
+    temp.name_eng = "Germany";
+    temp.ico = QIcon("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\ger.png");
     Lang_List << temp;
 
     Carcass::WriteResult wr = carcass->WriteFile(carcass->adr.LangList, Lang_List);
