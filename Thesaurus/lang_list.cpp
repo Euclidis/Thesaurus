@@ -28,15 +28,13 @@ const LangList::Lang* LangList::getLang(QString str)
     return nullptr;
 }
 
-const QList<LangList::StrIco> LangList::getStrIcoList()
+QList<LangList::StrIco> LangList::getStrIcoList()
 {
     QList<StrIco> tempList;
     if(initialized){
         if(!Lang_List.isEmpty()){
-            StrIco temp;
             for(int i = 0; i < Lang_List.size(); ++i){
-                temp.icon = Lang_List.at(i).ico;
-                temp.name = Lang_List.at(i).name_eng;
+                StrIco temp(&Lang_List.at(i).name_eng, &Lang_List.at(i).ico);
                 tempList << temp;
             }
             return tempList;
@@ -100,4 +98,9 @@ bool LangList::WriteFile()
         carcass->message(carcass->enumWToQStr(wr));
     }
     return false;
+}
+
+LangList::StrIco::StrIco(const QString* _name, const QIcon* _icon) : name(_name), icon(_icon)
+{
+
 }

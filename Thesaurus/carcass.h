@@ -15,8 +15,9 @@ public:
         QList<QChar> transcript;
     };
     struct StrIco{
-        QString name;
-        QIcon icon;
+        StrIco(const QString* _name, const QIcon* _icon);
+        const QString* name;
+        const QIcon* icon;
     };
 private:
     Carcass* carcass;
@@ -25,7 +26,7 @@ private:
 public:
     LangList(Carcass*);
     const Lang* getLang(QString);
-    const QList<StrIco> getStrIcoList();
+    QList<StrIco> getStrIcoList();
     bool Initialize();
     friend QDataStream& operator>> (QDataStream& out, Lang& l);
     friend QDataStream& operator<< (QDataStream& in, const Lang& l);
