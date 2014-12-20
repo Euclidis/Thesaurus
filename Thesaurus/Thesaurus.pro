@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     language.cpp \
     Implementation/learning_direction.cpp \
     Implementation/www_realization.cpp \
-    Windows/dct_window.cpp
+    Windows/dct_window.cpp \
+    lang_list.cpp
 
 HEADERS  += \
     carcass.h \
