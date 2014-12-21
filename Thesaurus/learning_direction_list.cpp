@@ -35,15 +35,16 @@ bool L_D_List::LoadFromFile() {
 bool L_D_List::WriteFile() {
   if (this->curLDindex != -1){
       QString path = carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.CurLearnDirList;
-      Carcass::ReadResult rr = carcass->WriteFile(path, this->AllLD);
-      switch (rr) {
-        case Carcass::ReadResult::OK:
+      Carcass::WriteResult wr = carcass->WriteFile(path, this->AllLD);
+      switch (wr) {
+      case Carcass::WriteResult::OK:
           return true;
-        default:
-          ex_some_show ex(QObject::tr("Problems reading the file ") + path);
+      default:
+          ex_some_show ex(QObject::tr("Problems writing the file ") + path);
           ex.show();
-          carcass->message(carcass->enumRToQStr(rr));
-        }
+          carcass->message(carcass->enumWToQStr(wr));
+      }
+      return false;
     }
 
   return false;
