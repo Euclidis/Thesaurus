@@ -4,8 +4,8 @@ Sloter::Sloter()
 {
     //Получаем имя пользователя компьютера
     carcass = new Carcass;
-    carcass->lang_list = new LangList(carcass);
-    if(!carcass->lang_list->Initialize()) carcass->message("ErrorDDDDDDDDDDDDDDDDDDDDDDDDD");
+    carcass->LanguageList = new LangList(carcass);
+    if(!carcass->LanguageList->Initialize()) carcass->message("ErrorDDDDDDDDDDDDDDDDDDDDDDDDD");
 
     AW = nullptr;
     WWW = nullptr;
