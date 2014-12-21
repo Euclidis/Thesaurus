@@ -105,8 +105,9 @@ public: //метки
     QString current_language_interface;
     L_D_List* LDList;
     QString current_L_D; // string like: KnownLang_TargLang
+    L_D_List::L_Direct current_learn_dir;
     QString current_accountOS;
-    LangList* lang_list;
+    LangList* LanguageList;
     QMap<QString, QString> QMapAccounts;
     bool flag_AWIgnore;
 
