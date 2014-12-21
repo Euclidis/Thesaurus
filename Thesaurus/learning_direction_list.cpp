@@ -7,7 +7,7 @@ QDataStream& operator>> (QDataStream& out, L_D_List::L_Direct& ld){
   return out;
 }
 
-QDataStream& operator<< (QDataStream& in, L_D_List::L_Direct& ld){
+QDataStream& operator<< (QDataStream& in, const L_D_List::L_Direct& ld){
   in << ld.knownL;
   in << ld.targL;
 
@@ -51,13 +51,12 @@ bool L_D_List::WriteFile() {
 
 }
 
-L_D_List::L_Direct* L_D_List::currentLD(){
+const L_D_List::L_Direct* L_D_List::currentLD(){
 
   if (this->curLDindex != -1){
     return &this->AllLD.at(curLDindex);
     }
   carcass->message("Learning Direction is Empty and has no current LD, Please Create new Learning Direction");
-
 }
 
 bool operator==(const L_D_List::L_Direct& first, const L_D_List::L_Direct& second){
@@ -68,7 +67,7 @@ bool operator==(const L_D_List::L_Direct& first, const L_D_List::L_Direct& secon
 void L_D_List::set_curLD(const int index){
 
   carcass->LDList->curLDindex = index;
-  carcass->current_L_D = currentLDname();
+  carcass->current_learn_dir = AllLD.at(index);
 
 }
 
@@ -77,7 +76,7 @@ void L_D_List::set_curLD(const L_D_List::L_Direct& direction){
   for (unsigned int i = 0; i < AllLD.size(); ++i)
     if (direction == AllLD.at(i))
       {  carcass->LDList->curLDindex = i;
-        carcass->current_L_D = currentLDname();
+        carcass->current_learn_dir = direction;
       }
 }
 

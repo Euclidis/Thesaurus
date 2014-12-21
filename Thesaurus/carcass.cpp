@@ -37,7 +37,7 @@ void Carcass::confUser_write()
     QString str = current_account.toLower();
     try
     {
-        data << current_language_interface << current_L_D << (QString::number(flag_AWIgnore));
+        data << current_language_interface << current_learn_dir.knownL << current_learn_dir.targL << (QString::number(flag_AWIgnore));
     }
     catch(...){
         ex_some_show ex(QObject::tr("Problems writing the file ") + adr.users_dir + str + adr.user_config);
@@ -71,8 +71,9 @@ void Carcass::confUser_read()
     try
     {
         current_language_interface = data.at(0);
-        current_L_D= data.at(1);
-        flag_AWIgnore = ((data.at(2) == "0") ? false : true);
+        current_learn_dir.knownL = data.at(1);
+        current_learn_dir.targL = data.at(2);
+        flag_AWIgnore = ((data.at(3) == "0") ? false : true);
     }
     catch(...){
         ex_some_show ex(QObject::tr("Problems reading the file ") + adr.users_dir + str + adr.user_config);

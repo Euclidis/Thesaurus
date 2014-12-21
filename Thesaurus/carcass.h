@@ -60,7 +60,7 @@ public:
   void set_curLD(const L_D_List::L_Direct& direction);
   friend bool operator== (const L_Direct&, const L_Direct&);
   L_D_List(Carcass*);
-  L_Direct* currentLD();
+  const L_Direct* currentLD();
   void addNew_L_D(QString knownlang, QString targlang);
   //DELETE LD
   friend QDataStream& operator>> (QDataStream& out, L_Direct& l);
@@ -104,7 +104,6 @@ public: //метки
     QString current_account;
     QString current_language_interface;
     L_D_List* LDList;
-    QString current_L_D; // string like: KnownLang_TargLang
     L_D_List::L_Direct current_learn_dir;
     QString current_accountOS;
     LangList* LanguageList;

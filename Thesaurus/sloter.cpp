@@ -28,7 +28,8 @@ Sloter::Sloter()
 
     //Присваиваем общим переменным стандартные значения
     carcass->current_language_interface = carcass->adr.LangInterface_en;  //>>>>>>>>> Стоит поменять на что-то другое <<<<<<<<//
-    carcass->current_L_D = carcass->symb.lang_empty;
+    carcass->current_learn_dir.knownL = carcass->symb.lang_empty;
+    carcass->current_learn_dir.targL = carcass->symb.lang_empty;
     carcass->flag_AWIgnore = false;
 
     //читаем файл конфигурации и заполняем QMapAccounts

@@ -4,7 +4,7 @@ Language::Language(Carcass *_carcass)
 {
     carcass = _carcass;
     adress = carcass->adr.users_dir + carcass->current_account.toLower() + "\\English-Russian.lang" /*+ carcass->current_language + carcass->adr.lext*/;
-    name = carcass->current_L_D;
+    //name = carcass->current_L_D;
     initialized = false;
 }
 
