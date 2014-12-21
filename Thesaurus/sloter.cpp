@@ -5,7 +5,7 @@ Sloter::Sloter()
     //Получаем имя пользователя компьютера
     carcass = new Carcass;
     carcass->lang_list = new LangList(carcass);
-    if(!carcass->lang_list->Initialize()) carcass->message("Error");
+    if(!carcass->lang_list->Initialize()) carcass->message("ErrorDDDDDDDDDDDDDDDDDDDDDDDDD");
 
     AW = nullptr;
     WWW = nullptr;
@@ -28,7 +28,7 @@ Sloter::Sloter()
 
     //Присваиваем общим переменным стандартные значения
     carcass->current_language_interface = carcass->adr.LangInterface_en;  //>>>>>>>>> Стоит поменять на что-то другое <<<<<<<<//
-    carcass->current_language = carcass->symb.lang_empty;
+    carcass->current_L_D = carcass->symb.lang_empty;
     carcass->flag_AWIgnore = false;
 
     //читаем файл конфигурации и заполняем QMapAccounts

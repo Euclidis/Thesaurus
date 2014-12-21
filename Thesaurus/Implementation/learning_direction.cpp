@@ -39,7 +39,7 @@ void LearningDirection::Load_Directions(){
       LangList.open(QFile::WriteOnly);
       LangList.close();
       NewDirection = TargLang +"-"+ KnownLang;
-      carcass->current_language = NewDirection;
+      carcass->current_L_D = NewDirection;
       QString str = "";
       carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.CurLearnDirList, NewDirection);
       carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + "//" + NewDirection + carcass->adr.lext, str);

@@ -229,7 +229,7 @@ void AccountWindow::on_OK_Button_clicked()
                 carcass->conf_read();
                 carcass->conf_write();
               //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-STARTS--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                if (carcass->current_language == carcass->symb.lang_empty)
+                if (carcass->current_L_D == carcass->symb.lang_empty)
                   emit LSW_open();
                 else
                   emit MW_open();

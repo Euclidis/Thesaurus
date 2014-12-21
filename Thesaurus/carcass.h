@@ -34,18 +34,33 @@ private:
     bool ReadFile();
     bool WriteFile();
 };
-
-
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//структура для хранения списка созданных пользователем направлений изучения языка (Learning Direction)
 class L_D_List{
 public:
-  
-private:
-  struct L_Direct{
+  struct L_Direct // структура для хранения наименования изучаемого языка (targL) и уже известного (knownL)
+  {
     QString knownL;
     QString targL;
   };
-  QList <LangList::Lang> AllLD;
-  
+public:
+  QString currentLDname(); // i.e. English_Russian
+  void set_curLD(const int index);
+  void set_curLD(const L_D_List::L_Direct& direction);
+  friend bool operator== (const L_Direct&, const L_Direct&);
+  L_D_List(Carcass*);
+  L_Direct* currentLD();
+  void addNew_L_D(QString knownlang, QString targlang);
+  //DELETE LD
+  friend QDataStream& operator>> (QDataStream& out, L_Direct& l);
+  friend QDataStream& operator<< (QDataStream& in, const L_Direct& l);
+private:
+  Carcass *carcass;
+  QList <L_Direct> AllLD;
+private:
+  signed int curLDindex = -1;
+  bool LoadFromFile();
+  bool WriteFile();
 };
 
 struct Word
@@ -77,7 +92,8 @@ Q_OBJECT
 public: //метки
     QString current_account;
     QString current_language_interface;
-    QString current_language;
+    L_D_List* LDList;
+    QString current_L_D; // string like: KnownLang_TargLang
     QString current_accountOS;
     LangList* lang_list;
     QMap<QString, QString> QMapAccounts;
