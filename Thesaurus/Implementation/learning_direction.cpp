@@ -7,12 +7,12 @@ LearningDirection::LearningDirection(Carcass * _car) : carcass(_car)
 
 void LearningDirection::Lang_Initializ(){
 
-  Lang = new QStringList;
-  Direction = new QStringList;
-
-  *Lang << "English" << "Russian" << "Chines" << "Khmer" << "Azerbajanian" << "Ephiopian";
-
-
+//      const QList<LangList::StrIco>& tempStrIcoList = carcass->LanguageList->getStrIcoList();
+//      for (int i = 0; i < tempStrIcoList.size(); ++i){
+////          QAction tempAction(*tempStrIcoList.at(i).name, *tempStrIcoList.at(i).icon);
+////      Lang.push_back(tempAction);
+//}
+//  Direction = new QStringList;
 }
 
 bool LearningDirection::is_Lang_exists(QString checkLang){
@@ -38,13 +38,19 @@ void LearningDirection::Load_Directions(){
   if (!LangList.exists()){
       LangList.open(QFile::WriteOnly);
       LangList.close();
-      NewDirection = TargLang +"-"+ KnownLang;
-      carcass->current_L_D = NewDirection;
+
+      carcass->current_learn_dir.knownL = KnownLang;
+      carcass->current_learn_dir.targL = TargLang;
+      carcass->LDList->addNew_L_D(KnownLang, TargLang);
+
       QString str = "";
-      carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.CurLearnDirList, NewDirection);
-      carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + "//" + NewDirection + carcass->adr.lext, str);
+      carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.CurLearnDirList, carcass->LDList->currentLDname());
+      carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + "//" + carcass->LDList->currentLDname() + carcass->adr.lext, str);
+
+      carcass->LDList->WriteFile();
     }
   else {
+      //?>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     }
 

@@ -14,10 +14,8 @@ public:
   QString KnownLang;
   QString TargLang;
 
-  QString NewDirection;
-
   Carcass * carcass;
-  QStringList *Lang;
+  //QList<QAction*> Lang;
   QStringList *Direction;
 
   struct AllLearningDirections{

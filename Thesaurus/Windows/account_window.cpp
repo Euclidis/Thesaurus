@@ -63,7 +63,6 @@ void AccountWindow::retranslateUI(){}
 AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
     ui(new Ui::AccountWindow)
 {
-
     InstallFont();
     ui->setupUi(this);
     carcass = _carcass;
@@ -131,13 +130,13 @@ AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
 
     //-------------------------------------------------------
     //-------------------------------------------------------
-    QMenu m;
-    QList<LangList::StrIco> i;
-    i = carcass->LanguageList->getStrIcoList();
-    m.addAction(*i.at(0).icon, *i.at(0).name);
-    m.addAction(*i.at(1).icon, *i.at(1).name);
-    m.addAction(*i.at(2).icon, *i.at(2).name);
-    m.exec(QCursor::pos());
+//    QMenu m;
+//    QList<LangList::StrIco> i;
+//    i = carcass->LanguageList->getStrIcoList();
+//    m.addAction(*i.at(0).icon, *i.at(0).name);
+//    m.addAction(*i.at(1).icon, *i.at(1).name);
+//    m.addAction(*i.at(2).icon, *i.at(2).name);
+//    m.exec(QCursor::pos());
 }
 
 AccountWindow::~AccountWindow()
@@ -212,7 +211,9 @@ void AccountWindow::on_label_clicked()
    RPW_open(name_pass);
   else {carcass->message(tr("No users found"));}
 }
-
+//****************************************************************************//
+//************************* OK Pressed ***************************************//
+//****************************************************************************//
 void AccountWindow::on_OK_Button_clicked()
 {
 
@@ -227,6 +228,14 @@ void AccountWindow::on_OK_Button_clicked()
                 carcass->QMapAccounts.insert(carcass->current_accountOS, carcass->current_account);
                 carcass->conf_read();
                 carcass->conf_write();
+
+                carcass->confUser_write();
+
+                carcass->LDList = new L_D_List(carcass);
+                if (carcass->LDList->LoadFromFile()){
+
+
+                  }
               //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-STARTS--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 if (carcass->current_learn_dir.knownL == carcass->symb.lang_empty)
                   emit LSW_open();
@@ -278,7 +287,7 @@ void AccountWindow::on_OK_Button_clicked()
         carcass->confUser_write();
       }
     else {
-        carcass->message(tr("Something is wrong!\n Programm will shutdown"));
+        carcass->message(tr("Something is wrong! File ") + path_to_User + tr(" is already exists\n Programm will shutdown"));
         close();
       }
 

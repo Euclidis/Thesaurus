@@ -61,17 +61,19 @@ public:
   friend bool operator== (const L_Direct&, const L_Direct&);
   L_D_List(Carcass*);
   const L_Direct* currentLD();
-  void addNew_L_D(QString knownlang, QString targlang);
+  void addNew_L_D(const QString &knownlang, const QString &targlang);
   //DELETE LD
   friend QDataStream& operator>> (QDataStream& out, L_Direct& l);
   friend QDataStream& operator<< (QDataStream& in, const L_Direct& l);
+  friend QStringList& operator<< (QStringList& in, const QList <L_Direct>& all_ld);
+  bool LoadFromFile();
+  bool WriteFile();
 private:
   Carcass *carcass;
   QList <L_Direct> AllLD;
 private:
   signed int curLDindex = -1;
-  bool LoadFromFile();
-  bool WriteFile();
+
 };
 
 struct Word
@@ -103,7 +105,7 @@ Q_OBJECT
 public: //метки
     QString current_account;
     QString current_language_interface;
-    L_D_List* LDList;
+    L_D_List* LDList = nullptr;
     L_D_List::L_Direct current_learn_dir;
     QString current_accountOS;
     LangList* LanguageList;

@@ -57,6 +57,7 @@ void Carcass::confUser_write()
 void Carcass::confUser_read()
 {
     QString str = current_account.toLower();
+
     QStringList data;
     ReadResult rr = ReadFile(adr.users_dir + str + adr.user_config, data);
     switch (rr) {
@@ -70,10 +71,12 @@ void Carcass::confUser_read()
     }
     try
     {
-        current_language_interface = data.at(0);
-        current_learn_dir.knownL = data.at(1);
-        current_learn_dir.targL = data.at(2);
-        flag_AWIgnore = ((data.at(3) == "0") ? false : true);
+
+          current_language_interface = data.at(0);
+          current_learn_dir.knownL = data.at(1);
+          current_learn_dir.targL = data.at(2);
+          flag_AWIgnore = ((data.at(3) == "0") ? false : true);
+
     }
     catch(...){
         ex_some_show ex(QObject::tr("Problems reading the file ") + adr.users_dir + str + adr.user_config);

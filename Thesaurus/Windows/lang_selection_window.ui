@@ -65,7 +65,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="Label" name="label_3">
+  <widget class="Label" name="label_3" native="true">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -79,10 +79,15 @@
      <pointsize>20</pointsize>
     </font>
    </property>
-   <property name="text">
+   <property name="text" stdset="0">
     <string>OK</string>
    </property>
   </widget>
+  <zorder>verticalLayoutWidget</zorder>
+  <zorder>verticalLayoutWidget_2</zorder>
+  <zorder>label_3</zorder>
+  <zorder>label</zorder>
+  <zorder>label_2</zorder>
  </widget>
  <customwidgets>
   <customwidget>

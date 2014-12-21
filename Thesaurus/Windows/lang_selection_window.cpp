@@ -8,14 +8,28 @@ LangSelectionWindow::LangSelectionWindow(Carcass *_carcass) : LearningDirection(
   ui->setupUi(this);
   Lang_Initializ();
 
-  ui->comboBox->addItems(*Lang);
-  ui->comboBox_2->addItems(*Lang);
+  for ( int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
+  ui->comboBox->addItem(*carcass->LanguageList->getStrIcoList().at(i).icon, *carcass->LanguageList->getStrIcoList().at(i).name);
+  ui->comboBox_2->addItem(*carcass->LanguageList->getStrIcoList().at(i).icon, *carcass->LanguageList->getStrIcoList().at(i).name);
+}
+  QString cursyslang = QLocale::languageToString(QLocale::system().language());
 
-  ui->comboBox->removeItem(1);
-  ui->comboBox_2->removeItem(0);
+  if (carcass->LanguageList->getLang(cursyslang)!= nullptr){
+      ui->comboBox_2->removeItem(ui->comboBox_2->findText(cursyslang));
+      ui->comboBox->removeItem(ui->comboBox->findText(ui->comboBox_2->currentText()));
+      ui->comboBox->setCurrentIndex(ui->comboBox->findText(cursyslang));
+}
+  else {
+      ui->comboBox_2->removeItem(0);
+      ui->comboBox->removeItem(1);
+    }
+
+//  ui->comboBox->removeItem(1);
+//  ui->comboBox_2->removeItem(0);
 
   KnownLang = ui->comboBox->currentText();
   TargLang  = ui->comboBox_2->currentText();
+
 
 }
 
@@ -36,7 +50,10 @@ void LangSelectionWindow::on_comboBox_2_activated(const QString &str)
 {
   QString temp = ui->comboBox->currentText();
   ui->comboBox->clear();
-  ui->comboBox->addItems(*Lang);
+  for (int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
+      ui->comboBox->addItem(*carcass->LanguageList->getStrIcoList().at(i).icon, *carcass->LanguageList->getStrIcoList().at(i).name);
+    }
+//  ui->comboBox->addActions(Lang);
   ui->comboBox->removeItem(ui->comboBox->findText(str));
   ui->comboBox->setCurrentIndex(ui->comboBox->findText(temp));
 }
@@ -45,7 +62,10 @@ void LangSelectionWindow::on_comboBox_activated(const QString &str)
 {
   QString temp = ui->comboBox_2->currentText();
   ui->comboBox_2->clear();
-  ui->comboBox_2->addItems(*Lang);
+  for (int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
+      ui->comboBox_2->addItem(*carcass->LanguageList->getStrIcoList().at(i).icon, *carcass->LanguageList->getStrIcoList().at(i).name);
+    }
+//  ui->comboBox_2->addActions(Lang);
   ui->comboBox_2->removeItem(ui->comboBox_2->findText(str));
   ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText(temp));
 }

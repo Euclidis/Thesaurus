@@ -21,6 +21,7 @@
 #include <QTimer>
 #include <QStringListModel>
 #include <QMenu>
+#include <QLocale>
 
 
 #include "Windows/MyWidgets/label.h"

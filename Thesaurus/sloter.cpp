@@ -7,6 +7,8 @@ Sloter::Sloter()
     carcass->LanguageList = new LangList(carcass);
     if(!carcass->LanguageList->Initialize()) carcass->message("ErrorDDDDDDDDDDDDDDDDDDDDDDDDD");
 
+    carcass->LDList = new L_D_List(carcass);
+
     AW = nullptr;
     WWW = nullptr;
     MW = nullptr;
@@ -55,6 +57,7 @@ Sloter::Sloter()
         }
     }
     connector();
+
 }
 
 

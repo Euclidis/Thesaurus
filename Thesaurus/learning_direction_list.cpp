@@ -13,13 +13,19 @@ QDataStream& operator<< (QDataStream& in, const L_D_List::L_Direct& ld){
 
   return in;
 }
+QStringList& operator<< (QStringList& in, const L_D_List::L_Direct& ld){
+  in << ld.knownL;
+  in << ld.targL;
 
+  return in;
+}
 L_D_List::L_D_List(Carcass * _carcass) : carcass(_carcass){
 }
 
 bool L_D_List::LoadFromFile() {
   QString path = carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.CurLearnDirList;
-  Carcass::ReadResult rr = carcass->ReadFile(path, this->AllLD);
+  QStringList AllLearnDirect;
+  Carcass::ReadResult rr = carcass->ReadFile(path, AllLearnDirect);
   switch (rr) {
     case Carcass::ReadResult::OK:
       return true;
@@ -27,15 +33,32 @@ bool L_D_List::LoadFromFile() {
       ex_some_show ex(QObject::tr("Problems reading the file ") + path);
       ex.show();
       carcass->message(carcass->enumRToQStr(rr));
+      return false;
     }
-  return false;
-
+  if (carcass->current_learn_dir.knownL != carcass->symb.lang_empty){
+ for (int i = 0; i < AllLearnDirect.size()-1; i+=2){
+     L_Direct temp;
+     temp.knownL = AllLearnDirect.at(i);
+     temp.targL = AllLearnDirect.at(i+1);
+     AllLD.push_back(temp);
+   }
+ curLDindex = AllLearnDirect.at(AllLearnDirect.size()-1).toInt();
+ carcass->LDList->set_curLD(curLDindex);
+    }
+  else carcass->message("Problem reading file: " + path);
 }
+
 
 bool L_D_List::WriteFile() {
   if (this->curLDindex != -1){
       QString path = carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.CurLearnDirList;
-      Carcass::WriteResult wr = carcass->WriteFile(path, this->AllLD);
+      QStringList AllLearnDirect;
+      if (!AllLD.isEmpty()){
+          for (int i = 0; i < AllLD.size(); ++i)
+            AllLearnDirect << AllLD.at(i);
+        }
+      AllLearnDirect << QString::number(curLDindex);
+      Carcass::WriteResult wr = carcass->WriteFile(path, AllLearnDirect);
       switch (wr) {
       case Carcass::WriteResult::OK:
           return true;
@@ -44,7 +67,6 @@ bool L_D_List::WriteFile() {
           ex.show();
           carcass->message(carcass->enumWToQStr(wr));
       }
-      return false;
     }
 
   return false;
@@ -73,11 +95,12 @@ void L_D_List::set_curLD(const int index){
 
 void L_D_List::set_curLD(const L_D_List::L_Direct& direction){
   if (!AllLD.isEmpty())
-  for (unsigned int i = 0; i < AllLD.size(); ++i)
-    if (direction == AllLD.at(i))
-      {  carcass->LDList->curLDindex = i;
-        carcass->current_learn_dir = direction;
-      }
+    for (unsigned int i = 0; i < AllLD.size(); ++i)
+      if (direction == AllLD.at(i))
+        {
+            carcass->LDList->curLDindex = i;
+          carcass->current_learn_dir = direction;
+        }
 }
 
 QString L_D_List::currentLDname(){
@@ -86,7 +109,7 @@ QString L_D_List::currentLDname(){
 
 }
 
-void L_D_List::addNew_L_D(QString knownlang, QString targlang){
+void L_D_List::addNew_L_D(const QString& knownlang, const QString& targlang){
   L_Direct temp;
   temp.knownL = knownlang;
   temp.targL = targlang;
