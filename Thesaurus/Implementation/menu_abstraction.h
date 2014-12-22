@@ -3,19 +3,17 @@
 
 #include "../language.h"
 
-class MenuAbstraction : public QObject
+class MenuAbstraction
 {
-    Q_OBJECT
-
-private:
+protected:
     Carcass* carcass;
     Language* language;
 public:
     explicit MenuAbstraction(Carcass* _carcass);
-
-signals:
-
-public slots:
+protected:
+    bool LanguageInitialize();
+protected:
+    bool language_initialized;
 
 };
 

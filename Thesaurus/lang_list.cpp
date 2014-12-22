@@ -16,7 +16,7 @@ bool LangList::Initialize()
     return false;
 }
 
-const LangList::Lang* LangList::getLang(QString str)
+const LangList::Lang* LangList::getLang(const QString& str)
 {
     if(initialized){
         if(!Lang_List.isEmpty()){

@@ -14,6 +14,8 @@ struct Adr
     const QString users_dir = "data\\users\\";
     const QString user_config = "\\User" + ext;
     const QString EndingTemp = ".temp";
+    const QString default_face = ":/DefaultFace.png";
+    const QString face_file = "\\face.png";
 
     const QString LangInterface_en = ":/...";
     const QString LangInterface_ru = ":/...";

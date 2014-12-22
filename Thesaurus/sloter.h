@@ -32,6 +32,8 @@ public slots:
     void LSW_show();
     void MOCW_show(QString);
 
+    void WWW_close();
+
 };
 
 #endif // SLOTER_H

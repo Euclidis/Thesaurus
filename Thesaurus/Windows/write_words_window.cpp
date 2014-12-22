@@ -74,4 +74,6 @@ WriteWordsWindow::~WriteWordsWindow()
 {
     delete ui;
     delete realiz;
+    if(!DW){}
+    else delete DW;
 }

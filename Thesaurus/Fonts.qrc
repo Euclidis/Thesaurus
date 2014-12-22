@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>Code Pro Light LC.otf</file>
+        <file>DefaultFace.png</file>
     </qresource>
 </RCC>

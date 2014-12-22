@@ -24,7 +24,7 @@ public:
     //***************************************************
     //                   Интерфейс
     //***************************************************
-    const Lang* getLang(QString);
+    const Lang* getLang(const QString&);
     QList<StrIco> getStrIcoList();
     bool Initialize();
     //***************************************************
@@ -108,6 +108,7 @@ public: //метки
     L_D_List* LDList = nullptr;
     L_D_List::L_Direct current_learn_dir;
     QString current_accountOS;
+    QPixmap account_photo;
     LangList* LanguageList;
     QMap<QString, QString> QMapAccounts;
     bool flag_AWIgnore;

@@ -3,32 +3,32 @@
 Language::Language(Carcass *_carcass)
 {
     carcass = _carcass;
-    adress = carcass->adr.users_dir + carcass->current_account.toLower() + "\\English-Russian.lang" /*+ carcass->current_language + carcass->adr.lext*/;
-    //name = carcass->current_L_D;
     initialized = false;
 }
 
 bool Language::Initialize()
 {
-    if(ReadFile()){
-        initialized = true;
-        if (initialized){
+    learn_dir = carcass->current_learn_dir;
+    if(learn_dir.knownL != carcass->symb.lang_empty){
+        adress = carcass->adr.users_dir + carcass->current_account.toLower() + "\\" + carcass->LDList->currentLDname() + carcass->adr.lext;
+        if(ReadFile()){
             if(!words.isEmpty()){
                 for (int i = 0; i < words.size(); ++i){
-                    for (int u = 0; u < words[i].dictionaries.size(); ++u){
-                        if(!dictionaries.contains(words[i].dictionaries[u])) dictionaries << words[i].dictionaries[u];
+                    if(words.at(i).word != carcass->symb.new_dictionary){
+                        for (int u = 0; u < words[i].dictionaries.size(); ++u){
+                            if(!dictionaries.contains(words[i].dictionaries[u])) dictionaries << words[i].dictionaries[u];
+                        }
                     }
                 }
+                initialized = true;
+                return true;
             }
+            initialized = true;
+            return true;
         }
-        else{
-            carcass->message("Не инициализирован абстрактор WWW");
-        }
-        return true;
     }
-    else{
-        return false;
-    }
+    else carcass->message("Нет словаря");
+    return false;
 }
 
 bool Language::ReadFile()
@@ -117,7 +117,7 @@ bool Language::AddDictionary(QString str)
     }
     return false;
 }
-void Language::RemoveDictionary(QString str)
+void Language::RemoveDictionary(const QString &str)
 {
     if(initialized){
 

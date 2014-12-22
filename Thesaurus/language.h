@@ -11,7 +11,7 @@ class Language
     //               Интерфейс
     //*****************************************
 public:
-    QString name;                       //Имя языка
+    L_D_List::L_Direct learn_dir;
     QList<Word> words;                  //Список слов языка
     QList<QString> dictionaries;        //Спиок словарей
 public:
@@ -23,7 +23,7 @@ public:
     void AddWord(Word &_word);
     void RemoveWord(QString);
     bool AddDictionary(QString);
-    void RemoveDictionary(QString);
+    void RemoveDictionary(const QString&);
     //*****************************************
     //            Служебная часть
     //*****************************************
