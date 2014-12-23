@@ -271,14 +271,22 @@ void AccountWindow::on_OK_Button_clicked()
     name_pass.insert(UserName, ui->lineEdit_2->text());
 
     if(carcass->CurAccount->Set(UserName, true)){
-        MW_open();
+        Carcass::WriteResult wr = carcass->WriteFile(carcass->adr.User, name_pass);
+        switch (wr) {
+        case Carcass::WriteResult::OK:
+            MW_open();
+            break;
+        default:
+            carcass->message("some problem during registration (WriteFile(name_pass))");
+            break;
+        }
         close();
     }
     else{
         carcass->message("some problem during registration");
     }
 //    carcass->current_account = UserName;
-//    carcass->WriteFile(carcass->adr.User, name_pass);
+//
 //    //Загрузка конфиг-файла QMapAccounts
 //    carcass->QMapAccounts.insert(carcass->current_accountOS, carcass->current_account);
 //    carcass->conf_write();
