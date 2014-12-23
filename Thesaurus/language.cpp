@@ -109,7 +109,7 @@ void CurrentLearnDir::AddWord(Word& _word)
         }
     }
     else{
-        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+        carcass->message("Не инициализированн CurLearnDir AddWord"); //*************** Обработать исключение *************************
     }
 }
 void CurrentLearnDir::RemoveWord(QString str)
@@ -125,7 +125,7 @@ void CurrentLearnDir::RemoveWord(QString str)
         }
     }
     else{
-        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+        carcass->message("Не инициализированн CurLearnDir RemoveWord"); //*************** Обработать исключение *************************
     }
 }
 bool CurrentLearnDir::AddDictionary(QString str)
@@ -144,7 +144,7 @@ bool CurrentLearnDir::AddDictionary(QString str)
         }
     }
     else{
-        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+        carcass->message("Не инициализированн CurLearnDir AddDct"); //*************** Обработать исключение *************************
     }
     return false;
 }
@@ -154,7 +154,7 @@ void CurrentLearnDir::RemoveDictionary(const QString &str)
 
     }
     else{
-        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+        carcass->message("Не инициализированн CurLearnDir RemoveDct"); //*************** Обработать исключение *************************
     }
 }
 
@@ -171,7 +171,7 @@ bool CurrentLearnDir::Contains(const QString str)
         return false;
     }
     else{
-        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+        carcass->message("Не инициализированн CurLearnDir Contains"); //*************** Обработать исключение *************************
         return false;
     }
 }
@@ -187,7 +187,7 @@ int CurrentLearnDir::IndexOf(const QString str)
         return -1;
     }
     else{
-        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+        carcass->message("Не инициализированн CurLearnDir IndexOf"); //*************** Обработать исключение *************************
         return -1;
     }
 }

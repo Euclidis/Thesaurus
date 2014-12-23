@@ -66,7 +66,7 @@ bool CurrentAccount::Set(const QString& user_name, bool new_account)
     }
     else{
         carcass->message("Необходимо инициализировать"
-                         " класс CurrentAccount");
+                         " класс CurrentAccount Set");
         return false;
     }
 }
@@ -78,7 +78,7 @@ QString CurrentAccount::Get () const
     }
     else{
         carcass->message("Необходимо инициализировать"
-                         " класс CurrentAccount");
+                         " класс CurrentAccount Get");
         return "";
     }
 }
@@ -92,7 +92,7 @@ bool CurrentAccount::Set_flag_AW_ignore  (bool _flag)
     }
     else{
         carcass->message("Необходимо инициализировать"
-                         " класс CurrentAccount");
+                         " класс CurrentAccount Set_flag_AW_ignore");
         return false;
     }
 }
@@ -104,7 +104,7 @@ bool CurrentAccount::Get_flag_AW_ignore ()
     }
     else{
         carcass->message("Необходимо инициализировать"
-                         " класс CurrentAccount");
+                         " класс CurrentAccount Get_flag");
         return false;
     }
 }
@@ -139,7 +139,7 @@ bool CurrentAccount::WriteFile()
     }
     else{
         carcass->message("Необходимо инициализировать"
-                         " класс CurrentAccount");
+                         " класс CurrentAccount WriteFile");
         return false;
     }
 }

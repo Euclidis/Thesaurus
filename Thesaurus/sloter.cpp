@@ -19,11 +19,11 @@ Sloter::Sloter()
 
     if(carcass->CurAccount->Initialize()){
         if(carcass->CurAccount->Get() != ""){
-            if(carcass->CurAccount->Get_flag_AW_ignore()) AW_show();
-            else MW_show();
+            if(carcass->CurAccount->Get_flag_AW_ignore()) MW_show();
+            else AW_show(true);
         }
         else{
-            AW_show(true);
+            AW_show(false);
         }
     }
     else{
