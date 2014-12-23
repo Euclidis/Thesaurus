@@ -20,11 +20,11 @@ void MenuWindow::AccountChange()
 {
     if(carcass->CurAccount->Get() != ""){
         QPixmap* p;
-        if(carcass->account_photo.isNull()){
+        if(carcass->CurAccount->account_photo.isNull()){
             p = new QPixmap(carcass->adr.default_face);
         }
         else{
-            p = new QPixmap(carcass->account_photo);
+            p = new QPixmap(carcass->CurAccount->account_photo);
         }
         int w = ui->label->width();
         int h = ui->label->height();

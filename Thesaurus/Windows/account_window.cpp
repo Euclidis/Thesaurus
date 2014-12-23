@@ -286,7 +286,7 @@ void AccountWindow::on_OK_Button_clicked()
         carcass->message("some problem during registration");
     }
 //    carcass->current_account = UserName;
-//
+//    carcass->WriteFile(carcass->adr.User, name_pass);
 //    //Загрузка конфиг-файла QMapAccounts
 //    carcass->QMapAccounts.insert(carcass->current_accountOS, carcass->current_account);
 //    carcass->conf_write();

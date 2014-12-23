@@ -41,7 +41,7 @@ bool Carcass::confUser_write()
 
     if(!CurLearnDirList) return false;
     f.cldl = CurLearnDirList;
-    f.flag = flag_AW_ignore;
+    f.flag = CurAccount->Get_flag_AW_ignore();
 
     WriteResult wr = WriteFile(path, f);
     switch (wr) {
@@ -71,7 +71,7 @@ bool Carcass::confUser_read()
     }
 
     CurLearnDir->Set(f.knownL, f.targL); // ******************************** Добавить проверку *********************
-    flag_AW_ignore = f.flag;
+    CurAccount->Set_flag_AW_ignore(f.flag);
 
     return true;
 }

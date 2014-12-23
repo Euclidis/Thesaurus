@@ -2,17 +2,19 @@
 #define CURRENTS
 
 #include "langlist.h"
+class Sloter;
 
 class CurrentAccount
 {
 public:
     CurrentAccount(Carcass*);
+    friend class Sloter;
 public:
     //********************************
     //           Интерфейс
     //********************************
 
-    bool       Initialize       ();
+
     bool           Set          (const QString&, bool new_account = false);
     QString        Get          () const;
     bool    Set_flag_AW_ignore  (bool);
@@ -32,6 +34,7 @@ private:
 private:
     bool WriteFile();
     bool ReadFile();
+    bool Initialize ();
 };
 //*****************************************************************************************************************
 
