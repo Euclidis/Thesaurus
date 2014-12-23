@@ -64,7 +64,7 @@ bool CurrentLearnDir::Zeroing()
 
 const LD CurrentLearnDir::Get () const
 {
-    if(!initialized)carcass->message("Не инициализирован CurLearnDir get");
+    //if(!initialized)carcass->message("Не инициализирован CurLearnDir get");
     return learn_dir;
 }
 
