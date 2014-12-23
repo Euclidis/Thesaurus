@@ -224,25 +224,23 @@ void AccountWindow::on_OK_Button_clicked()
 
       if (name_pass.contains(UserName)){
           if (name_pass[UserName] == ui->lineEdit_2->text()){
-                carcass->current_account = UserName;
-                carcass->QMapAccounts.insert(carcass->current_accountOS, carcass->current_account);
-                carcass->conf_read();
-                carcass->conf_write();
-
-                carcass->confUser_write();
-
-                carcass->LDList = new L_D_List(carcass);
-                if (carcass->LDList->LoadFromFile()){
-
-
+              if(carcass->CurAccount->Set(UserName, false)){
+                  MW_open();
+                  close();
+              }
+              else{
+                  carcass->message("some problem during registration");
+              }
+//                carcass->LDList = new L_D_List(carcass);
+//                if (carcass->LDList->LoadFromFile()){
+//                  }
+//              //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-STARTS--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//                if (carcass->current_learn_dir.knownL == carcass->symb.lang_empty)
+//                  emit LSW_open();
+//                else
+//                  emit MW_open();
+//              //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-ENDS--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                   }
-              //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-STARTS--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                if (carcass->current_learn_dir.knownL == carcass->symb.lang_empty)
-                  emit LSW_open();
-                else
-                  emit MW_open();
-              //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-ENDS--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                  close();}
           else {
                 carcass->message(tr("Incorrect Password"));
                 ui->lineEdit_2->setFocus();
@@ -271,30 +269,32 @@ void AccountWindow::on_OK_Button_clicked()
     }
   else if (ui->lineEdit_2->text() == ui->lineEdit_3->text()){
     name_pass.insert(UserName, ui->lineEdit_2->text());
-    carcass->current_account = UserName;
-    carcass->WriteFile(carcass->adr.User, name_pass);
 
-    //Загрузка конфиг-файла QMapAccounts
-    carcass->QMapAccounts.insert(carcass->current_accountOS, carcass->current_account);
-    carcass->conf_write();
-
-    // create dir and files for new user
-    QString path_to_User = carcass->adr.users_dir + UserName.toLower();
-    QDir dir(path_to_User);
-    if (!dir.exists()){
-
-        dir.mkpath(".");
-        carcass->confUser_write();
-      }
-    else {
-        carcass->message(tr("Something is wrong! File ") + path_to_User + tr(" is already exists\n Programm will shutdown"));
+    if(carcass->CurAccount->Set(UserName, true)){
+        MW_open();
         close();
-      }
+    }
+    else{
+        carcass->message("some problem during registration");
+    }
+//    carcass->current_account = UserName;
+//    carcass->WriteFile(carcass->adr.User, name_pass);
+//    //Загрузка конфиг-файла QMapAccounts
+//    carcass->QMapAccounts.insert(carcass->current_accountOS, carcass->current_account);
+//    carcass->conf_write();
+//    // create dir and files for new user
+//    QString path_to_User = carcass->adr.users_dir + UserName.toLower();
+//    QDir dir(path_to_User);
+//    if (!dir.exists()){
+//        dir.mkpath(".");
+//        carcass->confUser_write();
+//      }
+//    else {
+//        carcass->message(tr("Something is wrong! File ") + path_to_User + tr(" is already exists\n Programm will shutdown"));
+
+//      }
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-START--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-    emit LSW_open();
-    close();
     }
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----TEST-END--->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 

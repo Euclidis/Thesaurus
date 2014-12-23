@@ -1,142 +1,76 @@
 #ifndef CARCASS_H
 #define CARCASS_H
 
-#include "exceptions_list.h"
-
-class Carcass;
-
-//Список языков
-class LangList{
-public:
-    struct Lang{                    //
-        QString name_eng;           //
-        QString name_native;        //
-        QIcon ico;                  // Структура для списка языков
-        int keyboard;               //
-        QList<QChar> transcript;    //
-    };                              //
-    struct StrIco{                                          //
-        StrIco(const QString* _name, const QIcon* _icon);   //
-        const QString* name;                                // Структура для списка имен и иконок языков
-        const QIcon* icon;                                  //
-    };                                                      //
-public:
-    //***************************************************
-    //                   Интерфейс
-    //***************************************************
-    const Lang* getLang(const QString&);
-    QList<StrIco> getStrIcoList();
-    bool Initialize();
-    //***************************************************
-    //                Служебная часть
-    //***************************************************
-public:
-    LangList(Carcass*);
-    friend QDataStream& operator>> (QDataStream& out, Lang& l);
-    friend QDataStream& operator<< (QDataStream& in, const Lang& l);
-private:
-    Carcass* carcass;
-    QList<Lang> Lang_List;
-    bool initialized;
-private:
-    bool ReadFile();
-    bool WriteFile();
-    //***************************************************
-};
-
-
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//структура для хранения списка созданных пользователем направлений изучения языка (Learning Direction)
-class L_D_List{
-public:
-  struct L_Direct // структура для хранения наименования изучаемого языка (targL) и уже известного (knownL)
-  {
-    QString knownL;
-    QString targL;
-  };
-public:
-  QString currentLDname(); // i.e. English_Russian
-  void set_curLD(const int index);
-  void set_curLD(const L_D_List::L_Direct& direction);
-  friend bool operator== (const L_Direct&, const L_Direct&);
-  L_D_List(Carcass*);
-  const L_Direct* currentLD();
-  void addNew_L_D(const QString &knownlang, const QString &targlang);
-  //DELETE LD
-  friend QDataStream& operator>> (QDataStream& out, L_Direct& l);
-  friend QDataStream& operator<< (QDataStream& in, const L_Direct& l);
-  friend QStringList& operator<< (QStringList& in, const QList <L_Direct>& all_ld);
-  bool LoadFromFile();
-  bool WriteFile();
-private:
-  Carcass *carcass;
-  QList <L_Direct> AllLD;
-private:
-  signed int curLDindex = -1;
-
-};
-
-struct Word
-{
-    QString word;
-    QString transcription;
-    QStringList translates;
-    QStringList dictionaries;
-    QString note;
-private:
-    QDate date;
-    double priority;
-public:
-    Word();
-    Word(QString _word,
-         QString _transcription,
-         QStringList &_translates,
-         QStringList &_dictionaries,
-         QString _note);
-    Word& operator+= (const Word& _word);
-    friend QDataStream& operator>> (QDataStream& out, Word& w);
-    friend QDataStream& operator<< (QDataStream& in, const Word& w);
-};
+#include "currents.h"
 
 class Carcass : public QObject
 {
 Q_OBJECT
+public:
+    Carcass();
 
-public: //метки
-    QString current_account;
-    QString current_language_interface;
-    L_D_List* LDList = nullptr;
-    L_D_List::L_Direct current_learn_dir;
-    QString current_accountOS;
+//*************************************************************************************************
+//                                        Currents
+//*************************************************************************************************
+
+public:
+    CurrentLearnDirList* CurLearnDirList;
+    CurrentLearnDir* CurLearnDir;
+    CurrentAccount* CurAccount;
+
     QPixmap account_photo;
-    LangList* LanguageList;
-    QMap<QString, QString> QMapAccounts;
-    bool flag_AWIgnore;
+    bool flag_AW_ignore;
 
-public: //структуры данных
+//*************************************************************************************************
+//                                    Структуры данных
+//*************************************************************************************************
+
+public:
     Adr adr;                    //структура адресов
     ControlSymbol symb;         //структура символов
     WidgetsTexts wg_tx;         //структура текстов виджетов
+    LangList* LanguageList;     //структура списка языков
 
-//===========================================================
-//               методы вывода месседж окон
-//===========================================================
+//*************************************************************************************************
+//                                Методы вывода месседж окон
+//*************************************************************************************************
+
 signals:
     void mesOKCancelShow(QString);
 public:
     void message(QString, bool _modal = true);
     void mesOKCancel(QString str);
-//===========================================================
 
-public: //методы записи и чтения файлов
+//*************************************************************************************************
+//                         Ф-и записи и чтения файлов конфигурации
+//*************************************************************************************************
+private:
+    struct confUser_file
+    {
+        CurrentLearnDirList* cldl;
+        QString knownL;
+        QString targL;
+        bool flag;
+
+        confUser_file(Carcass *_carcass);
+    };
+
+public:
+    bool confUser_write();
+    bool confUser_read();
+
+    friend QDataStream& operator>> (QDataStream& out, confUser_file&);
+    friend QDataStream& operator<< (QDataStream& in, const confUser_file&);
+//*************************************************************************************************
+//                         Шаблоны и их вспомогательные компоненты
+//*************************************************************************************************
+
+public:
+
     enum class WriteResult  {OK, Write, Open, Copy, DelTmpWhileCopy, DelSource, DelTmp, RenameTmp};
     enum class ReadResult   {OK, NotFound, Open, Read, DelTmp, RenameTmp};
     enum class OpenWriteAs  {WriteOnly  =   static_cast<OpenWriteAs>(QIODevice::WriteOnly),
                              Append     =   static_cast<OpenWriteAs>(QIODevice::Append)};
-    void conf_write();
-    void conf_read();
-    void confUser_write();
-    void confUser_read();
 
     QString enumWToQStr (WriteResult wr);
     QString enumRToQStr (ReadResult rr);
@@ -246,6 +180,9 @@ public: //методы записи и чтения файлов
 
         return ReadResult::OK; //если все успешно прошло
     }
+
+//*************************************************************************************************
+//*************************************************************************************************
 
 };
 

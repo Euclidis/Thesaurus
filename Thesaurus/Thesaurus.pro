@@ -37,7 +37,7 @@ SOURCES += main.cpp\
     Windows/dct_window.cpp \
     lang_list.cpp \
     Implementation/menu_abstraction.cpp \
-    learning_direction_list.cpp
+    currents.cpp
 
 HEADERS  += \
     carcass.h \
@@ -61,11 +61,12 @@ HEADERS  += \
     sloter.h \
     Windows/reset_pass_window.h \
     Windows/mesokcancel.h \
-    language.h \
     Implementation/learning_direction.h \
     Implementation/www_realization.h \
     Windows/dct_window.h \
-    Implementation/menu_abstraction.h
+    Implementation/menu_abstraction.h \
+    currents.h \
+    langlist.h
 
 
 FORMS    += \

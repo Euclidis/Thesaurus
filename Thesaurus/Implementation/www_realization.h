@@ -1,7 +1,9 @@
 #ifndef WWW_REALIZATION_H
 #define WWW_REALIZATION_H
 
-#include "../language.h"
+#ifndef CARCASS_H
+#include "../carcass.h"
+#endif
 
 class WWWAbstraction : public QObject
 {
@@ -12,7 +14,7 @@ class WWWAbstraction : public QObject
 //*********************************************
 public:
     Carcass* carcass;
-    Language* language;
+    CurrentLearnDir* language;
     QStringList DctCheck;
 public:
     //-----------------------------------------

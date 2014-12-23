@@ -7,16 +7,16 @@
 WWWAbstraction::WWWAbstraction(Carcass* _carcass)
 {
     carcass = _carcass;
-    language = new Language(carcass);
+    language = new CurrentLearnDir(carcass);
     initialized = false;
 }
 
 bool WWWAbstraction::Initialize()
 {
-    if(language->Initialize()){
-        initialized = true;
-        return true;
-    }
+//    if(language->Initialize()){
+//        initialized = true;
+//        return true;
+//    }
     return false;
 }
 

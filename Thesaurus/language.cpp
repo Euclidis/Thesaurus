@@ -1,37 +1,74 @@
-#include "language.h"
+#include "carcass.h"
 
-Language::Language(Carcass *_carcass)
+CurrentLearnDir::CurrentLearnDir(Carcass *_carcass) : carcass(_carcass)
 {
-    carcass = _carcass;
     initialized = false;
+    learn_dir.knownL = "";
+    learn_dir.targL = "";
 }
 
-bool Language::Initialize()
+bool CurrentLearnDir::Set (const QString& known, const QString& targ, bool new_LD)
 {
-    learn_dir = carcass->current_learn_dir;
-    if(learn_dir.knownL != carcass->symb.lang_empty){
-        adress = carcass->adr.users_dir + carcass->current_account.toLower() + "\\" + carcass->LDList->currentLDname() + carcass->adr.lext;
-        if(ReadFile()){
-            if(!words.isEmpty()){
-                for (int i = 0; i < words.size(); ++i){
-                    if(words.at(i).word != carcass->symb.new_dictionary){
-                        for (int u = 0; u < words[i].dictionaries.size(); ++u){
-                            if(!dictionaries.contains(words[i].dictionaries[u])) dictionaries << words[i].dictionaries[u];
-                        }
-                    }
-                }
-                initialized = true;
-                return true;
+    if(known != "" && targ != ""){
+        if(!carcass->CurAccount->Get().isEmpty()){
+            adress = carcass->adr.users_dir + carcass->CurAccount->Get().toLower() + "\\" + known + "_" + targ + carcass->adr.lext;
+            learn_dir.knownL = known;
+            learn_dir.targL = targ;
+            if(new_LD){
+                if(!Initialize(true)) return false;
             }
-            initialized = true;
+            else{
+                if(!carcass->CurLearnDirList->Contains(learn_dir)) return false;
+                if(!Initialize(false)) return false;
+            }
             return true;
         }
     }
-    else carcass->message("Нет словаря");
     return false;
 }
+bool CurrentLearnDir::Initialize(bool new_LD)
+{
+    initialized = false;
+    if(new_LD){
+        words.clear();
+        dictionaries.clear();
+        if(WriteFile()) return false;
+        initialized = true;
+    }
+    else{
+        if(!ReadFile()) return false;
+        if(!words.isEmpty()){
+            for (int i = 0; i < words.size(); ++i){
+                if(words.at(i).word != carcass->symb.new_dictionary){
+                    for (int u = 0; u < words[i].dictionaries.size(); ++u){
+                        if(!dictionaries.contains(words[i].dictionaries[u])) dictionaries << words[i].dictionaries[u];
+                    }
+                }
+            }
+        }
+        initialized = true;
+        return true;
+    }
+    return true;
+}
+bool CurrentLearnDir::Zeroing()
+{
+    words.clear();
+    dictionaries.clear();
+    learn_dir.knownL = "";
+    learn_dir.targL = "";
+    adress = "";
+    initialized = false;
+    return true;
+}
 
-bool Language::ReadFile()
+const LD CurrentLearnDir::Get () const
+{
+    if(!initialized)carcass->message("Не инициализирован CurLearnDir get");
+    return learn_dir;
+}
+
+bool CurrentLearnDir::ReadFile()
 {
     Carcass::ReadResult rr = carcass->ReadFile(adress, words);
     switch (rr) {
@@ -42,25 +79,19 @@ bool Language::ReadFile()
         return false;
     }
 }
-bool Language::WriteFile()
+bool CurrentLearnDir::WriteFile()
 {
-    if(initialized){
-        Carcass::WriteResult wr = carcass->WriteFile(adress, words);
-        switch (wr) {
-        case Carcass::ReadResult::OK:
-            return true;
-        default:
-            //carcass->message(carcass->enumWToQStr(wr) + "  " + adress);
-            return false;
-        }
-    }
-    else{
-        carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
+    Carcass::WriteResult wr = carcass->WriteFile(adress, words);
+    switch (wr) {
+    case Carcass::ReadResult::OK:
+        return true;
+    default:
+        //carcass->message(carcass->enumWToQStr(wr) + "  " + adress);
         return false;
     }
 }
 
-void Language::AddWord(Word& _word)
+void CurrentLearnDir::AddWord(Word& _word)
 {
     if(initialized){
         if(_word.word != ""){
@@ -81,7 +112,7 @@ void Language::AddWord(Word& _word)
         carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
     }
 }
-void Language::RemoveWord(QString str)
+void CurrentLearnDir::RemoveWord(QString str)
 {
     if(initialized){
         str = str.trimmed();
@@ -97,7 +128,7 @@ void Language::RemoveWord(QString str)
         carcass->message("Не инициализированн класс словаря"); //*************** Обработать исключение *************************
     }
 }
-bool Language::AddDictionary(QString str)
+bool CurrentLearnDir::AddDictionary(QString str)
 {
     if(initialized){
         str = str.trimmed();
@@ -117,7 +148,7 @@ bool Language::AddDictionary(QString str)
     }
     return false;
 }
-void Language::RemoveDictionary(const QString &str)
+void CurrentLearnDir::RemoveDictionary(const QString &str)
 {
     if(initialized){
 
@@ -127,7 +158,7 @@ void Language::RemoveDictionary(const QString &str)
     }
 }
 
-bool Language::Contains(const QString str)
+bool CurrentLearnDir::Contains(const QString str)
 {
     if(initialized){
         if(!words.isEmpty()){
@@ -145,7 +176,7 @@ bool Language::Contains(const QString str)
     }
 }
 
-int Language::IndexOf(const QString str)
+int CurrentLearnDir::IndexOf(const QString str)
 {
     if (initialized){
         if(!words.isEmpty()){

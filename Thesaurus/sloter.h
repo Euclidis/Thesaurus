@@ -6,7 +6,7 @@
 #include "Windows/write_words_window.h"
 #include "Windows/lang_selection_window.h"
 #include "Implementation/learning_direction.h"
-#include "language.h"
+#include <QApplication>
 
 class Sloter : public QObject
 {
@@ -24,6 +24,7 @@ public:
 
 private:
     void connector();
+    void closApp();
 
 public slots:
     void AW_show(bool mode = 0);

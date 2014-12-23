@@ -1,87 +1,79 @@
 #include "carcass.h"
 
-//===============================================================================
-//                     Чтение и запись файла конфигурации
-//===============================================================================
-void Carcass::conf_write()
-{
-    WriteResult wr = WriteFile(adr.config, QMapAccounts);
-    switch (wr) {
-    case WriteResult::OK:
-        break;
-    default:
-        ex_some_show ex(QObject::tr("Problems writing the file ") + adr.config);
-        ex.show();
-        message(enumWToQStr(wr));
-    }
-}
-void Carcass::conf_read()
-{
-    ReadResult rr = ReadFile(adr.config, QMapAccounts);
-    switch (rr) {
-    case ReadResult::OK:
-        break;
-    default:
-        ex_some_show ex(QObject::tr("Problems reading the file ") + adr.config);
-        ex.show();
-        message(enumRToQStr(rr));
-    }
-}
+Carcass::Carcass(){}
 
 //===============================================================================
 //                     Чтение и запись файла конфигурации юзера
 //===============================================================================
-void Carcass::confUser_write()
+Carcass::confUser_file::confUser_file(Carcass* _carcass)
 {
-    QStringList data;
-    QString str = current_account.toLower();
-    try
-    {
-        data << current_language_interface << current_learn_dir.knownL << current_learn_dir.targL << (QString::number(flag_AWIgnore));
-    }
-    catch(...){
-        ex_some_show ex(QObject::tr("Problems writing the file ") + adr.users_dir + str + adr.user_config);
-        ex.show();
-        return;
-    }
-    WriteResult wr = WriteFile(adr.users_dir + str + adr.user_config, data);
+    cldl = _carcass->CurLearnDirList;
+}
+
+QDataStream& operator>> (QDataStream& out, Carcass::confUser_file& cuf)
+{
+    out >> *cuf.cldl;
+
+    out >> cuf.knownL;
+    out >> cuf.targL;
+
+    out >> cuf.flag;
+    return out;
+}
+QDataStream& operator<< (QDataStream& in, const Carcass::confUser_file& cuf)
+{
+    in << *cuf.cldl;
+
+    in << cuf.knownL;
+    in << cuf.targL;
+
+    in << cuf.flag;
+    return in;
+}
+
+bool Carcass::confUser_write()
+{
+    QString path = adr.users_dir + CurAccount->Get().toLower() + adr.user_config ;
+    confUser_file f(this);
+
+    f.knownL = CurLearnDir->Get().knownL;
+    f.targL = CurLearnDir->Get().targL;
+
+    if(!CurLearnDirList) return false;
+    f.cldl = CurLearnDirList;
+    f.flag = flag_AW_ignore;
+
+    WriteResult wr = WriteFile(path, f);
     switch (wr) {
     case WriteResult::OK:
-        break;
+        return true;
     default:
-        ex_some_show ex(QObject::tr("Problems writing the file ") + adr.users_dir + str + adr.user_config);
+        ex_some_show ex(QObject::tr("Problems writing the file ") + path);
         ex.show();
         message(enumWToQStr(wr));
+        return false;
     }
 }
-void Carcass::confUser_read()
+bool Carcass::confUser_read()
 {
-    QString str = current_account.toLower();
+    QString path =adr.users_dir + CurAccount->Get().toLower() + adr.user_config ;
+    confUser_file f(this);
 
-    QStringList data;
-    ReadResult rr = ReadFile(adr.users_dir + str + adr.user_config, data);
+    ReadResult rr = ReadFile(path, f);
     switch (rr) {
     case ReadResult::OK:
         break;
     default:
-        ex_some_show ex(QObject::tr("Problems reading the file ") + adr.users_dir + str + adr.user_config);
+        ex_some_show ex(QObject::tr("Problems reading the file ") + path);
         ex.show();
         message(enumRToQStr(rr));
-        return;
+        return false;
     }
-    try
-    {
 
-          current_language_interface = data.at(0);
-          current_learn_dir.knownL = data.at(1);
-          current_learn_dir.targL = data.at(2);
-          flag_AWIgnore = ((data.at(3) == "0") ? false : true);
+    CurLearnDir->Set(f.knownL, f.targL); // ******************************** Добавить проверку *********************
+    flag_AW_ignore = f.flag;
 
-    }
-    catch(...){
-        ex_some_show ex(QObject::tr("Problems reading the file ") + adr.users_dir + str + adr.user_config);
-        ex.show();
-    }
+    return true;
 }
 
 //===============================================================================
@@ -141,73 +133,4 @@ QString Carcass::enumRToQStr (ReadResult rr)
     default:
         return "Error";
     }
-}
-
-
-//===============================================================================
-//                               Методы Word
-//===============================================================================
-Word::Word()
-{
-    date = QDate::currentDate();
-    priority = 1;
-}
-Word::Word(QString _word,
-           QString _transcription,
-           QStringList &_translates,
-           QStringList &_dictionaries,
-           QString _note)
-{
-    date = QDate::currentDate();
-    priority = 1;
-    word = _word.trimmed();
-    transcription = _transcription.trimmed();
-    if(!_translates.isEmpty()){
-        for(int i = 0; i < _translates.size(); ++i){
-            translates << _translates.at(i).trimmed();
-        }
-    }
-    if(!_dictionaries.isEmpty()){
-        for(int i = 0; i < _dictionaries.size(); ++i){
-            dictionaries << _dictionaries.at(i).trimmed();
-        }
-    }
-    note = _note/*.trimmed()*/;
-}
-Word& Word::operator+=(const Word& _word)
-{
-    if(&_word != this){
-        if (this->word == _word.word){
-            for(int i = 0; i < _word.translates.size(); ++i){
-                if(!(this->translates.contains(_word.translates[i]))) this->translates << _word.translates[i];
-            }
-            for(int i = 0; i < _word.dictionaries.size(); ++i){
-                if(!(this->dictionaries.contains(_word.dictionaries[i]))) this->dictionaries << _word.dictionaries[i];
-            }
-            if(this->note != _word.note) this->note += "\n" + _word.note;
-        }
-    }
-    return *this;
-}
-QDataStream& operator>>(QDataStream& out, Word& w)
-{
-    out >> w.word;
-    out >> w.transcription;
-    out >> w.translates;
-    out >> w.dictionaries;
-    out >> w.note;
-    out >> w.date;
-    out >> w.priority;
-    return out;
-}
-QDataStream& operator<<(QDataStream& in, const Word& w)
-{
-    in << w.word;
-    in << w.transcription;
-    in << w.translates;
-    in << w.dictionaries;
-    in << w.note;
-    in << w.date;
-    in << w.priority;
-    return in;
 }

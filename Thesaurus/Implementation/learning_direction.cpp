@@ -33,26 +33,26 @@ bool LearningDirection::is_Lang_exists(QString checkLang){
 // Если нет ЛэнгЛиста, то создать его
 void LearningDirection::Load_Directions(){
 
-  QFile LangList (carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.CurLearnDirList);
+//  QFile LangList (carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.CurLearnDirList);
 
-  if (!LangList.exists()){
-      LangList.open(QFile::WriteOnly);
-      LangList.close();
+//  if (!LangList.exists()){
+//      LangList.open(QFile::WriteOnly);
+//      LangList.close();
 
-      carcass->current_learn_dir.knownL = KnownLang;
-      carcass->current_learn_dir.targL = TargLang;
-      carcass->LDList->addNew_L_D(KnownLang, TargLang);
+//      carcass->current_learn_dir.knownL = KnownLang;
+//      carcass->current_learn_dir.targL = TargLang;
+//      carcass->LDList->addNew_L_D(KnownLang, TargLang);
 
-      QString str = "";
-      carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.CurLearnDirList, carcass->LDList->currentLDname());
-      carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + "//" + carcass->LDList->currentLDname() + carcass->adr.lext, str);
+//      QString str = "";
+//      carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + carcass->adr.CurLearnDirList, carcass->LDList->currentLDname());
+//      carcass->WriteFile(carcass->adr.users_dir + carcass->current_account.toLower() + "//" + carcass->LDList->currentLDname() + carcass->adr.lext, str);
 
-      carcass->LDList->WriteFile();
-    }
-  else {
-      //?>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//      carcass->LDList->WriteFile();
+//    }
+//  else {
+//      //?>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    }
+//    }
 
 }
 void LearningDirection::createLD(const QString &knownL, const QString &targL){

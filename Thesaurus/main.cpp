@@ -1,4 +1,3 @@
-#include <QApplication>
 #include "sloter.h"
 
 int main(int argc, char *argv[])

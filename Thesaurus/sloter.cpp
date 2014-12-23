@@ -2,56 +2,42 @@
 
 Sloter::Sloter()
 {
-    //Получаем имя пользователя компьютера
-    carcass = new Carcass;
-    carcass->LanguageList = new LangList(carcass);
-    if(!carcass->LanguageList->Initialize()) carcass->message("ErrorDDDDDDDDDDDDDDDDDDDDDDDDD");
-
-    carcass->LDList = new L_D_List(carcass);
-
     AW = nullptr;
     WWW = nullptr;
     MW = nullptr;
     LSW = nullptr;
     MOCW = nullptr;
 
-    carcass->current_accountOS = qgetenv("USER");
-    if (carcass->current_accountOS.isEmpty())
-        carcass->current_accountOS = qgetenv("USERNAME");
+    carcass = new Carcass;
 
-    //Присваиваем общим переменным стандартные значения
-    carcass->current_account = "";
-    carcass->current_language_interface = carcass->adr.LangInterface_en;  //>>>>>>>>> Стоит поменять на что-то другое <<<<<<<<//
-    carcass->current_learn_dir.knownL = carcass->symb.lang_empty;
-    carcass->current_learn_dir.targL = carcass->symb.lang_empty;
-    carcass->flag_AWIgnore = false;
+    carcass->LanguageList = new LangList(carcass);
+    if(!carcass->LanguageList->Initialize()) carcass->message("Error initialize LangList");
 
-    //читаем файл конфигурации и заполняем QMapAccounts
-    carcass->conf_read();
+    carcass->CurLearnDirList = new CurrentLearnDirList(carcass);
+    carcass->CurLearnDir = new CurrentLearnDir(carcass);
+    carcass->CurAccount = new CurrentAccount(carcass);
 
-    //Проверяем наличие пользователя компьютера в QMapAccounts
-    if (carcass->QMapAccounts.isEmpty()){
-        AW_show();
+    if(carcass->CurAccount->Initialize()){
+        if(carcass->CurAccount->Get() != ""){
+            if(carcass->CurAccount->Get_flag_AW_ignore()) AW_show();
+            else MW_show();
+        }
+        else{
+            AW_show(true);
+        }
     }
     else{
-        if (carcass->QMapAccounts.contains(carcass->current_accountOS)){
-            carcass->current_account = carcass->QMapAccounts[carcass->current_accountOS];
-
-            //читаем user config
-            carcass->confUser_read();
-            if(carcass->flag_AWIgnore) MW_show();
-            else {
-                AW_show(1);
-            }
-        }
-        else {
-            AW_show(1);
-        }
+        closApp();
     }
-    connector();
 
+    connector();
 }
 
+void Sloter::closApp()
+{
+    carcass->message("Ups!");
+    qApp->exit();
+}
 
 /*************************************************************************************
                   Коннектор и слот открытия месседжа с двумя кнопками
