@@ -103,7 +103,7 @@ void MenuWindow::WWW_open_slot()
         WWW_open_signal();
     }
     else{
-        carcass->CurLearnDir->Set("Russian", "Spain");
+        //carcass->CurLearnDir->Set("Russian", "Spain");
         WWW_open_signal();
     }
 }
