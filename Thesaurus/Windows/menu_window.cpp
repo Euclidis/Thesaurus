@@ -45,7 +45,8 @@ void MenuWindow::CreateNewCheckBox(QString str)
 {
     QHBoxLayout* h = new QHBoxLayout;
     QPushButton* c = new QPushButton(str);
-    connect(c, SIGNAL(clicked(bool)), SLOT(CheckChange(bool)));
+    c->setFlat(true);
+    //connect(c, SIGNAL(clicked(bool)), SLOT(CheckChange(bool)));
     h->addWidget(c);
     ui->verticalLayout->insertLayout(ui->verticalLayout->count()-1, h);
     ui->scrollArea->widget()->setLayout(ui->verticalLayout);
