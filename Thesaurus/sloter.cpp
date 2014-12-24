@@ -76,6 +76,7 @@ void Sloter::MW_show()
         connect(MW, SIGNAL(WWW_open_signal()), SLOT(WWW_show()));
         connect(MW, SIGNAL(WWW_close()), SLOT(WWW_close()));
         connect(carcass, SIGNAL(DctListChange()), MW, SLOT(SetDictionaries()));
+        connect(carcass, SIGNAL(Menu_UpDate()), MW, SLOT(SetAccount()));
     }
     MW->show();
 }
@@ -91,11 +92,11 @@ void Sloter::LSW_show()
     if(!LSW){
         LSW = new LangSelectionWindow(carcass);
     }
-    connect (LSW, SIGNAL(MW_open()), SLOT(MW_show()));
+//    connect (LSW, SIGNAL(MW_open()), SLOT(MW_show()));
 
-    //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    connect (LSW, SIGNAL(WWW_open()), SLOT(WWW_show()));
-    //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//    //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//    connect (LSW, SIGNAL(WWW_open()), SLOT(WWW_show()));
+//    //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     LSW->show();
 }
 

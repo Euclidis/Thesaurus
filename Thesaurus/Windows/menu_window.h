@@ -36,6 +36,9 @@ public slots:
     void SetDictionaries();
     //void SetWordsList();
     void WWW_open_slot();
+private slots:
+    void on_pushButton_2_clicked();
+
 private:
     void ObjSet_AccountName();
     void ObjSet_AccountPhoto(QPixmap& p);

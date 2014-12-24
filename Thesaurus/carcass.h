@@ -178,6 +178,7 @@ public:
 //*************************************************************************************************
 signals:
     void DctListChange();
+    void Menu_UpDate();
 };
 
 #endif // CARCASS_H

@@ -21,6 +21,7 @@ bool CurrentLearnDir::Set (const QString& known, const QString& targ, bool new_L
                 if(!Initialize(false)) return false;
             }
             if(!carcass->confUser_write()) return false;
+            carcass->Menu_UpDate();
             return true;
         }
     }

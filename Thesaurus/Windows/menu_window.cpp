@@ -9,7 +9,6 @@ MenuWindow::MenuWindow(Carcass * _carcass) :
     PhotoSize.setHeight(81);
     Connector();
     SetAccount();
-    SetDictionaries();
 }
 
 
@@ -72,6 +71,7 @@ void MenuWindow::SetAccount()
         ObjSet_AccountPhoto(p->scaled(PhotoSize));
         delete p;
         ObjSet_AccountName();
+        SetDictionaries();
     }
 }
 void MenuWindow::SetDictionaries()
@@ -93,17 +93,10 @@ void MenuWindow::DctList_UpDate()
 }
 void MenuWindow::WWW_open_slot()
 {
-    if(carcass->CurLearnDir->Get().knownL == "") {
-        LD ld;
-        ld.knownL = "Russian";
-        ld.targL = "English";
-
-        carcass->CurLearnDirList->Add(ld);
-        WWW_open_signal();
-    }
+    if(!carcass->CurLearnDirList->Get().isEmpty()) emit WWW_open_signal();
     else{
-        //carcass->CurLearnDir->Set("Russian", "Spain");
-        WWW_open_signal();
+        carcass->message("Create Lerning Direction");
+        emit LSW_open();
     }
 }
 
@@ -114,4 +107,7 @@ MenuWindow::~MenuWindow()
     delete ui;
 }
 
-
+void MenuWindow::on_pushButton_2_clicked()
+{
+    LSW_open();
+}
