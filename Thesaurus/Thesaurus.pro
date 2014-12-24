@@ -36,7 +36,6 @@ SOURCES += main.cpp\
     Implementation/www_realization.cpp \
     Windows/dct_window.cpp \
     lang_list.cpp \
-    Implementation/menu_abstraction.cpp \
     currents.cpp
 
 HEADERS  += \
@@ -64,7 +63,6 @@ HEADERS  += \
     Implementation/learning_direction.h \
     Implementation/www_realization.h \
     Windows/dct_window.h \
-    Implementation/menu_abstraction.h \
     currents.h \
     langlist.h
 

@@ -22,6 +22,7 @@
 #include <QStringListModel>
 #include <QMenu>
 #include <QLocale>
+#include <QPushButton>
 
 
 #include "Windows/MyWidgets/label.h"

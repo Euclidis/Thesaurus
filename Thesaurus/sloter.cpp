@@ -73,6 +73,7 @@ void Sloter::MW_show()
     if(!MW){
         MW = new MenuWindow(carcass);
         connect(MW, SIGNAL(LSW_open()), SLOT(LSW_show()));
+        connect(MW, SIGNAL(WWW_open()), SLOT(WWW_show()));
         connect(MW, SIGNAL(WWW_close()), SLOT(WWW_close()));
     }
     MW->show();

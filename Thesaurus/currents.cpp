@@ -12,30 +12,30 @@ CurrentAccount::CurrentAccount(Carcass* _carcass) : carcass(_carcass)
 //------------------------------------------------------------------------------------------------
 bool CurrentAccount::Initialize ()
 {
-    if(!initialized){                                           //
-        cur_AccoutOS = qgetenv("USER");                         //
-        if (cur_AccoutOS.isEmpty())                             //     Запускается только в слотере
-            cur_AccoutOS = qgetenv("USERNAME");                 //
-                                                                //
-        if(!cur_AccoutOS.isEmpty()){                            //   - получаем имя пользователя
-            if(ReadFile()){                                     //     компьютера.
-                initialized = true;                             //   - считываем список пользователей
-                if (!Accounts.isEmpty()){                       //     компьютера и соответствующие им
-                    if (Accounts.contains(cur_AccoutOS)){       //     имена аккаунтов тезауруса.
+    if(!initialized){
+        cur_AccoutOS = qgetenv("USER");
+        if (cur_AccoutOS.isEmpty())
+            cur_AccoutOS = qgetenv("USERNAME");
+
+        if(!cur_AccoutOS.isEmpty()){
+            if(ReadFile()){
+                initialized = true;
+                if (!Accounts.isEmpty()){
+                    if (Accounts.contains(cur_AccoutOS)){
                         if(!Set(Accounts[cur_AccoutOS])){
                             initialized = false;
-                            return false;                       //   - Если есть такой пользователь в
+                            return false;
                         }
-                    }                                           //     спискеи ему соответствует имя
-                }                                               //     аккаунта тезауруса, присваиваем:
-                return true;                                    //     cur_Account = полученное имя
-            }                                                   //
-        }                                                       //
-        return false;                                           //
-    }                                                           //
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
     else{
         return true;
-    }                                           //
+    }
 }
 //------------------------------------------------------------------------------------------------
 bool CurrentAccount::Set(const QString& user_name, bool new_account)
@@ -143,6 +143,19 @@ bool CurrentAccount::WriteFile()
         return false;
     }
 }
+//------------------------------------------------------------------------------------------------
+QDataStream& operator>> (QDataStream& out, CurrentAccount& ca)
+{
+    out >> ca.flag_AW_ignore;
+    return out;
+}
+//------------------------------------------------------------------------------------------------
+QDataStream& operator<< (QDataStream& in, const CurrentAccount& ca)
+{
+    in << ca.flag_AW_ignore;
+    return in;
+}
+
 
 //************************************************************************************************
 //                                   CurrentLearnDirList

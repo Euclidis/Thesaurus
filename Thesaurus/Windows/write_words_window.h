@@ -10,12 +10,10 @@ class WriteWordsWindow;
 class WriteWordsWindow : public BaseWindow
 {
     Q_OBJECT
-//************************************************
-//************************************************
+
 public:
     explicit WriteWordsWindow(Carcass * _carcass);
     ~WriteWordsWindow();
-//************************************************
 
 private:
     Carcass * carcass;

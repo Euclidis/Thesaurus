@@ -4,20 +4,16 @@
 //                               INTERFACE
 //**************************************************************************
 
-WWWAbstraction::WWWAbstraction(Carcass* _carcass)
+WWWAbstraction::WWWAbstraction(Carcass* _carcass) : carcass (_carcass)
 {
-    carcass = _carcass;
-    language = new CurrentLearnDir(carcass);
     initialized = false;
 }
 
 bool WWWAbstraction::Initialize()
 {
-//    if(language->Initialize()){
-//        initialized = true;
-//        return true;
-//    }
-    return false;
+    if(carcass->CurLearnDir->Get().knownL == "") return false;
+    initialized = true;
+    return true;
 }
 
 bool WWWAbstraction::SaveWord(QString _word,
@@ -28,21 +24,21 @@ bool WWWAbstraction::SaveWord(QString _word,
     if(initialized){
         if(_word != ""){
             if(!_translates.isEmpty()){
-//                if(!language->dictionaries.isEmpty()){
+               if(!carcass->CurLearnDir->dictionaries.isEmpty()){
                     if(!DctCheck.isEmpty()){
                         Word w(_word, _transcription, _translates, DctCheck, _note);
-                        language->AddWord(w);
+                        carcass->CurLearnDir->AddWord(w);
                         return true;
                     }
                     else{
                         emit DctShow();
                         carcass->message(tr("Select a Dictionary"));
                     }
-//                }
-//                else{
-//                    emit DctShow(); //нужно вызывать меню ****************************
-//                    carcass->message(tr("Create a Dictionary"));
-//                }
+                }
+                else{
+                    emit DctShow();
+                    carcass->message(tr("Create a Dictionary"));
+                }
             }
         }
     }
@@ -52,20 +48,21 @@ bool WWWAbstraction::SaveWord(QString _word,
     return false;
 }
 
-bool WWWAbstraction::AddDictionary(QString str)
+bool WWWAbstraction::AddDictionary(QString dct_name)
 {
     if(initialized){
-        if(language->AddDictionary(str)) return true;
+        if(carcass->CurLearnDir->AddDictionary(dct_name))
+            return true;
     }
     else{
         carcass->message("Не инициализирован абстрактор WWW");
+        return false;
     }
-    return false;
 }
 
-void WWWAbstraction::addDctCheck(QString str)
+void WWWAbstraction::addDctCheck(QString dct_name)
 {
-    if(!DctCheck.contains(str)) DctCheck << str;
+    if(!DctCheck.contains(dct_name)) DctCheck << dct_name;
 }
 
 void WWWAbstraction::removeDctCheck(QString str)

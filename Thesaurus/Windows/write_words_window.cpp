@@ -3,10 +3,9 @@
 
 
 WriteWordsWindow::WriteWordsWindow(Carcass * _carcass) :
-    ui(new Ui::WriteWordsWindow)
+    ui(new Ui::WriteWordsWindow), carcass(_carcass)
 {
     ui->setupUi(this);
-    carcass = _carcass;
     realiz = new WWWAbstraction(carcass);
     DW = nullptr;
     if(realiz->Initialize()){

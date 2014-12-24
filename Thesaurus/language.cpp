@@ -11,7 +11,6 @@ bool CurrentLearnDir::Set (const QString& known, const QString& targ, bool new_L
 {
     if(known != "" && targ != ""){
         if(!carcass->CurAccount->Get().isEmpty()){
-            adress = carcass->adr.users_dir + carcass->CurAccount->Get().toLower() + "\\" + known + "_" + targ + carcass->adr.lext;
             learn_dir.knownL = known;
             learn_dir.targL = targ;
             if(new_LD){
@@ -21,6 +20,7 @@ bool CurrentLearnDir::Set (const QString& known, const QString& targ, bool new_L
                 if(!carcass->CurLearnDirList->Contains(learn_dir)) return false;
                 if(!Initialize(false)) return false;
             }
+            if(!carcass->confUser_write()) return false;
             return true;
         }
     }
@@ -28,22 +28,23 @@ bool CurrentLearnDir::Set (const QString& known, const QString& targ, bool new_L
 }
 bool CurrentLearnDir::Initialize(bool new_LD)
 {
+    adress = carcass->adr.users_dir + carcass->CurAccount->Get().toLower() + "\\" + learn_dir.knownL + "_" + learn_dir.targL + carcass->adr.lext;
     initialized = false;
     if(new_LD){
         words.clear();
         dictionaries.clear();
-        if(WriteFile()) return false;
+        if(!WriteFile()) return false;
         initialized = true;
     }
     else{
         if(!ReadFile()) return false;
         if(!words.isEmpty()){
             for (int i = 0; i < words.size(); ++i){
-                if(words.at(i).word != carcass->symb.new_dictionary){
+                //if(words.at(i).word != carcass->symb.new_dictionary){
                     for (int u = 0; u < words[i].dictionaries.size(); ++u){
                         if(!dictionaries.contains(words[i].dictionaries[u])) dictionaries << words[i].dictionaries[u];
                     }
-                }
+                //}
             }
         }
         initialized = true;
@@ -148,6 +149,7 @@ bool CurrentLearnDir::AddDictionary(QString str)
     }
     return false;
 }
+
 void CurrentLearnDir::RemoveDictionary(const QString &str)
 {
     if(initialized){
@@ -190,4 +192,17 @@ int CurrentLearnDir::IndexOf(const QString str)
         carcass->message("Не инициализированн CurLearnDir IndexOf"); //*************** Обработать исключение *************************
         return -1;
     }
+}
+
+QDataStream& operator>> (QDataStream& out, CurrentLearnDir& cld)
+{
+    out >> cld.learn_dir;
+    cld.Initialize(false);
+    return out;
+}
+
+QDataStream& operator<< (QDataStream& in, const CurrentLearnDir& cld)
+{
+    in << cld.learn_dir;
+    return in;
 }

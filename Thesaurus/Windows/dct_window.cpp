@@ -14,8 +14,8 @@ DctWindow::DctWindow(WWWAbstraction* _realiz) :
 //********************************************************************
 void DctWindow::BoxFilling()
 {
-    for(int i = 0; i < realiz->language->dictionaries.size(); ++i){
-        CreateNewCheckBox(realiz->language->dictionaries.at(i));
+    for(int i = 0; i < realiz->carcass->CurLearnDir->dictionaries.size(); ++i){
+        CreateNewCheckBox(realiz->carcass->CurLearnDir->dictionaries.at(i));
     }
     ui->lineEdit->hide();
 }

@@ -8,7 +8,6 @@ class CurrentAccount
 {
 public:
     CurrentAccount(Carcass*);
-    friend class Sloter;
 public:
     //********************************
     //           Интерфейс
@@ -23,7 +22,10 @@ public:
     QPixmap account_photo;
 
     //********************************
-
+public:
+    friend QDataStream& operator>> (QDataStream& out, CurrentAccount&);
+    friend QDataStream& operator<< (QDataStream& in, const CurrentAccount&);
+    friend class Sloter;
 private:
     Carcass* carcass;
     QString cur_Account;
@@ -136,6 +138,8 @@ public:
 public:
     CurrentLearnDir(Carcass *_carcass);
     friend class CurrentLearnDirList;
+    friend QDataStream& operator>> (QDataStream& out, CurrentLearnDir&);
+    friend QDataStream& operator<< (QDataStream& in, const CurrentLearnDir&);
 private:
     Carcass* carcass;
     QString adress;

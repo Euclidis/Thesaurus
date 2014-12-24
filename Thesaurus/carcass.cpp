@@ -5,43 +5,30 @@ Carcass::Carcass(){}
 //===============================================================================
 //                     Чтение и запись файла конфигурации юзера
 //===============================================================================
-Carcass::confUser_file::confUser_file(Carcass* _carcass)
+Carcass::confUser_file::confUser_file(Carcass* _carcass) : carcass(_carcass)
 {
-    cldl = _carcass->CurLearnDirList;
 }
 
 QDataStream& operator>> (QDataStream& out, Carcass::confUser_file& cuf)
 {
-    out >> *cuf.cldl;
-
-    out >> cuf.knownL;
-    out >> cuf.targL;
-
-    out >> cuf.flag;
+    out >> *(cuf.carcass->CurLearnDirList);
+    out >> *(cuf.carcass->CurLearnDir);
+    out >> *(cuf.carcass->CurAccount);
     return out;
 }
 QDataStream& operator<< (QDataStream& in, const Carcass::confUser_file& cuf)
 {
-    in << *cuf.cldl;
-
-    in << cuf.knownL;
-    in << cuf.targL;
-
-    in << cuf.flag;
+    in << *(cuf.carcass->CurLearnDirList);
+    in << *(cuf.carcass->CurLearnDir);
+    in << *(cuf.carcass->CurAccount);
     return in;
 }
 
 bool Carcass::confUser_write()
 {
+    if(CurAccount->Get() == "") return false;
     QString path = adr.users_dir + CurAccount->Get().toLower() + adr.user_config ;
     confUser_file f(this);
-
-    f.knownL = CurLearnDir->Get().knownL;
-    f.targL = CurLearnDir->Get().targL;
-
-    if(!CurLearnDirList) return false;
-    f.cldl = CurLearnDirList;
-    f.flag = CurAccount->Get_flag_AW_ignore();
 
     WriteResult wr = WriteFile(path, f);
     switch (wr) {
@@ -62,18 +49,13 @@ bool Carcass::confUser_read()
     ReadResult rr = ReadFile(path, f);
     switch (rr) {
     case ReadResult::OK:
-        break;
+        return true;
     default:
         ex_some_show ex(QObject::tr("Problems reading the file ") + path);
         ex.show();
         message(enumRToQStr(rr));
         return false;
     }
-
-    CurLearnDir->Set(f.knownL, f.targL); // ******************************** Добавить проверку *********************
-    CurAccount->Set_flag_AW_ignore(f.flag);
-
-    return true;
 }
 
 //===============================================================================

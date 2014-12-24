@@ -51,9 +51,9 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>10</x>
      <y>110</y>
-     <width>47</width>
+     <width>101</width>
      <height>16</height>
     </rect>
    </property>
@@ -64,7 +64,7 @@
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>150</x>
      <y>110</y>
      <width>120</width>
      <height>341</height>
@@ -111,6 +111,19 @@
      </layout>
     </widget>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>110</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Write Words</string>
+   </property>
   </widget>
  </widget>
  <resources/>

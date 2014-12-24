@@ -14,7 +14,6 @@ class WWWAbstraction : public QObject
 //*********************************************
 public:
     Carcass* carcass;
-    CurrentLearnDir* language;
     QStringList DctCheck;
 public:
     //-----------------------------------------
@@ -29,7 +28,7 @@ public slots:
                   QString _transcription,
                   QStringList _translates,
                   QString _note);
-    bool AddDictionary(QString str);
+    bool AddDictionary(QString dct_name);
 //*********************************************
 
 private:

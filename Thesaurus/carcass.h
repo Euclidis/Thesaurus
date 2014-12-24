@@ -44,11 +44,7 @@ public:
 private:
     struct confUser_file
     {
-        CurrentLearnDirList* cldl;
-        QString knownL;
-        QString targL;
-        bool flag;
-
+        Carcass* carcass;
         confUser_file(Carcass *_carcass);
     };
 
