@@ -93,7 +93,6 @@ void MenuWindow::DctList_UpDate()
 }
 void MenuWindow::WWW_open_slot()
 {
-    carcass->message("Fuck");
     if(carcass->CurLearnDir->Get().knownL == "") {
         LD ld;
         ld.knownL = "Russian";
