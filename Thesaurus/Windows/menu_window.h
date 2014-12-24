@@ -13,25 +13,35 @@ class MenuWindow : public BaseWindow
 {
     Q_OBJECT
 public:
-    Carcass* carcass;
-    ~MenuWindow();
-public:
     explicit MenuWindow(Carcass * _carcass);
-
+    ~MenuWindow();
 private:
     Ui::MenuWindow *ui;
-    void SetAccount();
-    void SetDictionaries();
-    void BoxFilling();
-    void CreateNewCheckBox(QString str);
+
+
+private:
+    Carcass* carcass;
+    QSize PhotoSize;
+
+public:
+    void Connector();
+    void AddItemToDctList(QString dct_name);
 signals:
-    void WWW_open();
+    void WWW_open_signal();
     void WWW_close();
     void LSW_open();
 public slots:
-    void slot_for_LSW();
-private slots:
-    void on_pushButton_clicked();
+    void SetAccount();
+    //void SetLearnDir();
+    void SetDictionaries();
+    //void SetWordsList();
+    void WWW_open_slot();
+private:
+    void ObjSet_AccountName();
+    void ObjSet_AccountPhoto(QPixmap& p);
+    void ObjSet_CurLearnDir();
+    void DctList_UpDate();
+    void DctList_Clear();
 };
 
 #endif // MENU_WINDOW_H

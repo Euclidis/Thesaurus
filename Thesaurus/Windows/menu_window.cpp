@@ -5,10 +5,59 @@ MenuWindow::MenuWindow(Carcass * _carcass) :
     ui(new Ui::MenuWindow), carcass(_carcass)
 {
     ui->setupUi(this);
+    PhotoSize.setWidth(81);
+    PhotoSize.setHeight(81);
+    Connector();
     SetAccount();
     SetDictionaries();
 }
 
+
+//****************************************************************************************************
+//             Интерфейс зависимые ф-и. Для того, чтобы легко можно было менять виджеты.
+//****************************************************************************************************
+void MenuWindow::Connector()                                                //
+{                                                                           // Коннектор
+    connect(ui->pushButton, SIGNAL(clicked()), SLOT(WWW_open_slot()));      //
+}                                                                           //
+
+void MenuWindow::ObjSet_AccountName()                                                //
+{                                                                                    //
+    ui->label_2->setText(carcass->CurAccount->Get());                                //
+}                                                                                    //
+void MenuWindow::ObjSet_AccountPhoto(QPixmap& p)                                     //
+{                                                                                    //  Лэйблы, принимающие
+    ui->label->setPixmap(p);                                                         //  значения
+}                                                                                    //
+void MenuWindow::ObjSet_CurLearnDir()                                                //
+{                                                                                    //
+    ui->label_3->setText(carcass->CurLearnDir->Get().knownL                          //
+                         + "-" + carcass->CurLearnDir->Get().targL);                 //
+}                                                                                    //
+
+void MenuWindow::DctList_Clear()                                                //
+{                                                                               //
+    delete ui->verticalLayout;                                                  //
+    ui->verticalLayout = new QVBoxLayout;                                       //
+    ui->verticalLayout->addStretch(1);                                          //
+}                                                                               //
+void MenuWindow::AddItemToDctList(QString dct_name)                             //
+{                                                                               //  Ф-и списка словарей
+    QHBoxLayout* h = new QHBoxLayout;                                           //
+    QPushButton* c = new QPushButton(dct_name);                                 //
+    c->setFlat(true);                                                           //
+    //connect(c, SIGNAL(clicked(bool)), SLOT(CheckChange(bool)));               //
+    h->addWidget(c);                                                            //
+    ui->verticalLayout->insertLayout(ui->verticalLayout->count()-1, h);         //
+    ui->scrollArea->widget()->setLayout(ui->verticalLayout);                    //
+}                                                                               //
+//****************************************************************************************************
+//****************************************************************************************************
+
+
+//****************************************************************************************************
+//                                 Интерфейс независимые ф-и
+//****************************************************************************************************
 void MenuWindow::SetAccount()
 {
     QString account_name = carcass->CurAccount->Get();
@@ -20,62 +69,50 @@ void MenuWindow::SetAccount()
         else{
             p = new QPixmap(carcass->CurAccount->account_photo);
         }
-        int w = ui->label->width();
-        int h = ui->label->height();
-        ui->label->setPixmap(p->scaled(w, h));
+        ObjSet_AccountPhoto(p->scaled(PhotoSize));
         delete p;
-        ui->label_2->setText(account_name);
+        ObjSet_AccountName();
     }
 }
-
 void MenuWindow::SetDictionaries()
 {
     if(carcass->CurLearnDir->Get().knownL != ""){
-        ui->label_3->setText(carcass->CurLearnDir->Get().knownL + " - " + carcass->CurLearnDir->Get().targL);
-        delete ui->verticalLayout;
-        ui->verticalLayout = new QVBoxLayout;
-        ui->verticalLayout->addStretch(1);
-        for(int i = 0; i < carcass->CurLearnDir->dictionaries.size(); ++i){
-            CreateNewCheckBox(carcass->CurLearnDir->dictionaries.at(i));
-        }
+        ObjSet_CurLearnDir();
+        DctList_UpDate();
+    }
+    else{
+        DctList_Clear();
     }
 }
-
-void MenuWindow::CreateNewCheckBox(QString str)
+void MenuWindow::DctList_UpDate()
 {
-    QHBoxLayout* h = new QHBoxLayout;
-    QPushButton* c = new QPushButton(str);
-    c->setFlat(true);
-    //connect(c, SIGNAL(clicked(bool)), SLOT(CheckChange(bool)));
-    h->addWidget(c);
-    ui->verticalLayout->insertLayout(ui->verticalLayout->count()-1, h);
-    ui->scrollArea->widget()->setLayout(ui->verticalLayout);
+    DctList_Clear();
+    for(int i = 0; i < carcass->CurLearnDir->dictionaries.size(); ++i){
+        AddItemToDctList(carcass->CurLearnDir->dictionaries.at(i));
+    }
 }
-
-void MenuWindow::slot_for_LSW()
+void MenuWindow::WWW_open_slot()
 {
-
-}
-
-MenuWindow::~MenuWindow()
-{
-    delete ui;
-}
-
-
-void MenuWindow::on_pushButton_clicked()
-{
+    carcass->message("Fuck");
     if(carcass->CurLearnDir->Get().knownL == "") {
         LD ld;
         ld.knownL = "Russian";
         ld.targL = "English";
 
         carcass->CurLearnDirList->Add(ld);
-        WWW_open();
+        WWW_open_signal();
     }
     else{
-
         carcass->CurLearnDir->Set("Russian", "Spain");
-        WWW_open();
+        WWW_open_signal();
     }
 }
+
+//****************************************************************************************************
+//****************************************************************************************************
+MenuWindow::~MenuWindow()
+{
+    delete ui;
+}
+
+

@@ -140,6 +140,7 @@ bool CurrentLearnDir::AddDictionary(QString str)
                 empty << str;
                 Word w(carcass->symb.new_dictionary, "", empty, empty, "");
                 AddWord(w);
+                emit carcass->DctListChange();
                 return true;
             }
         }

@@ -30,8 +30,6 @@ private:
     void TakeTexts();
     void ClearTexts();
     void closeEvent(QCloseEvent * event);
-signals:
-
 private slots:
     void SaveWord();
     void DW_open();

@@ -23,6 +23,7 @@
 #include <QMenu>
 #include <QLocale>
 #include <QPushButton>
+#include <QSize>
 
 
 #include "Windows/MyWidgets/label.h"

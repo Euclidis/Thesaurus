@@ -24,11 +24,11 @@ private:
     void CreateNewCheckBox(QString str);
     void mousePressEvent(QMouseEvent *event);
     void ContextMenuShow();
+
 private slots:
     void CheckChange(bool b);
     void AddDictionary();
     void TextShow();
-
     void on_lineEdit_returnPressed();
 
 private:
