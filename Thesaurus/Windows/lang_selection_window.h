@@ -33,8 +33,8 @@ public slots:
 
 private slots:
 
-    void on_comboBox_2_activated(const QString &str);
-    void on_comboBox_activated(const QString &str);
+    void on_comboBox_2_activated(const QString &combo2_cur_text);
+    void on_comboBox_activated(const QString &combo1_cur_text);
 };
 
 #endif // LangSelectionWindow_H

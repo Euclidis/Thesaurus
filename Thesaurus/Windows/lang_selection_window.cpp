@@ -5,32 +5,53 @@ LangSelectionWindow::LangSelectionWindow(Carcass *_carcass) : LearningDirection(
   ui(new Ui::LangSelectionWindow)
 {
 
-  ui->setupUi(this);
-  Lang_Initializ();
+#define ICON carcass->LanguageList->getStrIcoList().at(i).icon
+#define NAME carcass->LanguageList->getStrIcoList().at(i).name
 
-  for ( int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
-  ui->comboBox->addItem(*carcass->LanguageList->getStrIcoList().at(i).icon, *carcass->LanguageList->getStrIcoList().at(i).name);
-  ui->comboBox_2->addItem(*carcass->LanguageList->getStrIcoList().at(i).icon, *carcass->LanguageList->getStrIcoList().at(i).name);
-}
+  ui->setupUi(this);
+  this->setModal(1);
+  Lang_Initializ();
+  //>>>>>>>>>>>>>>>>>>>>>>>>TEST
+  ui->textEdit->clear();
+   QString temp = "";
+  if (!carcass->CurLearnDirList->Get().isEmpty())
+    for (int n = 0; n < carcass->CurLearnDirList->Get().size(); ++n){
+     temp +=(carcass->CurLearnDirList->Get().at(n).knownL + "_" + carcass->CurLearnDirList->Get().at(n).targL + "\n");
+    }
+     ui->textEdit->setText(temp);
+  //>>>>>>>>>>>>>>>>>>>>>>>>TEST
   QString cursyslang = QLocale::languageToString(QLocale::system().language());
 
-  if (carcass->LanguageList->getLang(cursyslang)!= nullptr){
+  if (carcass->CurLearnDirList->Get().isEmpty()){
+      for ( int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
+      ui->comboBox->addItem(*ICON, *NAME);
+      ui->comboBox_2->addItem(*ICON, *NAME);
+    }
       ui->comboBox_2->removeItem(ui->comboBox_2->findText(cursyslang));
       ui->comboBox->removeItem(ui->comboBox->findText(ui->comboBox_2->currentText()));
       ui->comboBox->setCurrentIndex(ui->comboBox->findText(cursyslang));
 }
   else {
-      ui->comboBox_2->removeItem(0);
-      ui->comboBox->removeItem(1);
+      for ( int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
+      ui->comboBox->addItem(*ICON, *NAME);
+    }
+      ui->comboBox->setCurrentIndex(ui->comboBox->findText(cursyslang));
+
+      for ( int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
+          if (*NAME != ui->comboBox->currentText())
+      ui->comboBox_2->addItem(*ICON, *NAME);
+    }
+      for (int n = 0; n < carcass->CurLearnDirList->Get().size(); ++n){
+          if (carcass->CurLearnDirList->Get().at(n).knownL == ui->comboBox->currentText())
+            ui->comboBox_2->removeItem(ui->comboBox_2->findText(carcass->CurLearnDirList->Get().at(n).targL));
+
+        }
+
+      ui->comboBox->removeItem(ui->comboBox->findText(ui->comboBox_2->currentText()));
     }
 
 //  ui->comboBox->removeItem(1);
 //  ui->comboBox_2->removeItem(0);
-
-  KnownLang = ui->comboBox->currentText();
-  TargLang  = ui->comboBox_2->currentText();
-
-
 }
 
 LangSelectionWindow::~LangSelectionWindow()
@@ -40,32 +61,112 @@ LangSelectionWindow::~LangSelectionWindow()
 
 void LangSelectionWindow::on_label_3_clicked()
 {
-  createLD(ui->comboBox->currentText(), ui->comboBox_2->currentText());
+  LD templd;
+  templd.knownL = ui->comboBox->currentText();
+  templd.targL = ui->comboBox_2->currentText();
+  carcass->CurLearnDirList->Add(templd);
+
+  //>>>>>>>>>>>>>>>>>>>>>>>>TEST
+  ui->comboBox->clear();
+  ui->comboBox_2->clear();
+
+      for ( int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
+      ui->comboBox->addItem(*ICON, *NAME);
+    }
+      for ( int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
+          if (*NAME != ui->comboBox->currentText())
+      ui->comboBox_2->addItem(*ICON, *NAME);
+    }
+      for (int n = 0; n < carcass->CurLearnDirList->Get().size(); ++n){
+          if (carcass->CurLearnDirList->Get().at(n).knownL == ui->comboBox->currentText())
+            ui->comboBox_2->removeItem(ui->comboBox_2->findText(carcass->CurLearnDirList->Get().at(n).targL));
+        }
+
+      ui->comboBox->removeItem(ui->comboBox->findText(ui->comboBox_2->currentText()));
+
+  ui->textEdit->clear();
+  QString temp = "";
+  if (!carcass->CurLearnDirList->Get().isEmpty())
+    for (int n = 0; n < carcass->CurLearnDirList->Get().size(); ++n){
+     temp +=(carcass->CurLearnDirList->Get().at(n).knownL + "_" + carcass->CurLearnDirList->Get().at(n).targL + "\n");
+    }
+     ui->textEdit->setText(temp);
+  //>>>>>>>>>>>>>>>>>>>>>>>>TEST
+
+//  createLD(ui->comboBox->currentText(), ui->comboBox_2->currentText());
   emit WWW_open();
   close();
 }
 
 
-void LangSelectionWindow::on_comboBox_2_activated(const QString &str)
+void LangSelectionWindow::on_comboBox_2_activated(const QString &combo2_cur_text)
 {
+
   QString temp = ui->comboBox->currentText();
   ui->comboBox->clear();
-  for (int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
-      ui->comboBox->addItem(*carcass->LanguageList->getStrIcoList().at(i).icon, *carcass->LanguageList->getStrIcoList().at(i).name);
+
+
+        for ( int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
+            if (*NAME != ui->comboBox_2->currentText())
+        ui->comboBox->addItem(*ICON, *NAME);
+      }
+        if (!carcass->CurLearnDirList->Get().isEmpty()){
+        for (int n = 0; n < carcass->CurLearnDirList->Get().size(); ++n){
+            if (carcass->CurLearnDirList->Get().at(n).targL == ui->comboBox_2->currentText())
+              ui->comboBox->removeItem(ui->comboBox->findText(carcass->CurLearnDirList->Get().at(n).knownL));
+          }
+  }
+
+        if (ui->comboBox->count() == 0){
+            carcass->message("this target language are totaly in use");
+            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> +
+          }
+        else
+          ui->comboBox->setCurrentIndex(ui->comboBox->findText(temp));
+
+  //>>>>>>>>>>>>>>>>>>>>>>>>TEST
+  ui->textEdit->clear();
+  QString tempo = "";
+  if (!carcass->CurLearnDirList->Get().isEmpty())
+    for (int n = 0; n < carcass->CurLearnDirList->Get().size(); ++n){
+     tempo +=(carcass->CurLearnDirList->Get().at(n).knownL + "_" + carcass->CurLearnDirList->Get().at(n).targL + "\n");
     }
-//  ui->comboBox->addActions(Lang);
-  ui->comboBox->removeItem(ui->comboBox->findText(str));
-  ui->comboBox->setCurrentIndex(ui->comboBox->findText(temp));
+     ui->textEdit->setText(tempo);
+  //>>>>>>>>>>>>>>>>>>>>>>>>TEST
 }
 
-void LangSelectionWindow::on_comboBox_activated(const QString &str)
+void LangSelectionWindow::on_comboBox_activated(const QString &combo1_cur_text)
 {
   QString temp = ui->comboBox_2->currentText();
   ui->comboBox_2->clear();
-  for (int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
-      ui->comboBox_2->addItem(*carcass->LanguageList->getStrIcoList().at(i).icon, *carcass->LanguageList->getStrIcoList().at(i).name);
+
+
+        for ( int i = 0; i < carcass->LanguageList->getStrIcoList().size(); ++i){
+            if (*NAME != ui->comboBox->currentText())
+        ui->comboBox_2->addItem(*ICON, *NAME);
+      }
+        if (!carcass->CurLearnDirList->Get().isEmpty()){
+        for (int n = 0; n < carcass->CurLearnDirList->Get().size(); ++n){
+            if (carcass->CurLearnDirList->Get().at(n).knownL == ui->comboBox->currentText())
+              ui->comboBox_2->removeItem(ui->comboBox_2->findText(carcass->CurLearnDirList->Get().at(n).targL));
+          }
+  }
+
+
+        if (ui->comboBox_2->count() == 0){
+        carcass->message("this known language are totaly in use");
+          }
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> +
+        else
+          ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText(temp));
+
+  //>>>>>>>>>>>>>>>>>>>>>>>>TEST
+  ui->textEdit->clear();
+   QString tempo = "";
+  if (!carcass->CurLearnDirList->Get().isEmpty())
+    for (int n = 0; n < carcass->CurLearnDirList->Get().size(); ++n){
+     tempo +=(carcass->CurLearnDirList->Get().at(n).knownL + "_" + carcass->CurLearnDirList->Get().at(n).targL + "\n");
     }
-//  ui->comboBox_2->addActions(Lang);
-  ui->comboBox_2->removeItem(ui->comboBox_2->findText(str));
-  ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText(temp));
+     ui->textEdit->setText(tempo);
+  //>>>>>>>>>>>>>>>>>>>>>>>>TEST
 }
