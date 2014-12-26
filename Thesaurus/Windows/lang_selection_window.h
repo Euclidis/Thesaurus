@@ -21,7 +21,7 @@ public:
   ~LangSelectionWindow();
 
 
-
+QString test;
 
 public slots:
     void on_label_3_clicked();

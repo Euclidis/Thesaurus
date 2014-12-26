@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>592</height>
+    <width>573</width>
+    <height>280</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>60</y>
+     <x>370</x>
+     <y>0</y>
      <width>191</width>
      <height>161</height>
     </rect>
@@ -25,6 +25,14 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QComboBox" name="comboBox">
+      <property name="font">
+       <font>
+        <family>Code Pro Light</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="duplicatesEnabled">
        <bool>false</bool>
       </property>
@@ -32,34 +40,16 @@
     </item>
     <item>
      <widget class="QComboBox" name="comboBox_2">
+      <property name="font">
+       <font>
+        <family>Code Pro Light</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="duplicatesEnabled">
        <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="verticalLayoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>60</y>
-     <width>141</width>
-     <height>161</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Your Language</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Target Language</string>
       </property>
      </widget>
     </item>
@@ -68,29 +58,79 @@
   <widget class="Label" name="label_3" native="true">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>240</y>
+     <x>230</x>
+     <y>220</y>
      <width>71</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
+     <family>Code Pro Light</family>
      <pointsize>20</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text" stdset="0">
     <string>OK</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="textEdit">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>370</y>
-     <width>271</width>
-     <height>171</height>
+     <x>10</x>
+     <y>10</y>
+     <width>341</width>
+     <height>76</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Code Pro Light</family>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Language You already know</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="buddy">
+    <cstring>comboBox</cstring>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>341</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Code Pro Light</family>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Language You want to learn</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>false</bool>
+   </property>
+   <property name="buddy">
+    <cstring>comboBox_2</cstring>
    </property>
   </widget>
  </widget>
