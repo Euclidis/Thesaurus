@@ -14,7 +14,7 @@ class MesOKCancel : public BaseWindow
 public:
     explicit MesOKCancel(QString str);
     ~MesOKCancel();
-
+void closeEvent(QCloseEvent*);
 signals:
     void MesOKCancelResult(bool);
 

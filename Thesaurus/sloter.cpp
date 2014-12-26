@@ -48,12 +48,12 @@ void Sloter::connector()
 }
 void Sloter::MOCW_show(QString str)
 {
-    if(!MOCW){
-        MOCW = new MesOKCancel(str);
-        //Шаблон для заполнения - связывание сигнала месседжера с двумя кнопками со слотом объекта
-        //connect(MOCW, SIGNAL(MesOKCancelResult(bool)), /*some obj*/, /*some SLOT*/);
-    }
-    MOCW->show();
+  MOCW = new MesOKCancel(str);
+  connect(MOCW, SIGNAL(MesOKCancelResult(bool)), LSW, SLOT(accepted(bool)));
+  //Шаблон для заполнения - связывание сигнала месседжера с двумя кнопками со слотом объекта
+  //connect(MOCW, SIGNAL(MesOKCancelResult(bool)), /*some obj*/, /*some SLOT*/);
+
+  MOCW->show();
 }
 
 /*********************************************************
@@ -61,12 +61,12 @@ void Sloter::MOCW_show(QString str)
 *********************************************************/
 void Sloter::AW_show(bool mode)
 {
-    if(!AW){
-        AW = new AccountWindow(carcass, mode);
-        connect(AW, SIGNAL(LSW_open()), SLOT(LSW_show()));
-        connect (AW, SIGNAL(MW_open()), SLOT(MW_show()));
-    }
-    AW->show();
+
+  AW = new AccountWindow(carcass, mode);
+  connect(AW, SIGNAL(LSW_open()), SLOT(LSW_show()));
+  connect (AW, SIGNAL(MW_open()), SLOT(MW_show()));
+
+  AW->show();
 }
 void Sloter::MW_show()
 {
@@ -90,8 +90,6 @@ void Sloter::WWW_show()
 }
 void Sloter::LSW_show()
 {
-    if(!LSW){
-        LSW = new LangSelectionWindow(carcass);
-    }
-    LSW->show();
+  LSW = new LangSelectionWindow(carcass);
+  LSW->show();
 }

@@ -20,6 +20,7 @@ public:
 public:
     explicit AccountWindow(Carcass*, bool mode = 0);
     ~AccountWindow();
+    void closeEvent(QCloseEvent * close_ev);
 void retranslateUI();
 
 
@@ -57,7 +58,7 @@ private:
     QTimer *timer_for_anim;
     bool timer_flag = 1;
 
-    ResetPassWindow *RPW;
+    ResetPassWindow *RPW = nullptr;
     Ui::AccountWindow *ui;
 
 

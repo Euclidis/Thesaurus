@@ -19,7 +19,7 @@ public:
   LangSelectionWindow(Carcass *_carcass);
 
   ~LangSelectionWindow();
-
+void closeEvent(QCloseEvent * close_ev);
 
 QString test;
 
@@ -32,7 +32,7 @@ public slots:
     //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 private slots:
-
+    void accepted(bool);
     void on_comboBox_2_activated(const QString &combo2_cur_text);
     void on_comboBox_activated(const QString &combo1_cur_text);
 };

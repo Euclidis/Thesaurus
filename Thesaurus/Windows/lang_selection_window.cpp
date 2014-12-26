@@ -47,13 +47,30 @@ LangSelectionWindow::~LangSelectionWindow()
 {
   delete ui;
 }
+void LangSelectionWindow::accepted(bool result){
 
+  if (result){
+        LD templd;
+        templd.knownL = ui->comboBox->currentText();
+        templd.targL = ui->comboBox_2->currentText();
+        carcass->CurLearnDirList->Add(templd);
+        emit WWW_open();
+        close();
+    }
+  else {
+
+    }
+
+}
 void LangSelectionWindow::on_label_3_clicked()
 {
-  LD templd;
-  templd.knownL = ui->comboBox->currentText();
-  templd.targL = ui->comboBox_2->currentText();
-  carcass->CurLearnDirList->Add(templd);
+
+  QString mess = (tr("Are you already know ") + ui->comboBox->currentText() + tr(" and want to learn ") + ui->comboBox_2->currentText() + "?");
+  carcass->mesOKCancelShow(mess);
+//  LD templd;
+//  templd.knownL = ui->comboBox->currentText();
+//  templd.targL = ui->comboBox_2->currentText();
+//  carcass->CurLearnDirList->Add(templd);
 
   //  //>>>>>>>>>>>>>>>>>>>>>>>>TEST
   //  ui->comboBox->clear();
@@ -83,8 +100,9 @@ void LangSelectionWindow::on_label_3_clicked()
   //  //>>>>>>>>>>>>>>>>>>>>>>>>TEST
 
   //  createLD(ui->comboBox->currentText(), ui->comboBox_2->currentText());
-  emit WWW_open();
-  close();
+
+//  emit WWW_open();
+//  close();
 }
 void LangSelectionWindow::on_comboBox_2_activated(const QString &combo2_cur_text)
 {
@@ -130,3 +148,8 @@ void LangSelectionWindow::on_comboBox_activated(const QString &combo1_cur_text)
     ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText(temp));
 }
 
+void LangSelectionWindow::closeEvent(QCloseEvent * close_ev){
+
+  delete(this);
+  close_ev->accept();
+}

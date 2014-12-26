@@ -32,6 +32,7 @@ void AccountWindow::Login(){
   QPalette *palette = new QPalette();
   palette->setColor(QPalette::Text,Qt::black);
   ui->lineEdit->setPalette(*palette);
+  delete palette;
 
     //add Animation
   Login_Anim();
@@ -50,6 +51,7 @@ void AccountWindow::Registration(){
     QPalette *palette = new QPalette();
     palette->setColor(QPalette::Text,Qt::red);
     ui->lineEdit->setPalette(*palette);
+    delete palette;
 }
     //add Animation
   Regis_Anim();
@@ -106,6 +108,8 @@ AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
     ui->OK_Button->setPalette(*Buttons_Color);
     ui->LogReg_Button->setPalette(*Buttons_Color);
 
+    delete Buttons_Color;
+
     mode_flag = mode;
     if (mode_flag)
     Login();
@@ -127,6 +131,8 @@ AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
     ui->lineEdit->setValidator(validUN);
     ui->lineEdit_2->setValidator(validUP);
     ui->lineEdit_3->setValidator(validUP);
+    delete validUN;
+    delete validUP;
 
     setModal(true);
     //-------------------------------------------------------
@@ -142,9 +148,25 @@ AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
 
 AccountWindow::~AccountWindow()
 {
+
+  delete lineedit_anim;
+  delete lineedit_2_anim;
+  delete lineedit_3_anim;
+  delete OK_Butt_anim;
+  delete timer_for_anim;
+
+  if (RPW != nullptr){
+      delete RPW;
+    }
+
     delete ui;
 }
+void AccountWindow::closeEvent(QCloseEvent * close_ev){
 
+  delete(this);
+  close_ev->accept();
+
+}
 //--------------------------------------------------//
 // прыжки по объектам используя Ентер --------------//
 //--------------------------------------------------//
@@ -190,11 +212,13 @@ void AccountWindow::on_lineEdit_textChanged()
         QPalette *palette = new QPalette();
         palette->setColor(QPalette::Text,Qt::red);
         ui->lineEdit->setPalette(*palette);
+        delete palette;
     }
       else {
         QPalette *palette = new QPalette();
         palette->setColor(QPalette::Text,Qt::black);
         ui->lineEdit->setPalette(*palette);
+        delete palette;
     }
   }
 }
@@ -415,6 +439,7 @@ void AccountWindow::InstallFont(){
     }
   else {
       QFontDatabase::addApplicationFontFromData(res.readAll());
+      res.close();
     }
 
 
