@@ -18,6 +18,7 @@ public:
     QString        Get          () const;
     bool    Set_flag_AW_ignore  (bool);
     bool    Get_flag_AW_ignore  ();
+    void    Set_account_photo   (const QString&fileName);
 
     QPixmap account_photo;
 

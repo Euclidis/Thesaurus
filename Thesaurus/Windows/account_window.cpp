@@ -128,6 +128,7 @@ AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
     ui->lineEdit_2->setValidator(validUP);
     ui->lineEdit_3->setValidator(validUP);
 
+    setModal(true);
     //-------------------------------------------------------
     //-------------------------------------------------------
 //    QMenu m;

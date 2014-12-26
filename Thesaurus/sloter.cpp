@@ -72,11 +72,12 @@ void Sloter::MW_show()
 {
     if(!MW){
         MW = new MenuWindow(carcass);
-        connect(MW, SIGNAL(LSW_open()), SLOT(LSW_show()));
+        connect(MW, SIGNAL(AW_open_signal()), SLOT(AW_show()));
+        connect(MW, SIGNAL(LSW_open_signal()), SLOT(LSW_show()));
         connect(MW, SIGNAL(WWW_open_signal()), SLOT(WWW_show()));
-        connect(MW, SIGNAL(WWW_close()), SLOT(WWW_close()));
-        connect(carcass, SIGNAL(DctListChange()), MW, SLOT(SetDictionaries()));
-        connect(carcass, SIGNAL(Menu_UpDate()), MW, SLOT(SetAccount()));
+        connect(carcass, SIGNAL(DctList_Add(QString)), MW, SLOT(DctList_Add(QString)));
+        connect(carcass, SIGNAL(SetAccount()), MW, SLOT(SetAccount()));
+        connect(carcass, SIGNAL(SetLD()), MW, SLOT(SetDictionaries()));
     }
     MW->show();
 }
@@ -92,19 +93,5 @@ void Sloter::LSW_show()
     if(!LSW){
         LSW = new LangSelectionWindow(carcass);
     }
-//    connect (LSW, SIGNAL(MW_open()), SLOT(MW_show()));
-
-//    //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//    connect (LSW, SIGNAL(WWW_open()), SLOT(WWW_show()));
-//    //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     LSW->show();
-}
-
-/*********************************************************
-                    Блок закрытия окон
-*********************************************************/
-void Sloter::WWW_close()
-{
-    if(!WWW){}
-    else delete WWW;
 }

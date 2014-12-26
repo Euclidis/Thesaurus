@@ -23,28 +23,45 @@ private:
     Carcass* carcass;
     QSize PhotoSize;
 
-public:
+    //****************************************
+    //       Интерфейс зависимые ф-и
+    //****************************************
+private:
     void Connector();
-    void AddItemToDctList(QString dct_name);
-signals:
-    void WWW_open_signal();
-    void WWW_close();
-    void LSW_open();
-public slots:
-    void SetAccount();
-    //void SetLearnDir();
-    void SetDictionaries();
-    //void SetWordsList();
-    void WWW_open_slot();
-private slots:
-    void on_pushButton_2_clicked();
-
 private:
     void ObjSet_AccountName();
     void ObjSet_AccountPhoto(QPixmap& p);
-    void ObjSet_CurLearnDir();
-    void DctList_UpDate();
+    void ObjSet_CurLearnDir(const QString &_LD);
     void DctList_Clear();
+    void AddItemToDctList(const QString &dct_name);
+private:
+    void ObjectsForEvetFilter();
+    //*****************************************
+    //        Интерфейс независимые ф-и
+    //*****************************************
+public slots:
+    void SetAccount();
+    void SetAccountPhoto();
+    void SetDictionaries();
+
+    void DctList_UpDate();
+    void DctList_Add(const QString& dct_name);
+private:
+    //----------> Раздел EventFilter
+    QObject* Obj_for_photo;
+    void InstallEventFilter();
+    bool eventFilter(QObject * obj, QEvent * e);
+    //********************************************
+    //        Ф-и закрытия/открытия окон
+    //********************************************
+public slots:
+    void AW_open_slot();
+    void WWW_open_slot();
+    void LSW_open_slot();
+signals:
+    void AW_open_signal();
+    void WWW_open_signal();
+    void LSW_open_signal();
 };
 
 #endif // MENU_WINDOW_H

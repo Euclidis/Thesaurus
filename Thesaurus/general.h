@@ -24,7 +24,8 @@
 #include <QLocale>
 #include <QPushButton>
 #include <QSize>
-
+#include <QFileDialog>
+#include <QMouseEvent>
 
 #include "Windows/MyWidgets/label.h"
 

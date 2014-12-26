@@ -55,19 +55,33 @@ bool CurrentAccount::Set(const QString& user_name, bool new_account)
                         return false;
                     if(!Set_flag_AW_ignore(false))
                         return false;
+                    account_photo.load(carcass->adr.default_face);
                 }
                 else{
                     if(!carcass->confUser_read())
                         return false;
+                    if(QFile::exists(carcass->adr.users_dir + cur_Account.toLower() + carcass->adr.face_file))
+                        account_photo.load(carcass->adr.users_dir + cur_Account.toLower() + carcass->adr.face_file);
+                    else
+                        account_photo.load(carcass->adr.default_face);
                 }
             }
         }
+        emit carcass->SetAccount();
         return true;
     }
     else{
         carcass->message("Необходимо инициализировать"
                          " класс CurrentAccount Set");
         return false;
+    }
+}
+//------------------------------------------------------------------------------------------------
+void CurrentAccount::Set_account_photo (const QString& fileName)
+{
+    if(!fileName.isEmpty()){
+        account_photo.load(fileName);
+        account_photo.save(carcass->adr.users_dir + cur_Account.toLower() + carcass->adr.face_file);
     }
 }
 //------------------------------------------------------------------------------------------------

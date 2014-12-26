@@ -21,7 +21,7 @@ bool CurrentLearnDir::Set (const QString& known, const QString& targ, bool new_L
                 if(!Initialize(false)) return false;
             }
             if(!carcass->confUser_write()) return false;
-            carcass->Menu_UpDate();
+            carcass->SetLD();
             return true;
         }
     }
@@ -141,7 +141,7 @@ bool CurrentLearnDir::AddDictionary(QString str)
                 empty << str;
                 Word w(carcass->symb.new_dictionary, "", empty, empty, "");
                 AddWord(w);
-                emit carcass->DctListChange();
+                emit carcass->DctList_Add(str);
                 return true;
             }
         }
