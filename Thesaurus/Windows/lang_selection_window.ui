@@ -16,9 +16,9 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>270</x>
      <y>0</y>
-     <width>191</width>
+     <width>291</width>
      <height>161</height>
     </rect>
    </property>
@@ -27,10 +27,8 @@
      <widget class="QComboBox" name="comboBox">
       <property name="font">
        <font>
-        <family>Code Pro Light</family>
+        <family>Corbel</family>
         <pointsize>12</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
        </font>
       </property>
       <property name="duplicatesEnabled">
@@ -42,10 +40,10 @@
      <widget class="QComboBox" name="comboBox_2">
       <property name="font">
        <font>
-        <family>Code Pro Light</family>
+        <family>Corbel</family>
         <pointsize>12</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
       <property name="duplicatesEnabled">
@@ -81,16 +79,16 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>341</width>
+     <width>251</width>
      <height>76</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Code Pro Light</family>
+     <family>Corbel</family>
      <pointsize>12</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <weight>50</weight>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -108,20 +106,20 @@
     <rect>
      <x>10</x>
      <y>80</y>
-     <width>341</width>
+     <width>251</width>
      <height>61</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Code Pro Light</family>
+     <family>Corbel</family>
      <pointsize>12</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <weight>50</weight>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
-    <string>Language You want to learn</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Language you want to learn&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -133,6 +131,10 @@
     <cstring>comboBox_2</cstring>
    </property>
   </widget>
+  <zorder>label_2</zorder>
+  <zorder>verticalLayoutWidget</zorder>
+  <zorder>label_3</zorder>
+  <zorder>label</zorder>
  </widget>
  <customwidgets>
   <customwidget>

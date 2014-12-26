@@ -4,7 +4,7 @@
 LangList::LangList(Carcass *_carcass){
     carcass = _carcass;
     initialized = false;
-    //if(!WriteFile()) carcass->message("Error");
+   // if(!WriteFile()) carcass->message("Error");
 }
 
 bool LangList::Initialize()
@@ -79,18 +79,16 @@ bool LangList::ReadFile()
 bool LangList::WriteFile()
 {
     Lang temp;
-    temp.name_eng = "English";
-    QPixmap p1("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\en.png");
-    temp.ico.addPixmap(p1);
-    Lang_List << temp;
-    temp.name_eng = "Russian";
-    QPixmap p2("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\ru.png");
-    temp.ico.addPixmap(p2);
-    Lang_List << temp;
-    temp.name_eng = "Germany";
-    QPixmap p3("C:\\Users\\Amir\\Documents\\GitHub\\Thesaurus\\Res\\settings\\language\\images\\ger.png");
-    temp.ico.addPixmap(p3);
-    Lang_List << temp;
+    QString path = "D:\\DRIVE\\Files\\thesaurus\\Thesaurus\\Notes\\images\\48";
+    QDir image_directory(path);
+    QStringList flagIcons = image_directory.entryList(QDir::Files);
+    if (!flagIcons.isEmpty())
+    for (int i = 0; i < flagIcons.size(); ++i){
+        QPixmap pix(path + "\\" + flagIcons.at(i));
+        temp.ico.addPixmap(pix);
+        temp.name_eng = flagIcons.at(i).left(flagIcons.at(i).size()-4);
+        Lang_List << temp;
+      }
 
     Carcass::WriteResult wr = carcass->WriteFile(carcass->adr.LangList, Lang_List);
     switch (wr) {
