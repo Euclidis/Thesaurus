@@ -17,10 +17,10 @@ public:
 void closeEvent(QCloseEvent*);
 signals:
     void MesOKCancelResult(bool);
+    void close_me(BaseWindow*);
 
 private slots:
     void on_pushButton_clicked();
-
     void on_pushButton_2_clicked();
 
 private:

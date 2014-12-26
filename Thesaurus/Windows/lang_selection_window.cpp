@@ -54,7 +54,6 @@ void LangSelectionWindow::accepted(bool result){
         templd.knownL = ui->comboBox->currentText();
         templd.targL = ui->comboBox_2->currentText();
         carcass->CurLearnDirList->Add(templd);
-        emit WWW_open();
         close();
     }
   else {
@@ -150,6 +149,6 @@ void LangSelectionWindow::on_comboBox_activated(const QString &combo1_cur_text)
 
 void LangSelectionWindow::closeEvent(QCloseEvent * close_ev){
 
-  delete(this);
+  emit close_me(this);
   close_ev->accept();
 }

@@ -12,7 +12,8 @@ MesOKCancel::MesOKCancel(QString str) :
     setModal(true);
 }
 void MesOKCancel::closeEvent(QCloseEvent* close_ev){
-  delete(this);
+
+  emit close_me(this);
   close_ev->accept();
 }
 MesOKCancel::~MesOKCancel()
@@ -31,3 +32,4 @@ void MesOKCancel::on_pushButton_2_clicked()
   emit MesOKCancelResult(false);
   close();
 }
+

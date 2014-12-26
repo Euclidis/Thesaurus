@@ -14,7 +14,11 @@ MessageWindow::~MessageWindow()
 {
     delete ui;
 }
+void MessageWindow::closeEvent(QCloseEvent * close_ev){
 
+  delete(this);
+  close_ev->accept();
+}
 void MessageWindow::on_pushButton_clicked()
 {
     close();

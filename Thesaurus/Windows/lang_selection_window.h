@@ -26,11 +26,8 @@ QString test;
 public slots:
     void on_label_3_clicked();
  signals:
+    void close_me(BaseWindow*);
     void MW_open();
-    //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    void WWW_open();
-    //TEST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 private slots:
     void accepted(bool);
     void on_comboBox_2_activated(const QString &combo2_cur_text);

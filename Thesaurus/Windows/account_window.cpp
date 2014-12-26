@@ -163,7 +163,7 @@ AccountWindow::~AccountWindow()
 }
 void AccountWindow::closeEvent(QCloseEvent * close_ev){
 
-  delete(this);
+  emit close_me(this);
   close_ev->accept();
 
 }

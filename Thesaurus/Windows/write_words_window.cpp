@@ -56,7 +56,7 @@ void WriteWordsWindow::DW_open()
 }
 void WriteWordsWindow::closeEvent(QCloseEvent * event)
 {
-    if(DW) DW->close();
+    emit close_me(this);
     event->accept();
 }
 //*******************************************************************
@@ -72,7 +72,5 @@ void WriteWordsWindow::SaveWord()
 WriteWordsWindow::~WriteWordsWindow()
 {
     delete ui;
-    delete realiz;
-    if(!DW){}
-    else delete DW;
+
 }

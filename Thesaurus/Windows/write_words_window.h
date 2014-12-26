@@ -33,6 +33,8 @@ private:
 private slots:
     void SaveWord();
     void DW_open();
+signals:
+    void close_me(BaseWindow * me);
 private:
     Ui::WriteWordsWindow *ui;
 };

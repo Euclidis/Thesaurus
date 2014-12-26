@@ -38,6 +38,8 @@ private slots:
     void on_LogReg_Button_mouseEnter();
     void on_LogReg_Button_mouseLeave();
     void change_timer_flag();
+signals:
+    void close_me(BaseWindow*);
 
 private:
     void Registration();

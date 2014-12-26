@@ -14,6 +14,7 @@ class MessageWindow : public BaseWindow
 public:
     explicit MessageWindow(QString, bool _modal = true);
     ~MessageWindow();
+  void closeEvent(QCloseEvent * close_ev);
 
 private slots:
     void on_pushButton_clicked();
