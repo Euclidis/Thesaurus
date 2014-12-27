@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>573</width>
+    <width>570</width>
     <height>280</height>
    </rect>
   </property>
@@ -46,7 +46,25 @@
         <bold>false</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="currentText">
+       <string/>
+      </property>
+      <property name="maxVisibleItems">
+       <number>10</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
+      </property>
       <property name="duplicatesEnabled">
+       <bool>false</bool>
+      </property>
+      <property name="frame">
        <bool>false</bool>
       </property>
      </widget>
@@ -66,8 +84,8 @@
     <font>
      <family>Code Pro Light</family>
      <pointsize>20</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <weight>50</weight>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text" stdset="0">

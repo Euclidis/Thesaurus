@@ -7,8 +7,8 @@ MesOKCancel::MesOKCancel(QString str) :
     ui->setupUi(this);
     ui->textEdit->setText(str);
     ui->textEdit->setFrameStyle(false);
-    ui->pushButton->setText(tr("OK"));
-    ui->pushButton_2->setText(tr("Cancel"));
+    ui->pushButton->setText(tr("Yes"));
+    ui->pushButton_2->setText(tr("No"));
     setModal(true);
 }
 void MesOKCancel::closeEvent(QCloseEvent* close_ev){

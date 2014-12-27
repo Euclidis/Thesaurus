@@ -97,16 +97,18 @@ AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
     //Background color
     QPalette p = this->palette();
     QColor backgrColor( 165, 104, 178, 255);
+   // QColor backgrColor( 107,131,73, 255);
     p.setColor(this->backgroundRole(), backgrColor);
     this->setPalette(p);
     //ui->lineEdit_3->setStyleSheet("background-image: url(data/space2.png)")
 
     //Font Color
-    QColor fontColor (255, 243, 255, 255);
+    QColor fontColor (250,250,255, 255);
     QPalette *Buttons_Color = new QPalette();
     Buttons_Color->setColor(QPalette::WindowText,fontColor);
     ui->OK_Button->setPalette(*Buttons_Color);
     ui->LogReg_Button->setPalette(*Buttons_Color);
+    ui->label->setPalette(*Buttons_Color);
 
     delete Buttons_Color;
 
@@ -225,7 +227,7 @@ void AccountWindow::on_lineEdit_textChanged()
 
 void AccountWindow::RPW_open(QMap<QString, QString>& names){
 
-  RPW = new ResetPassWindow(names, *ui->lineEdit, *carcass);
+  if (RPW == nullptr)RPW = new ResetPassWindow(names, *ui->lineEdit, *carcass);
   RPW->show();
   Login();
 

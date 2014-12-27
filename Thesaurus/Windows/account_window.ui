@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>401</width>
+    <width>400</width>
     <height>300</height>
    </rect>
   </property>
@@ -21,8 +21,8 @@
     <rect>
      <x>60</x>
      <y>60</y>
-     <width>281</width>
-     <height>51</height>
+     <width>280</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="font">
@@ -39,8 +39,8 @@
     <rect>
      <x>60</x>
      <y>120</y>
-     <width>281</width>
-     <height>51</height>
+     <width>280</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="font">
@@ -61,8 +61,8 @@
     <rect>
      <x>60</x>
      <y>180</y>
-     <width>281</width>
-     <height>51</height>
+     <width>280</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="font">
@@ -84,6 +84,11 @@
      <height>16</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Corbel</family>
+    </font>
+   </property>
    <property name="text" stdset="0">
     <string>forgot password?</string>
    </property>
@@ -91,15 +96,15 @@
   <widget class="Label" name="OK_Button" native="true">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>175</x>
      <y>240</y>
-     <width>51</width>
-     <height>41</height>
+     <width>50</width>
+     <height>40</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Code Pro Light LC</family>
+     <family>Corbel</family>
      <pointsize>20</pointsize>
      <kerning>true</kerning>
     </font>
@@ -119,7 +124,7 @@
    </property>
    <property name="font">
     <font>
-     <family>Code Pro Light LC</family>
+     <family>Corbel</family>
      <pointsize>11</pointsize>
     </font>
    </property>
@@ -127,14 +132,20 @@
     <string/>
    </property>
   </widget>
+  <zorder>OK_Button</zorder>
+  <zorder>lineEdit</zorder>
+  <zorder>lineEdit_2</zorder>
+  <zorder>label</zorder>
+  <zorder>LogReg_Button</zorder>
+  <zorder>lineEdit_3</zorder>
  </widget>
  <customwidgets>
   <customwidget>
    <class>Label</class>
    <slots>
-    <signal>mouseLeave()</signal>
-    <signal>mouseEnter()</signal>
     <signal>clicked()</signal>
+    <signal>MouseEnter()</signal>
+    <signal>MouseLeave()</signal>
    </slots>
   </customwidget>
  </customwidgets>
