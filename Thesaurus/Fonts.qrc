@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>Code Pro Light LC.otf</file>
-        <file>DefaultFace.png</file>
+        <file>resourses/Code Pro Light LC.otf</file>
+        <file>resourses/DefaultFace.png</file>
+        <file>resourses/downarrow.png</file>
     </qresource>
 </RCC>

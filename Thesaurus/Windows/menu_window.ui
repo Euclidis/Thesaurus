@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>745</width>
-    <height>462</height>
+    <width>949</width>
+    <height>595</height>
    </rect>
   </property>
   <property name="acceptDrops">
@@ -55,7 +55,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>110</y>
+     <y>130</y>
      <width>101</width>
      <height>16</height>
     </rect>
@@ -68,9 +68,9 @@
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>110</y>
-     <width>120</width>
-     <height>341</height>
+     <y>130</y>
+     <width>181</width>
+     <height>461</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -84,8 +84,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>120</width>
-      <height>341</height>
+      <width>181</width>
+      <height>461</height>
      </rect>
     </property>
     <widget class="QWidget" name="verticalLayoutWidget">
@@ -93,7 +93,7 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>121</width>
+       <width>181</width>
        <height>16</height>
       </rect>
      </property>
@@ -121,7 +121,7 @@
      <x>310</x>
      <y>80</y>
      <width>80</width>
-     <height>21</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -163,11 +163,20 @@
   <widget class="QTableView" name="tableView">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>110</y>
-     <width>421</width>
-     <height>341</height>
+     <x>360</x>
+     <y>130</y>
+     <width>581</width>
+     <height>461</height>
     </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="lineWidth">
+    <number>0</number>
    </property>
   </widget>
  </widget>

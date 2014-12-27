@@ -98,8 +98,7 @@ AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
     QPalette p = this->palette();
     //QColor backgrColor( 165, 104, 178, 255);
    // QColor backgrColor( 107,131,73, 255);
-//    p.setColor(this->backgroundRole(), backgrColor);
-//    this->setPalette(p);
+    //  this->setPalette(p);
     //ui->lineEdit_3->setStyleSheet("background-image: url(data/space2.png)")
 
     //Font Color
