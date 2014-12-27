@@ -15,6 +15,8 @@ class MenuWindow : public BaseWindow
 public:
     explicit MenuWindow(Carcass * _carcass);
     ~MenuWindow();
+  void paintEvent(QPaintEvent *p_ev);
+
 private:
     Ui::MenuWindow *ui;
 

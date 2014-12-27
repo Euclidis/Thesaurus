@@ -72,8 +72,8 @@
  }
 
   QScrollBar:vertical {
-		background: rgba(0,0,0,0);
-      border: 2px solid rgba(0,0,0,0);
+	background: transparent;
+      border: 2px solid transparent;
       width: 10px;
       margin: 0px 0px;
   }
@@ -96,7 +96,7 @@
   }
 
   QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-      background: white;
+      background: transparent;
   }
 
 QLabel,QComboBox QAbstractItemView

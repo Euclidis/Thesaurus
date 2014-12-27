@@ -26,6 +26,7 @@
 #include <QSize>
 #include <QFileDialog>
 #include <QMouseEvent>
+#include <QPainter>
 
 #include "Windows/MyWidgets/label.h"
 

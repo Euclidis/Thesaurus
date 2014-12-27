@@ -7,7 +7,6 @@ MenuWindow::MenuWindow(Carcass * _carcass) :
     ui->setupUi(this);
     PhotoSize.setWidth(81);
     PhotoSize.setHeight(81);
-
     Connector();
     SetAccount();
     ObjectsForEvetFilter();
@@ -163,4 +162,13 @@ void MenuWindow::LSW_open_slot()
 MenuWindow::~MenuWindow()
 {
     delete ui;
+}
+
+void MenuWindow::paintEvent(QPaintEvent *p_ev)
+{
+    QPainter painter(this);
+    painter.setPen(QPen(Qt::gray, 1,Qt::SolidLine, Qt::RoundCap));
+    painter.drawLine(ui->scrollArea->geometry().x()-1, ui->scrollArea->geometry().y(), ui->scrollArea->geometry().x()-1, this->height());
+    painter.drawLine(ui->scrollArea->geometry().x()+ui->scrollArea->geometry().width()+3, ui->scrollArea->geometry().y(), ui->scrollArea->geometry().x()+ui->scrollArea->geometry().width()+3, this->height());
+    painter.drawLine(0, ui->scrollArea->geometry().y()-1, this->width(), ui->scrollArea->geometry().y()-1 );
 }
