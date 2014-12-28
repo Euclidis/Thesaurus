@@ -6,6 +6,7 @@ BaseWindow::BaseWindow(QWidget *parent) :
     ui(new Ui::BaseWindow)
 {
     ui->setupUi(this);
+    setWindowFlags( Qt::CustomizeWindowHint );
 }
 
 BaseWindow::~BaseWindow()

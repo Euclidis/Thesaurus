@@ -12,10 +12,14 @@ class MenuWindow;
 class MenuWindow : public BaseWindow
 {
     Q_OBJECT
+    Q_PROPERTY(QColor lineColor READ getLineColor WRITE setLineColor DESIGNABLE true)
 public:
     explicit MenuWindow(Carcass * _carcass);
     ~MenuWindow();
+
   void paintEvent(QPaintEvent *p_ev);
+  QColor getLineColor() const;
+  void setLineColor( QColor c );
 
 private:
     Ui::MenuWindow *ui;
@@ -24,6 +28,7 @@ private:
 private:
     Carcass* carcass;
     QSize PhotoSize;
+    QColor lineColor = Qt::gray;
 
     //****************************************
     //       Интерфейс зависимые ф-и

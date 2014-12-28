@@ -163,12 +163,22 @@ MenuWindow::~MenuWindow()
 {
     delete ui;
 }
+void MenuWindow::setLineColor( QColor c )
+{
+    lineColor = c;
+}
+
+QColor MenuWindow::getLineColor() const
+{
+    return lineColor;
+}
 
 void MenuWindow::paintEvent(QPaintEvent *p_ev)
 {
     QPainter painter(this);
-    painter.setPen(QPen(Qt::gray, 1,Qt::SolidLine, Qt::RoundCap));
+    painter.setPen(QPen(getLineColor(), 1,Qt::SolidLine, Qt::RoundCap));
     painter.drawLine(ui->scrollArea->geometry().x()-1, ui->scrollArea->geometry().y(), ui->scrollArea->geometry().x()-1, this->height());
     painter.drawLine(ui->scrollArea->geometry().x()+ui->scrollArea->geometry().width()+3, ui->scrollArea->geometry().y(), ui->scrollArea->geometry().x()+ui->scrollArea->geometry().width()+3, this->height());
     painter.drawLine(0, ui->scrollArea->geometry().y()-1, this->width(), ui->scrollArea->geometry().y()-1 );
+     //painter.drawLine(ui->scrollArea->geometry().x(), (c->geometry().y()+c->geometry().height()), ui->scrollArea->geometry().x()+ui->scrollArea->geometry().width(), (c->geometry().y()+c->geometry().height()));
 }
