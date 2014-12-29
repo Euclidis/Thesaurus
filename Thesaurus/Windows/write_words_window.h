@@ -2,7 +2,7 @@
 #define WRITE_WORDS_WINDOW_H
 
 #include "dct_window.h"
-
+#include "../GTA/GTApi.h"
 namespace Ui {
 class WriteWordsWindow;
 }
@@ -23,6 +23,7 @@ private:
     QString transcription;
     QStringList translates;
     QString note;
+    GTApi  *gtApi;
 private:
     void ConnectRealizator();
     void ConnectWidgets();
@@ -33,6 +34,8 @@ private:
 private slots:
     void SaveWord();
     void DW_open();
+    void on_pushButton_3_clicked();
+    void onTranslationReady(const GTApiTranslation& gtApiTr);
 signals:
     void close_me(BaseWindow * me);
 private:

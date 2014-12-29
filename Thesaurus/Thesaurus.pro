@@ -4,9 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += core gui widgets network
 
 TARGET = Thesaurus
 TEMPLATE = app
@@ -36,7 +34,10 @@ SOURCES += main.cpp\
     Implementation/www_realization.cpp \
     Windows/dct_window.cpp \
     lang_list.cpp \
-    currents.cpp
+    currents.cpp \
+    GTA/GTApi.cpp \
+    GTA/GTApiTranslation.cpp \
+    GTA/GTReplyObject.cpp
 
 HEADERS  += \
     carcass.h \
@@ -64,7 +65,11 @@ HEADERS  += \
     Implementation/www_realization.h \
     Windows/dct_window.h \
     currents.h \
-    langlist.h
+    langlist.h \
+    GTA/GTApi.h \
+    GTA/GTApiTranslation.h \
+    GTA/GTLangCode.h \
+    GTA/GTReplyObject.h
 
 
 FORMS    += \

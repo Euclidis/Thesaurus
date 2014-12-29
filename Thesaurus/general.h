@@ -28,6 +28,19 @@
 #include <QMouseEvent>
 #include <QPainter>
 
+//for networking
+#include <QUrl>
+#include <QUrlQuery>
+//#include <QNetworkAccessManager>
+//#include <QNetworkRequest>
+//#include <QNetworkReply>
+//#include <QNetworkAccessManager>
+
+#include <D:/Programs/New_Qt/5.4/msvc2012_opengl/include/QtNetwork/QNetworkAccessManager>
+#include <D:/Programs/New_Qt/5.4/msvc2012_opengl/include/QtNetwork/QNetworkRequest>
+#include <D:/Programs/New_Qt/5.4/msvc2012_opengl/include/QtNetwork/QNetworkReply>
+//************************
+
 #include "Windows/MyWidgets/label.h"
 
 #endif // GENERAL_H
