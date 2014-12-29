@@ -92,7 +92,7 @@ void WriteWordsWindow::on_pushButton_3_clicked()
 void WriteWordsWindow::onTranslationReady(const GTApiTranslation& gtApiTr) {
 
 //ui->lineEdit->clear();
-//ui->textEdit_2->clear();
+ui->textEdit_2->clear();
 
     const GTReplyObject & ref = gtApiTr.replyObjectRef();
 
