@@ -113,19 +113,19 @@ QString GTReplyObject::toRawString(bool prettyDecoded) const {
             childsStr << child.toRawString(prettyDecoded);
 
         if (!prettyDecoded) {
-            res = '[' + childsStr.join(',') + ']';
+            res = childsStr.join('\n');
         } else {
-            QString childJoin = "\n" + childsStr.join(",\n");
-            childJoin.replace(QRegularExpression("\\n"), "\n\t");
-            res = "[" + childJoin+ "\n]";
+            QString childJoin = childsStr.join('\n');
+           // childJoin.replace(QRegularExpression("\\n"), "\n\t");
+            res = childJoin;
         }
 
     } else {
         res = obj_string;
-        if (obj_type == GTReplyObject::STRING)
-            res = "\"" + res + "\"";
-    }
 
+    }
+res = res.left(res.indexOf("\n"));
+res = res.replace(QRegularExpression("\n\n"), "\n");
     return res;
 }
 

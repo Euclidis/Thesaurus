@@ -93,7 +93,7 @@ void WriteWordsWindow::onTranslationReady(const GTApiTranslation& gtApiTr) {
 
 //ui->lineEdit->clear();
 ui->textEdit_2->clear();
-
+ui->textEdit->clear();
     const GTReplyObject & ref = gtApiTr.replyObjectRef();
 
     for (int child =0; child < ref.size(); ++child ) {
@@ -103,9 +103,12 @@ ui->textEdit_2->clear();
 
         if ( child == 0 ) {
 
-            childDescription = "[<Translation>*, <Translit>]";
+            //childDescription = "[<Translation>*, <Translit>]";
             comment = QString("Translation:\n\t%1 (%2)\n").arg(gtApiTr.translation().join(""), gtApiTr.translit());
             comment += QString("Original:\n\t%1 (%2)\n").arg(gtApiTr.original().join(""), gtApiTr.sourceTranslit());
+
+             QString childName/* = QString("Child #%1: %2\n").arg(QString::number(child), childDescription)*/;
+             ui->textEdit->append( childName + ref[child].toRawString(true)+ "\n");
 
         } /*else if (child == 2) {
             childDescription = "detected_source_lang";
