@@ -86,7 +86,7 @@ void WriteWordsWindow::on_pushButton_3_clicked()
   QString targetLang;
   if (carcass->CurLearnDir->Get().targL == "England")
     targetLang = "en";
-     gtApi->translate(ui->lineEdit->text(), "ru", "en", "ru");
+     gtApi->translate(ui->lineEdit->text(), carcass->CurLearnDir->Get().knownL, carcass->CurLearnDir->Get().targL, "ru");
 }
 
 void WriteWordsWindow::onTranslationReady(const GTApiTranslation& gtApiTr) {
@@ -108,7 +108,7 @@ ui->textEdit->clear();
             comment += QString("Original:\n\t%1 (%2)\n").arg(gtApiTr.original().join(""), gtApiTr.sourceTranslit());
 
              QString childName/* = QString("Child #%1: %2\n").arg(QString::number(child), childDescription)*/;
-             ui->textEdit->append( childName + ref[child].toRawString(true)+ "\n");
+             ui->textEdit->append( childName + ref[child].toRawString(true));
 
         } /*else if (child == 2) {
             childDescription = "detected_source_lang";
@@ -191,6 +191,7 @@ ui->textEdit->clear();
         //apiView->append( childName + ref[child].toRawString(true)+ "\n");
 
         //apiComment->setTextColor(textColor);
+
         ui->textEdit_2->append(comment);
       }
 }

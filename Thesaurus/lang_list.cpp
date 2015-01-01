@@ -79,7 +79,7 @@ bool LangList::ReadFile()
 bool LangList::WriteFile()
 {
     Lang temp;
-    QString path = "D:\\DRIVE\\Files\\thesaurus\\Thesaurus\\Notes\\images\\48";
+    QString path = "D:\\DRIVE\\Files\\thesaurus\\Thesaurus\\Notes\\images\\L";
     QDir image_directory(path);
     QStringList flagIcons = image_directory.entryList(QDir::Files);
     if (!flagIcons.isEmpty())
