@@ -1,6 +1,6 @@
 #include "write_words_window.h"
 #include "ui_write_words_window.h"
-
+#include "../GTA/GTLangCode.h"
 
 WriteWordsWindow::WriteWordsWindow(Carcass * _carcass) :
     ui(new Ui::WriteWordsWindow), carcass(_carcass)
@@ -81,12 +81,14 @@ WriteWordsWindow::~WriteWordsWindow()
 //////////////////////////////////////////////////////////////////
 //Translate button
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>SOMEFASTCODING<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//Translation
 void WriteWordsWindow::on_pushButton_3_clicked()
 {
-  QString targetLang;
-  if (carcass->CurLearnDir->Get().targL == "England")
-    targetLang = "en";
-     gtApi->translate(ui->lineEdit->text(), carcass->CurLearnDir->Get().knownL, carcass->CurLearnDir->Get().targL, "ru");
+  QString targetLang = GTLangCode::langMap()[carcass->CurLearnDir->Get().knownL];
+  QString sourceLang = GTLangCode::langMap()[carcass->CurLearnDir->Get().targL];
+  //============================================================================
+  // Тут нужно добавить язык интерфейса
+     gtApi->translate(ui->lineEdit->text(), targetLang, sourceLang, "ru");
 }
 
 void WriteWordsWindow::onTranslationReady(const GTApiTranslation& gtApiTr) {

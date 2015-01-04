@@ -53,6 +53,8 @@ private:
     void RPW_open(QMap<QString, QString> &);
     QString UserName;
     QMap <QString, QString> name_pass;  //имена и пароли пользователей
+    QValidator *validUN; //user name validator
+    QValidator *validUP; //user password validator
     QPropertyAnimation *lineedit_anim;
     QPropertyAnimation *lineedit_2_anim;
     QPropertyAnimation *lineedit_3_anim;

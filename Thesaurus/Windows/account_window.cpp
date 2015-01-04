@@ -127,13 +127,12 @@ AccountWindow::AccountWindow(Carcass*_carcass, bool mode) :
     ui->lineEdit_3->setPlaceholderText(tr("Confirm password"));
     QRegExp validUserName ("[A-Za-z-_0-9]{1,20}");
     QRegExp validUserPass ("[A-Za-z-_0-9]{0,20}");
-    QValidator *validUN = new QRegExpValidator(validUserName, this);
-    QValidator *validUP = new QRegExpValidator(validUserPass, this);
+    validUN = new QRegExpValidator(validUserName, this);
+    validUP = new QRegExpValidator(validUserPass, this);
     ui->lineEdit->setValidator(validUN);
     ui->lineEdit_2->setValidator(validUP);
     ui->lineEdit_3->setValidator(validUP);
-    delete validUN;
-    delete validUP;
+
 
     setModal(true);
     //-------------------------------------------------------
@@ -155,6 +154,8 @@ AccountWindow::~AccountWindow()
   delete lineedit_3_anim;
   delete OK_Butt_anim;
   delete timer_for_anim;
+  delete validUN;
+  delete validUP;
 
   if (RPW != nullptr){
       delete RPW;
