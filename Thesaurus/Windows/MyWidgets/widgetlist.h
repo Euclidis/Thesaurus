@@ -1,7 +1,9 @@
 #ifndef WIDGETLIST_H
 #define WIDGETLIST_H
 
+#ifndef GENERAL_H
 #include "../../general.h"
+#endif
 
 class WidgetList: public QScrollArea
 {

@@ -116,12 +116,11 @@ bool CurrentLearnDir::Initialize(bool new_LD)
     else{
         if(!ReadFile()) return false;
         if(!words.isEmpty()){
+            dictionaries.clear();
             for (int i = 0; i < words.size(); ++i){
-                //if(words.at(i).word != carcass->symb.new_dictionary){
-                    for (int u = 0; u < words[i].dictionaries.size(); ++u){
-                        if(!dictionaries.contains(words[i].dictionaries[u])) dictionaries << words[i].dictionaries[u];
-                    }
-                //}
+                for (int u = 0; u < words[i].dictionaries.size(); ++u){
+                    if(!dictionaries.contains(words[i].dictionaries[u])) dictionaries << words[i].dictionaries[u];
+                }
             }
         }
         initialized = true;
@@ -232,12 +231,21 @@ QDataStream& operator<< (QDataStream& in, const CurrentLearnDir& cld)
     in << cld.learn_dir;
     return in;
 }
-
-
+//-----------------------------------------------------------------------------------------------
+QVector<int> CurrentLearnDir::DictionaryWords (const QString& dct_name)
+{
+    QVector<int> list;
+    if(dictionaries.contains(dct_name)){
+        for(int i = 0; i < words.size(); ++i){
+            if(words.at(i).dictionaries.contains(dct_name)) list << i;
+        }
+    }
+    return list;
+}
 
 
 //***********************************************************************************************
-//                                   Ф-и CurrentLearnDir
+//                                   Ф-и OffLineCurrentLearnDir
 //***********************************************************************************************
 
 OffLineCurrentLearnDir::OffLineCurrentLearnDir(Carcass *_carcass) : BaseLearnDir(_carcass)

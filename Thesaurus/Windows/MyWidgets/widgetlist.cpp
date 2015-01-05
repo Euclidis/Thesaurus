@@ -50,6 +50,7 @@ void WidgetList::Clear()
 {
     if(!list.isEmpty()){
         for(int i = 0; i < list.size(); ++i){
+            qDebug() << "ffffF";//
             list.at(i)->close();
             delete list.at(i);
         }

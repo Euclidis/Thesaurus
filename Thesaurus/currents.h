@@ -156,6 +156,7 @@ public:
     //---> Работа с dictionaries
     bool AddDictionary(QString);
     void RemoveDictionary(const QString&);
+    QVector<int> DictionaryWords (const QString&);
 
     //*****************************************
     //            Служебная часть

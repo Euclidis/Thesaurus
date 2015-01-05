@@ -1,5 +1,6 @@
 #include "menu_window.h"
 #include "ui_menu_window.h"
+#include <QStandardItemModel>
 
 MenuWindow::MenuWindow(Carcass * _carcass) :
     ui(new Ui::MenuWindow), carcass(_carcass)
@@ -37,7 +38,7 @@ void MenuWindow::ObjSet_CurLearnDir(const QString& _LD)                         
 }                                                                                    //
 
 void MenuWindow::DctList_Clear()                                                //
-{                                                                               //
+{
     ui->scrollArea->Clear();
 }                                                                               //
 void MenuWindow::AddItemToDctList(const QString& dct_name)                      //
@@ -87,12 +88,27 @@ void MenuWindow::SetDictionaries()
         ObjSet_CurLearnDir(carcass->CurLearnDir->Get().knownL
                            + "-" + carcass->CurLearnDir->Get().targL);
         DctList_UpDate();
+        if(!carcass->CurLearnDir->dictionaries.isEmpty()) SetWords(carcass->CurLearnDir->dictionaries.at(0));
     }
     else{
         ObjSet_CurLearnDir("");
         DctList_Clear();
     }
 }
+
+void MenuWindow::SetWords(const QString& dct_name)
+{
+//        QStandardItemModel *model = new QStandardItemModel(carcass->CurLearnDir->words.size(),3, ui->tableView);
+//        ui->tableView->setModel(model);
+
+//        for(int row=0; row!=model->rowCount(); ++row){
+//            //for(int column=0; column!=model->columnCount(); ++column) {
+//                QStandardItem *newItem = new QStandardItem(carcass->CurLearnDir->words.at(row).word);
+//                model->setItem(row, 0/*column*/, newItem);
+//            //}
+//        }
+}
+
 void MenuWindow::DctList_UpDate()
 {
     DctList_Clear();

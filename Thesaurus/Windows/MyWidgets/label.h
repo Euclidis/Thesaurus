@@ -1,8 +1,9 @@
 #ifndef LABEL_H
 #define LABEL_H
 
+#ifndef GENERAL_H
 #include "../../general.h"
-
+#endif
 
 class Label : public QLabel {
     Q_OBJECT

@@ -50,6 +50,7 @@ public slots:
     void SetAccount();
     void SetAccountPhoto();
     void SetDictionaries();
+    void SetWords(const QString &dct_name);
 
     void DctList_UpDate();
     void DctList_Add(const QString& dct_name);

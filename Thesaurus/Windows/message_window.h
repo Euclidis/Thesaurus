@@ -1,7 +1,7 @@
 #ifndef MESSAGE_WINDOW_H
 #define MESSAGE_WINDOW_H
 
-#include "../general.h"
+#include "../mywidgets.h"
 
 namespace Ui {
 class MessageWindow;
