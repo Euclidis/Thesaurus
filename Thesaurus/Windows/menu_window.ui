@@ -68,7 +68,7 @@
     </widget>
    </item>
    <item row="3" column="3" colspan="2">
-    <widget class="QScrollArea" name="scrollArea">
+    <widget class="WidgetList" name="scrollArea">
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
@@ -80,37 +80,10 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>180</width>
-        <height>496</height>
+        <width>151</width>
+        <height>521</height>
        </rect>
       </property>
-      <widget class="QWidget" name="verticalLayoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>181</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-      <zorder>verticalLayoutWidget</zorder>
-      <zorder>tableView</zorder>
      </widget>
     </widget>
    </item>
@@ -136,6 +109,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>WidgetList</class>
+   <extends>QScrollArea</extends>
+   <header>widgetlist.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

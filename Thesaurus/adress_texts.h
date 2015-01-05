@@ -19,6 +19,7 @@ struct Adr
 
     const QString LangInterface_en = ":/...";
     const QString LangInterface_ru = ":/...";
+    const QString OffLine = "res\\OffLine\\";
 
     const QString ext_dct = ".dct";
 };

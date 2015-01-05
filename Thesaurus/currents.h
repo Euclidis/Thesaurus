@@ -107,15 +107,42 @@ public:
 //*****************************************************************************************************************
 
 
-
-class CurrentLearnDir
+class BaseLearnDir
 {
     //*****************************************
     //               Интерфейс
     //*****************************************
 
 public:
-    QList<Word> words;                  //Список слов языка
+    QList<Word> words;
+public:
+
+    bool Contains(const QString& str);
+    int  IndexOf(const QString& str);
+
+    //*****************************************
+    //            Служебная часть
+    //*****************************************
+public:
+    BaseLearnDir(Carcass *_carcass);
+protected:
+    Carcass* carcass;
+    QString adress;
+    LD learn_dir;
+    bool initialized;
+protected:
+    bool WriteFile();
+    bool ReadFile();
+    //*****************************************
+};
+
+class CurrentLearnDir : public BaseLearnDir
+{
+    //*****************************************
+    //               Интерфейс
+    //*****************************************
+
+public:
     QList<QString> dictionaries;        //Спиок словарей
 public:
     //---> Работа с learn_dir
@@ -123,10 +150,7 @@ public:
     const LD   Get  () const;
 
     //---> Работа с words
-    bool Contains(const QString str);
-    int  IndexOf(const QString str);
-
-    void AddWord(Word &_word);
+    bool AddWord(Word &_word);
     void RemoveWord(QString);
 
     //---> Работа с dictionaries
@@ -142,15 +166,29 @@ public:
     friend QDataStream& operator>> (QDataStream& out, CurrentLearnDir&);
     friend QDataStream& operator<< (QDataStream& in, const CurrentLearnDir&);
 private:
-    Carcass* carcass;
-    QString adress;
-    LD learn_dir;
-    bool initialized;
-private:
-    bool WriteFile();
-    bool ReadFile();
     bool Initialize(bool new_LD);
     bool Zeroing();
+    //*****************************************
+};
+
+
+
+class OffLineCurrentLearnDir : protected BaseLearnDir
+{
+    //*****************************************
+    //               Интерфейс
+    //*****************************************
+
+public:
+    Word Translate(const QString& _word);
+
+    //*****************************************
+    //            Служебная часть
+    //*****************************************
+public:
+    OffLineCurrentLearnDir(Carcass *_carcass);
+private:
+    bool Create();                   // Ф-я, необходимая для создания файлов офлайн перевода
     //*****************************************
 };
 #endif // CURRENTS

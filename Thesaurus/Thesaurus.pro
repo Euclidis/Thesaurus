@@ -37,7 +37,8 @@ SOURCES += main.cpp\
     currents.cpp \
     GTA/GTApi.cpp \
     GTA/GTApiTranslation.cpp \
-    GTA/GTReplyObject.cpp
+    GTA/GTReplyObject.cpp \
+    Windows/MyWidgets/widgetlist.cpp
 
 HEADERS  += \
     carcass.h \
@@ -69,7 +70,8 @@ HEADERS  += \
     GTA/GTApi.h \
     GTA/GTApiTranslation.h \
     GTA/GTLangCode.h \
-    GTA/GTReplyObject.h
+    GTA/GTReplyObject.h \
+    Windows/MyWidgets/widgetlist.h
 
 
 FORMS    += \

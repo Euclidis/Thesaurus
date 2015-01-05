@@ -1,12 +1,87 @@
 #include "carcass.h"
 
-CurrentLearnDir::CurrentLearnDir(Carcass *_carcass) : carcass(_carcass)
+//***********************************************************************************************
+//                                   Ф-и BaseLearnDir
+//***********************************************************************************************
+
+BaseLearnDir::BaseLearnDir(Carcass *_carcass) : carcass(_carcass)
 {
     initialized = false;
     learn_dir.knownL = "";
     learn_dir.targL = "";
 }
+//-----------------------------------------------------------------------------------------------
+bool BaseLearnDir::Contains(const QString& str)
+{
+    if(initialized){
+        if(!words.isEmpty()){
+            QList<Word>::iterator i = words.begin();
+            while(i != words.end()){
+                if((*i).word == str) return true;
+                ++i;
+            }
+        }
+        return false;
+    }
+    else{
+        carcass->message("Не инициализированн CurLearnDir Contains"); //*************** Обработать исключение *************************
+        return false;
+    }
+}
+//-----------------------------------------------------------------------------------------------
+int  BaseLearnDir::IndexOf(const QString& str)
+{
+    if (initialized){
+        if(!words.isEmpty()){
+            for(int i = 0; i < words.size(); ++i){
+                if(words.at(i).word == str) return i;
+            }
+        }
+        return -1;
+    }
+    else{
+        carcass->message("Не инициализированн CurLearnDir IndexOf"); //*************** Обработать исключение *************************
+        return -1;
+    }
+}
+//-----------------------------------------------------------------------------------------------
+bool BaseLearnDir::WriteFile()
+{
+    Carcass::WriteResult wr = carcass->WriteFile(adress, words);
+    switch (wr) {
+    case Carcass::ReadResult::OK:
+        return true;
+    default:
+        //carcass->message(carcass->enumWToQStr(wr) + "  " + adress);
+        return false;
+    }
+}
+//-----------------------------------------------------------------------------------------------
+bool BaseLearnDir::ReadFile()
+{
+    Carcass::ReadResult rr = carcass->ReadFile(adress, words);
+    switch (rr) {
+    case Carcass::ReadResult::OK:
+        return true;
+    default:
+        //carcass->message(carcass->enumRToQStr(rr)+ "  "+ adress);
+        return false;
+    }
+}
+//***********************************************************************************************
 
+
+
+
+
+//***********************************************************************************************
+//                                   Ф-и CurrentLearnDir
+//***********************************************************************************************
+
+CurrentLearnDir::CurrentLearnDir(Carcass *_carcass) :  BaseLearnDir (_carcass)
+{
+}
+//-----------------------------------------------------------------------------------------------
 bool CurrentLearnDir::Set (const QString& known, const QString& targ, bool new_LD)
 {
     if(known != "" && targ != ""){
@@ -27,6 +102,7 @@ bool CurrentLearnDir::Set (const QString& known, const QString& targ, bool new_L
     }
     return false;
 }
+//-----------------------------------------------------------------------------------------------
 bool CurrentLearnDir::Initialize(bool new_LD)
 {
     adress = carcass->adr.users_dir + carcass->CurAccount->Get().toLower() + "\\" + learn_dir.knownL + "_" + learn_dir.targL + carcass->adr.lext;
@@ -53,6 +129,7 @@ bool CurrentLearnDir::Initialize(bool new_LD)
     }
     return true;
 }
+//-----------------------------------------------------------------------------------------------
 bool CurrentLearnDir::Zeroing()
 {
     words.clear();
@@ -63,37 +140,14 @@ bool CurrentLearnDir::Zeroing()
     initialized = false;
     return true;
 }
-
+//-----------------------------------------------------------------------------------------------
 const LD CurrentLearnDir::Get () const
 {
     //if(!initialized)carcass->message("Не инициализирован CurLearnDir get");
     return learn_dir;
 }
-
-bool CurrentLearnDir::ReadFile()
-{
-    Carcass::ReadResult rr = carcass->ReadFile(adress, words);
-    switch (rr) {
-    case Carcass::ReadResult::OK:
-        return true;
-    default:
-        //carcass->message(carcass->enumRToQStr(rr)+ "  "+ adress);
-        return false;
-    }
-}
-bool CurrentLearnDir::WriteFile()
-{
-    Carcass::WriteResult wr = carcass->WriteFile(adress, words);
-    switch (wr) {
-    case Carcass::ReadResult::OK:
-        return true;
-    default:
-        //carcass->message(carcass->enumWToQStr(wr) + "  " + adress);
-        return false;
-    }
-}
-
-void CurrentLearnDir::AddWord(Word& _word)
+//-----------------------------------------------------------------------------------------------
+bool CurrentLearnDir::AddWord(Word& _word)
 {
     if(initialized){
         if(_word.word != ""){
@@ -107,13 +161,16 @@ void CurrentLearnDir::AddWord(Word& _word)
                     if(!dictionaries.contains(*i)) dictionaries << (*i);
                     ++i;
                 }
+                return true;
             }
         }
     }
     else{
         carcass->message("Не инициализированн CurLearnDir AddWord"); //*************** Обработать исключение *************************
     }
+    return false;
 }
+//-----------------------------------------------------------------------------------------------
 void CurrentLearnDir::RemoveWord(QString str)
 {
     if(initialized){
@@ -130,6 +187,7 @@ void CurrentLearnDir::RemoveWord(QString str)
         carcass->message("Не инициализированн CurLearnDir RemoveWord"); //*************** Обработать исключение *************************
     }
 }
+//-----------------------------------------------------------------------------------------------
 bool CurrentLearnDir::AddDictionary(QString str)
 {
     if(initialized){
@@ -151,7 +209,7 @@ bool CurrentLearnDir::AddDictionary(QString str)
     }
     return false;
 }
-
+//-----------------------------------------------------------------------------------------------
 void CurrentLearnDir::RemoveDictionary(const QString &str)
 {
     if(initialized){
@@ -161,50 +219,48 @@ void CurrentLearnDir::RemoveDictionary(const QString &str)
         carcass->message("Не инициализированн CurLearnDir RemoveDct"); //*************** Обработать исключение *************************
     }
 }
-
-bool CurrentLearnDir::Contains(const QString str)
-{
-    if(initialized){
-        if(!words.isEmpty()){
-            QList<Word>::iterator i = words.begin();
-            while(i != words.end()){
-                if((*i).word == str) return true;
-                ++i;
-            }
-        }
-        return false;
-    }
-    else{
-        carcass->message("Не инициализированн CurLearnDir Contains"); //*************** Обработать исключение *************************
-        return false;
-    }
-}
-
-int CurrentLearnDir::IndexOf(const QString str)
-{
-    if (initialized){
-        if(!words.isEmpty()){
-            for(int i = 0; i < words.size(); ++i){
-                if(words.at(i).word == str) return i;
-            }
-        }
-        return -1;
-    }
-    else{
-        carcass->message("Не инициализированн CurLearnDir IndexOf"); //*************** Обработать исключение *************************
-        return -1;
-    }
-}
-
+//-----------------------------------------------------------------------------------------------
 QDataStream& operator>> (QDataStream& out, CurrentLearnDir& cld)
 {
     out >> cld.learn_dir;
     cld.Initialize(false);
     return out;
 }
-
+//-----------------------------------------------------------------------------------------------
 QDataStream& operator<< (QDataStream& in, const CurrentLearnDir& cld)
 {
     in << cld.learn_dir;
     return in;
+}
+
+
+
+
+//***********************************************************************************************
+//                                   Ф-и CurrentLearnDir
+//***********************************************************************************************
+
+OffLineCurrentLearnDir::OffLineCurrentLearnDir(Carcass *_carcass) : BaseLearnDir(_carcass)
+{
+    adress = carcass->adr.OffLine + carcass->CurLearnDir->Get().knownL + "_" + carcass->CurLearnDir->Get().targL + carcass->adr.lext;
+    if(ReadFile()){
+        initialized = true;
+    }
+}
+//-----------------------------------------------------------------------------------------------
+Word OffLineCurrentLearnDir::Translate(const QString& _word)
+{
+    Word w;
+    if(initialized){
+        int i = IndexOf(_word);
+        if(i > -1){
+            w = words.at(i);
+        }
+    }
+    return w;
+}
+//-----------------------------------------------------------------------------------------------
+bool OffLineCurrentLearnDir::Create()
+{
+    return true;
 }

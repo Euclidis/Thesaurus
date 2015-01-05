@@ -38,19 +38,11 @@ void MenuWindow::ObjSet_CurLearnDir(const QString& _LD)                         
 
 void MenuWindow::DctList_Clear()                                                //
 {                                                                               //
-    delete ui->verticalLayout;                                                  //
-    ui->verticalLayout = new QVBoxLayout;                                       //
-    ui->verticalLayout->addStretch(1);                                          //
+    ui->scrollArea->Clear();
 }                                                                               //
 void MenuWindow::AddItemToDctList(const QString& dct_name)                      //
 {                                                                               //  Ф-и списка словарей
-    QHBoxLayout* h = new QHBoxLayout;                                           //
-    QPushButton* c = new QPushButton(dct_name);                                 //
-    c->setFlat(true);                                                           //
-    //connect(c, SIGNAL(clicked(bool)), SLOT(CheckChange(bool)));               //
-    h->addWidget(c);                                                            //
-    ui->verticalLayout->insertLayout(ui->verticalLayout->count()-1, h);         //
-    ui->scrollArea->widget()->setLayout(ui->verticalLayout);                    //
+    ui->scrollArea->AddItem(dct_name);
 }                                                                               //
 
 void MenuWindow::ObjectsForEvetFilter()

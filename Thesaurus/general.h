@@ -17,7 +17,7 @@
 #include <QLineEdit>
 #include <QCheckBox>
 #include <QVBoxLayout>
-#include <QHBoxLayout>
+#include <QScrollArea>
 #include <QTimer>
 #include <QStringListModel>
 #include <QMenu>
@@ -34,13 +34,13 @@
 //#include <QNetworkAccessManager>
 //#include <QNetworkRequest>
 //#include <QNetworkReply>
-//#include <QNetworkAccessManager>
 
-#include <D:/Programs/New_Qt/5.4/msvc2012_opengl/include/QtNetwork/QNetworkAccessManager>
-#include <D:/Programs/New_Qt/5.4/msvc2012_opengl/include/QtNetwork/QNetworkRequest>
-#include <D:/Programs/New_Qt/5.4/msvc2012_opengl/include/QtNetwork/QNetworkReply>
+#include <C:/Qt/5.4/msvc2010_opengl/include/QtNetwork/QNetworkAccessManager>
+#include <C:/Qt/5.4/msvc2010_opengl/include/QtNetwork/QNetworkRequest>
+#include <C:/Qt/5.4/msvc2010_opengl/include/QtNetwork/QNetworkReply>
 //************************
 
 #include "Windows/MyWidgets/label.h"
+#include "Windows/MyWidgets/widgetlist.h"
 
 #endif // GENERAL_H
