@@ -35,9 +35,13 @@
 //#include <QNetworkRequest>
 //#include <QNetworkReply>
 
-#include <C:/Qt/5.4/msvc2010_opengl/include/QtNetwork/QNetworkAccessManager>
-#include <C:/Qt/5.4/msvc2010_opengl/include/QtNetwork/QNetworkRequest>
-#include <C:/Qt/5.4/msvc2010_opengl/include/QtNetwork/QNetworkReply>
+//#include <C:/Qt/5.4/msvc2010_opengl/include/QtNetwork/QNetworkAccessManager>
+//#include <C:/Qt/5.4/msvc2010_opengl/include/QtNetwork/QNetworkRequest>
+//#include <C:/Qt/5.4/msvc2010_opengl/include/QtNetwork/QNetworkReply>
+
+#include <D:/Programs/New_Qt/5.4/msvc2013_64/include/QtNetwork/QNetworkAccessManager>
+#include <D:/Programs/New_Qt/5.4/msvc2013_64/include/QtNetwork/QNetworkRequest>
+#include <D:/Programs/New_Qt/5.4/msvc2013_64/include/QtNetwork/QNetworkReply>
 //************************
 
 #include "Windows/MyWidgets/label.h"
