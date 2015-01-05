@@ -71,7 +71,8 @@ HEADERS  += \
     GTA/GTApiTranslation.h \
     GTA/GTLangCode.h \
     GTA/GTReplyObject.h \
-    Windows/MyWidgets/widgetlist.h
+    Windows/MyWidgets/widgetlist.h \
+    mywidgets.h
 
 
 FORMS    += \
