@@ -1,91 +1,53 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2014-12-06T00:57:39
+# Project created by QtCreator 2015-01-09T13:19:53
 #
 #-------------------------------------------------
 
-QT += core gui widgets network
+QT       += core gui
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Thesaurus
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-    carcass.cpp \
-    base_window.cpp \
-    Exceptions/base_exception.cpp \
-    Exceptions/ex_file_not_found.cpp \
-    Windows/account_window.cpp \
-    Exceptions/ex_file_not_open.cpp \
-    Windows/write_words_window.cpp \
-    Exceptions/ex_unexpected.cpp \
-    Windows/message_window.cpp \
-    Exceptions/ex_config_error.cpp \
-    Exceptions/exception_window.cpp \
-    Exceptions/ex_some_show.cpp \
-    Windows/lang_selection_window.cpp \
-    Windows/menu_window.cpp \
-    Windows/MyWidgets/label.cpp \
-    sloter.cpp \
-    Windows/reset_pass_window.cpp \
-    Windows/mesokcancel.cpp \
-    language.cpp \
-    Implementation/learning_direction.cpp \
-    Implementation/www_realization.cpp \
-    Windows/dct_window.cpp \
-    lang_list.cpp \
-    currents.cpp \
-    GTA/GTApi.cpp \
-    GTA/GTApiTranslation.cpp \
-    GTA/GTReplyObject.cpp \
-    Windows/MyWidgets/widgetlist.cpp
+SOURCES += main.cpp \
+    I_General/c_read_write.cpp \
+    I_General/d_lang_list.cpp \
+    IV_DataClasses/c_word.cpp \
+    IV_DataClasses/d_ld.cpp \
+    IV_DataClasses/e_account.cpp \
+    I_General/e_base_window.cpp \
+    V_Windows/AccountWinow/account_window.cpp \
+    V_Windows/AccountWinow/abstraction_aw.cpp \
+    V_Windows/MyWidgets/a2_mlineedit.cpp \
+    V_Windows/MyWidgets/a1_mlabel.cpp
+
 
 HEADERS  += \
-    carcass.h \
-    adress_texts.h \
-    general.h \
-    base_window.h \
-    Exceptions/base_exception.h \
-    Exceptions/ex_file_not_found.h \
-    exceptions_list.h \
-    Windows/account_window.h \
-    Exceptions/ex_file_not_open.h \
-    Windows/write_words_window.h \
-    Exceptions/ex_unexpected.h \
-    Windows/message_window.h \
-    Exceptions/ex_config_error.h \
-    Exceptions/exception_window.h \
-    Exceptions/ex_some_show.h \
-    Windows/lang_selection_window.h \
-    Windows/menu_window.h \
-    Windows/MyWidgets/label.h \
-    sloter.h \
-    Windows/reset_pass_window.h \
-    Windows/mesokcancel.h \
-    Implementation/learning_direction.h \
-    Implementation/www_realization.h \
-    Windows/dct_window.h \
-    currents.h \
-    langlist.h \
-    GTA/GTApi.h \
-    GTA/GTApiTranslation.h \
-    GTA/GTLangCode.h \
-    GTA/GTReplyObject.h \
-    Windows/MyWidgets/widgetlist.h \
-    mywidgets.h
+    I_General/a_inclusion.h \
+    I_General/b_constants.h \
+    I_General/c_read_write.h \
+    I_General/d_lang_list.h \
+    IV_DataClasses/c_word.h \
+    IV_DataClasses/a_lists.h \
+    IV_DataClasses/e_account.h \
+    IV_DataClasses/d_ld.h \
+    IV_DataClasses/b_items.h \
+    I_General/e_base_window.h \
+    V_Windows/start.h \
+    IV_DataClasses/f_data.h \
+    V_Windows/AccountWinow/account_window.h \
+    V_Windows/AccountWinow/abstraction_aw.h \
+    V_Windows/MyWidgets/a2_mlineedit.h \
+    V_Windows/MyWidgets/b_list_my_widgets.h \
+    V_Windows/MyWidgets/a1_mlabel.h
 
 
 FORMS    += \
-    base_window.ui \
-    Windows/account_window.ui \
-    Windows/write_words_window.ui \
-    Windows/message_window.ui \
-    Exceptions/exception_window.ui \
-    Windows/lang_selection_window.ui \
-    Windows/menu_window.ui \
-    Windows/mesokcancel.ui \
-    Windows/reset_pass_window.ui \
-    Windows/dct_window.ui
+    I_General/e_base_window.ui \
+    V_Windows/AccountWinow/account_window.ui
 
 RESOURCES += \
-    Fonts.qrc
+    resources.qrc
