@@ -18,6 +18,8 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QTimer>
+#include <QScrollArea>
+#include <QVBoxLayout>
 
 #endif // A_INCLUSION
 

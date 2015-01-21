@@ -44,10 +44,6 @@ void AccountWindow::InstallTexts()
     ui->lineEdit->setPlaceholderText(tr("User name"));
     ui->lineEdit_2->setPlaceholderText(tr("Password"));
     ui->lineEdit_3->setPlaceholderText(tr("Confirm password"));
-
-//    ui->lineEdit->SetRegularExpressions(1);
-//    ui->lineEdit_2->SetRegularExpressions(0);
-//    ui->lineEdit_3->SetRegularExpressions(0);
 }
 //------------------------------------------------------------------------------------------
 void AccountWindow::InstallColor()
@@ -56,7 +52,6 @@ void AccountWindow::InstallColor()
     ui->LogReg_Button->setColorScheme("232,221,203,100%", "232,221,203,100%", "3,101,100,100%", "3,101,100,80%");
     ui->label->setColorScheme("232,221,203,100%", "232,221,203,100%", "3,101,100,100%", "3,101,100,80%");
     ui->label_2->setStyleSheet("QLabel {color : rgba(3,101,100,100%);}");
-
 }
 //------------------------------------------------------------------------------------------
 void AccountWindow::InstallImages()
@@ -152,7 +147,7 @@ void AccountWindow::on_lineEdit_textChanged()
 void AccountWindow::ColorManagementText()
 {
     QPalette p(ui->lineEdit->palette());
-    if (!mode_flag && dt->AccountList->Contains(UserName)){
+    if (!mode_flag && dt->AccountList()->Contains(UserName)){
         p.setColor(QPalette::Text,Qt::red);
         ui->lineEdit->setPalette(p);
         return;
@@ -213,7 +208,6 @@ void AccountWindow::Login_Anim(){
   anim_OK_Butt->setEndValue(QPoint (ui->OK_Button->pos().x(), 230));
   anim_OK_Butt->setEasingCurve(QEasingCurve::BezierSpline);
   anim_OK_Butt->start();
-
 }
 //------------------------------------------------------------------------------------------
 void AccountWindow::Regis_Anim(){

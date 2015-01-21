@@ -8,12 +8,26 @@
 class Data
 {
 public:
-    LanguageList* LL;
-    DataList<Account, AccountParameter>* AccountList;
-    Data(){
-        LL = new LanguageList;
-        AccountList = new DataList<Account, AccountParameter>(LL, Adr::conf_file);
-    }
+    Data();
+
+    LanguageList* LL();
+
+    DataList<Account, AccountParameter>* AccountList();
+
+    Account* CurrentAccount();
+
+    DataList<LearnDir, LearnDirParameter>* LDList();
+
+    LearnDir* CurrentLD();
+
+private:
+    LanguageList* _LL;
+    DataList<Account, AccountParameter>* _AccountList;
+    Account* _CurrentAccount;
+    DataList<LearnDir, LearnDirParameter>* _LDList;
+    LearnDir* _CurrentLD;
+
+    void UpDate();
 };
 
 #endif // F_DATA

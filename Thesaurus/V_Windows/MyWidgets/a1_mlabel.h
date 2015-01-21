@@ -1,5 +1,5 @@
-#ifndef LABEL_H
-#define LABEL_H
+#ifndef MLABEL_H
+#define MLABEL_H
 
 #ifndef START
 #include "../start.h"

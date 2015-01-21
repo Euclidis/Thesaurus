@@ -1,4 +1,6 @@
+#ifndef MLABEL_H
 #include "a1_mlabel.h"
+#endif
 
 //---------------------------------------------------------------
 MLabel::MLabel(QWidget *parent):QLabel(parent)

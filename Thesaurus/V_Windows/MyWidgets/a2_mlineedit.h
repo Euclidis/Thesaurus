@@ -11,8 +11,8 @@ class MLineEdit : public QLineEdit
 public:
     explicit MLineEdit(QWidget *parent = 0);
     ~MLineEdit();
-    void SetRegularExpressions(int min_nu_ch);
     void SetBoldChange(bool _flag_bold_change);
+    QRegExpValidator* _valide;
     bool flag_bold_change;
 signals:
 

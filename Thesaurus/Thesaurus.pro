@@ -22,7 +22,11 @@ SOURCES += main.cpp \
     V_Windows/AccountWinow/account_window.cpp \
     V_Windows/AccountWinow/abstraction_aw.cpp \
     V_Windows/MyWidgets/a2_mlineedit.cpp \
-    V_Windows/MyWidgets/a1_mlabel.cpp
+    V_Windows/MyWidgets/a1_mlabel.cpp \
+    V_Windows/MenuWindow/menu_window.cpp \
+    V_Windows/MenuWindow/abstraction_mw.cpp \
+    V_Windows/MyWidgets/a3_mscrollarea.cpp \
+    IV_DataClasses/f_data.cpp
 
 
 HEADERS  += \
@@ -42,12 +46,16 @@ HEADERS  += \
     V_Windows/AccountWinow/abstraction_aw.h \
     V_Windows/MyWidgets/a2_mlineedit.h \
     V_Windows/MyWidgets/b_list_my_widgets.h \
-    V_Windows/MyWidgets/a1_mlabel.h
+    V_Windows/MyWidgets/a1_mlabel.h \
+    V_Windows/MenuWindow/menu_window.h \
+    V_Windows/MenuWindow/abstraction_mw.h \
+    V_Windows/MyWidgets/a3_mscrollarea.h
 
 
 FORMS    += \
     I_General/e_base_window.ui \
-    V_Windows/AccountWinow/account_window.ui
+    V_Windows/AccountWinow/account_window.ui \
+    V_Windows/MenuWindow/menu_window.ui
 
 RESOURCES += \
     resources.qrc
