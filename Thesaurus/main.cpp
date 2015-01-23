@@ -1,27 +1,10 @@
 #include <QApplication>
-#include "V_Windows/AccountWinow/account_window.h"
+#include "sloter.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
-
-    //DataList<Account, AccountParameter> aclist(&LL, Adr::conf_file);
-    Data* data = new Data;
-    AccountWindow* AW1 = new AccountWindow(data);
-    delete AW1;
-    AccountWindow* AW2 = new AccountWindow(data);
-    delete AW2;
-    AccountWindow* AW3 = new AccountWindow(data);
-    delete AW3;
-    AccountWindow* AW5 = new AccountWindow(data);
-    delete AW5;
-    AccountWindow* AW6 = new AccountWindow(data);
-    delete AW6;
-    AccountWindow* AW7 = new AccountWindow(data);
-    delete AW7;
-    AccountWindow* AW4 = new AccountWindow(data);
-    AW4->show();
+    Sloter sloter;
 //    AccountParameter acp;
 //    acp.name = "Einstain";
 //    acp.LL = data.LL;
