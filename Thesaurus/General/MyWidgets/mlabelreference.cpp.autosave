@@ -1,0 +1,12 @@
+#include "mlabelreference.h"
+
+MLabelReference::MLabelReference(QWidget *parent) : QLabel(parent)
+{
+
+}
+
+MLabelReference::~MLabelReference()
+{
+
+}
+

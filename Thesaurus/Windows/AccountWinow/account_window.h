@@ -20,7 +20,7 @@ public:
 
 private:
     bool flag_anim_finished = true;
-    //ResetPassWindow *RPW = nullptr;
+    ResetPassWindow *RPW = nullptr;
     QPropertyAnimation *anim_lineedit;
     QPropertyAnimation *anim_lineedit_2;
     QPropertyAnimation *anim_lineedit_3;
@@ -43,7 +43,6 @@ private:
 
     void ColorManagementText();
 
-    //void RPW_open();
 
 private slots:
     void SwitchConfiguration();
@@ -56,9 +55,10 @@ private slots:
     void OK_Click();
     void OK_Butt_anim_finished();
 
+    void RPW_open_slot();
 signals:
-    void LSW_open();
-    void MW_open();
+    void LSW_open_signal();
+    void MW_open_signal();
 };
 
 #endif // ACCOUNT_WINDOW_H

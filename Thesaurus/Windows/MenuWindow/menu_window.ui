@@ -48,7 +48,7 @@
     </sizepolicy>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>UserName</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">
@@ -128,7 +128,7 @@
     <number>0</number>
    </property>
   </widget>
-  <widget class="MScrollArea" name="scrollArea">
+  <widget class="MScrollArea" name="scrollArea" native="true">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -137,10 +137,10 @@
      <height>321</height>
     </rect>
    </property>
-   <property name="widgetResizable">
+   <property name="widgetResizable" stdset="0">
     <bool>true</bool>
    </property>
-   <widget class="QWidget" name="scrollAreaWidgetContents">
+   <widget class="QWidget" name="scrollAreaWidgetContents" native="true">
     <property name="geometry">
      <rect>
       <x>0</x>

@@ -1,11 +1,11 @@
-#ifndef MLABEL_H
-#define MLABEL_H
+#ifndef MLABELBASE_H
+#define MLABELBASE_H
 
 #ifndef START_MYWIDGETS
 #include "start.h"
 #endif
 
-class MLabel : public QLabel {
+class MLabelBase : public QLabel {
     Q_OBJECT
     Q_PROPERTY(QColor color_enter READ getColor_Enter WRITE setColor_Enter DESIGNABLE true)
     Q_PROPERTY(QColor color_leave READ getColor_Leave WRITE setColor_Leave DESIGNABLE true)
@@ -14,10 +14,10 @@ class MLabel : public QLabel {
     Q_PROPERTY(int border_radius READ getBorderRadius WRITE setBorderRadius DESIGNABLE true)
 
 public:
-    MLabel(QWidget *parent = 0);
-    ~MLabel();
+    explicit MLabelBase(QWidget *parent = 0);
+    ~MLabelBase();
 
-private:
+protected:
     QColor color_enter = Qt::white;
     QColor color_leave = Qt::white;
     QColor color_text_enter = Qt::black;
@@ -29,7 +29,7 @@ private:
     QString c_tx_leave;
     int border_radius;
 
-public:
+protected:
     void setColor_Enter( QColor c );
     void setColor_Leave( QColor c );
     void setColor_TextEnter( QColor c );
@@ -43,7 +43,7 @@ public:
     QColor getColor_TextLeave();
     int getBorderRadius();
 
-private:
+protected:
     void mousePressEvent(QMouseEvent *e);
     virtual void enterEvent(QEvent *e);
     virtual void leaveEvent(QEvent *e);
@@ -52,4 +52,4 @@ signals:
     void clicked();
 };
 
-#endif // LABEL_H
+#endif // MLABELBASE_H

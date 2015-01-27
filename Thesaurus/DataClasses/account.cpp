@@ -114,7 +114,9 @@ bool Account::SetPhoto(const QString& _adress)
         return false;
     }
     photo_adress = _adress;
-    return true;
+    if(WriteFile()) return true;
+    qDebug() << "Изменения не сохранились (Account::SetPhoto)";
+    return false;
 }
 //-----------------------------------------------------------------------------------------------
 bool Account::SetFlagAWIgnore(bool _flag_AW_ignore)
@@ -124,7 +126,21 @@ bool Account::SetFlagAWIgnore(bool _flag_AW_ignore)
         return false;
     }
     flag_AW_ignore = _flag_AW_ignore;
-    return true;
+    if(WriteFile()) return true;
+    qDebug() << "Изменения не сохранились (Account::SetFlagAWIgnore)";
+    return false;
+}
+//-----------------------------------------------------------------------------------------------
+bool Account::SetPassword (const QString& new_password)
+{
+    if(!filled){
+        qDebug() << "filled = false (Account::SetPassword)";
+        return false;
+    }
+    password = new_password;
+    if(WriteFile()) return true;
+    qDebug() << "Изменения не сохранились (Account::SetPassword)";
+    return false;
 }
 //-----------------------------------------------------------------------------------------------
 bool Account::RenameAccount(const QString& new_name)
@@ -133,7 +149,9 @@ bool Account::RenameAccount(const QString& new_name)
         qDebug() << "filled = false Account (RenameAccount)";
         return false;
     }
-    return true;
+    if(WriteFile()) return true;
+    qDebug() << "Изменения не сохранились (Account::RenameAccount)";
+    return false;
 }
 //-----------------------------------------------------------------------------------------------
 Account::~Account()

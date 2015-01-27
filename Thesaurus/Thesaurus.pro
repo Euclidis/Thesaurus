@@ -21,13 +21,14 @@ SOURCES += main.cpp \
     DataClasses/ld.cpp \
     DataClasses/account.cpp \
     DataClasses/data.cpp \
-    General/MyWidgets/mlabel.cpp \
     General/MyWidgets/mlineedit.cpp \
     General/MyWidgets/mscrollarea.cpp \
     General/read_write.cpp \
     General/lang_list.cpp \
     General/base_window.cpp \
-    sloter.cpp
+    sloter.cpp \
+    Windows/AccountWinow/reset_pass_window.cpp \
+    General/MyWidgets/mlabel_base.cpp
 
 
 HEADERS  += \
@@ -38,7 +39,6 @@ HEADERS  += \
     Windows/MenuWindow/abstraction_mw.h \
     General/MyWidgets/start.h \
     General/MyWidgets/end.h \
-    General/MyWidgets/mlabel.h \
     General/MyWidgets/mlineedit.h \
     General/MyWidgets/mscrollarea.h \
     General/inclusion.h \
@@ -53,13 +53,17 @@ HEADERS  += \
     DataClasses/ld.h \
     DataClasses/account.h \
     DataClasses/data.h \
-    sloter.h
+    sloter.h \
+    Windows/AccountWinow/reset_pass_window.h \
+    General/MyWidgets/mlabel_classes.h \
+    General/MyWidgets/mlabel_base.h
 
 
 FORMS    += \
     General/e_base_window.ui \
     Windows/AccountWinow/account_window.ui \
-    Windows/MenuWindow/menu_window.ui
+    Windows/MenuWindow/menu_window.ui \
+    Windows/AccountWinow/reset_pass_window.ui
 
 RESOURCES += \
     resources.qrc

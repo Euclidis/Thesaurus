@@ -22,7 +22,7 @@ void BaseWindow::InstallFont()
     if (font.open(QIODevice::ReadOnly)){
         QFontDatabase::addApplicationFontFromData(font.readAll());
     }
-    else {
+    else{
         qDebug() << "Файл шрифтов не открылся или отсутствует";
     }
     font.close();

@@ -31,7 +31,7 @@ void AccountWindow::InstallConnect()
 {
     connect(ui->LogReg_Button, SIGNAL(clicked()), SLOT(SwitchConfiguration()));
     connect(ui->OK_Button, SIGNAL(clicked()), SLOT(OK_Click()));
-    //RPW_open & label.click
+    connect(ui->label, SIGNAL(clicked()), SLOT(RPW_open_slot()));
 }
 //------------------------------------------------------------------------------------------
 void AccountWindow::InstallFocusWidget()
@@ -101,7 +101,6 @@ void AccountWindow::Configuration_Registration(){
     ui->lineEdit_2->setPlaceholderText("");
     ui->lineEdit_3->setPlaceholderText("");
     ui->lineEdit_3->show();
-
     ColorManagementText();
 
     Regis_Anim();
@@ -176,7 +175,7 @@ void AccountWindow::OK_Click()
             return;
         }
     }
-    emit MW_open();
+    emit MW_open_signal();
 }
 
 
@@ -235,7 +234,7 @@ void AccountWindow::OK_Butt_anim_finished(){
     flag_anim_finished = true;
     ui->lineEdit_2->setPlaceholderText(tr("Password"));
     ui->lineEdit_3->setPlaceholderText(tr("Confirm password"));
-    if(ui->lineEdit_3->height() == 0) ui->lineEdit_3->hide();
+    if(ui->lineEdit_3->height() == 0) ui->lineEdit_3->close();
     if(mode_flag)
         ui->label_2->setText(tr("Login"));
     else
@@ -249,28 +248,25 @@ void AccountWindow::OK_Butt_anim_finished(){
 //------------------------------------------------------------------------------------------
 AccountWindow::~AccountWindow()
 {
-
     delete anim_lineedit;
     delete anim_lineedit_2;
     delete anim_lineedit_3;
     delete anim_OK_Butt;
 
-    //if (RPW != nullptr) delete RPW;
+    if (RPW != nullptr) delete RPW;
 
     delete ui;
 }
 //------------------------------------------------------------------------------------------
 
 
-
-//void AccountWindow::RPW_open(QMap<QString, QString>& names){
-//    if (name_pass.isEmpty()){
-//        if (RPW == nullptr)RPW = new ResetPassWindow(names, *ui->lineEdit, *carcass);
-//        RPW->show();
-//        Configuration_Login();
-//    }
-//    else{
-//        qDebug() << "No users found";
-//    }
-//}
-//Возможно нужен exec()
+void AccountWindow::RPW_open_slot(){
+    if (dt->AccountList()->size() != 0){
+        if (RPW == nullptr)RPW = new ResetPassWindow(dt, *ui->lineEdit, *ui->lineEdit_2);
+        RPW->show();
+        Configuration_Login();
+    }
+    else{
+        qDebug() << "No users found";
+    }
+}

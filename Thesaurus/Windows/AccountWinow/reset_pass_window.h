@@ -1,33 +1,33 @@
 #ifndef RESET_PASS_WINDOW_H
 #define RESET_PASS_WINDOW_H
 
-//#ifndef CARCASS_H
-//#include "../carcass.h"
-//#endif
+#ifndef START_WINDOWS
+#include "../start.h"
+#endif
 
-//namespace Ui {
-//  class ResetPassWindow;
-//}
+namespace Ui {
+  class ResetPassWindow;
+}
 
-//class ResetPassWindow : public BaseWindow
-//{
-//  Q_OBJECT
+class ResetPassWindow : public BaseWindow
+{
+  Q_OBJECT
 
-//public:
-//  explicit ResetPassWindow(QMap<QString, QString> &, QLineEdit &, Carcass &);
+public:
+  explicit ResetPassWindow(Data* _dt, MLineEdit& qle_name, MLineEdit &qle_pas);
+  Data* dt;
 
-//  QMap<QString, QString> &names;
-//  QLineEdit &CurrName;
-//  Carcass &carcass;
-//  ~ResetPassWindow();
+  QLineEdit &QLE_name;
+  QLineEdit &QLE_password;
+  ~ResetPassWindow();
 
-//private slots:
-//  void on_buttonBox_accepted();
+private slots:
+  void Connector();
+  void AnswerAccepted();
+  void AnswerRejected();
 
-//  void on_buttonBox_rejected();
-
-//private:
-//  Ui::ResetPassWindow *ui;
-//};
+private:
+  Ui::ResetPassWindow *ui;
+};
 
 #endif // RESET_PASS_WINDOW_H

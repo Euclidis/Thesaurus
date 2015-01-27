@@ -28,6 +28,7 @@ public:
                                               bool SetPhoto         (const QString &_adress);
                                               bool SetFlagAWIgnore  (bool _flag_AW_ignore);
                                               bool RenameAccount    (const QString& new_name);
+                                              bool SetPassword      (const QString& new_password);
 
     //*******************************************************************************
 protected:

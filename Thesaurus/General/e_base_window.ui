@@ -18,11 +18,18 @@
 background-color: rgba( 232, 221, 203, 100%);
 /*background-color: green;*/
 }
-MLabel {
+MLabelReference {
+qproperty-color_enter: rgba(232, 221, 203, 100%);
+qproperty-color_leave: rgba(232, 221, 203, 100%);
+qproperty-color_text_enter: rgba(3,101,100,100%);
+qproperty-color_text_leave: rgba(3,101,100,80%);
+qproperty-border_radius: 4;
+}
+MLabelButton {
 qproperty-color_enter: rgba(3,101,100,100%);
 qproperty-color_leave: rgba(3,101,100,80%);
-qproperty-color_color_text_enter: (232, 221, 203, 100%);
-qproperty-color_color_text_leave: (232, 221, 203 , 100%);
+qproperty-color_text_enter: white;
+qproperty-color_text_leave: white;
 qproperty-border_radius: 4;
 }
 /*BaseWindow{

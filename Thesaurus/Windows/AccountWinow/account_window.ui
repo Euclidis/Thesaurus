@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>AccountWindow</class>
  <widget class="QDialog" name="AccountWindow">
@@ -32,55 +32,6 @@
    </property>
    <property name="text">
     <string>Login</string>
-   </property>
-  </widget>
-  <widget class="MLabel" name="LogReg_Button" native="true">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>280</y>
-     <width>71</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>8</pointsize>
-    </font>
-   </property>
-   <property name="text" stdset="0">
-    <string>Registration</string>
-   </property>
-  </widget>
-  <widget class="MLabel" name="OK_Button" native="true">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>250</y>
-     <width>71</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text" stdset="0">
-    <string>OK</string>
-   </property>
-  </widget>
-  <widget class="MLabel" name="label" native="true">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>300</y>
-     <width>121</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text" stdset="0">
-    <string>Forgote the password?</string>
    </property>
   </widget>
   <widget class="MLineEdit" name="lineEdit" native="true">
@@ -146,13 +97,63 @@
     <bool>false</bool>
    </property>
   </widget>
+  <widget class="MLabelButton" name="OK_Button">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>250</y>
+     <width>60</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>ОК</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="MLabelReference" name="LogReg_Button">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>290</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Registration</string>
+   </property>
+  </widget>
+  <widget class="MLabelReference" name="label">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>310</y>
+     <width>121</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Forgot the password?</string>
+   </property>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>MLabel</class>
+   <class>MLineEdit</class>
   </customwidget>
   <customwidget>
-   <class>MLineEdit</class>
+   <class>MLabelButton</class>
+  </customwidget>
+  <customwidget>
+   <class>MLabelReference</class>
   </customwidget>
  </customwidgets>
  <resources/>

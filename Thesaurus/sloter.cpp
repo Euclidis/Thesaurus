@@ -14,7 +14,7 @@ void Sloter::AW_open()
 {
     if(AW == nullptr){
         AW = new AccountWindow(dt);
-        connect(AW, SIGNAL(MW_open()), SLOT(MW_open()));
+        connect(AW, SIGNAL(MW_open_signal()), SLOT(MW_open()));
     }
     AW->show();
 }

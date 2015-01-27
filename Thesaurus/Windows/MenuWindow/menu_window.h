@@ -41,8 +41,9 @@ private:
 
 public slots:
     void SetAccount();
-//    void SetDictionaries();
-//    void SetWords(const QString &dct_name);
+    void SetLD();
+    void SetDictionaries();
+    void SetWords(const QString &dct_name);
 
     void DctList_Clear();
     void DctList_UpDate();

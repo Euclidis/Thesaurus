@@ -21,40 +21,99 @@ MenuWindow::MenuWindow(Data *_data) :
 }
 
 
+
+// Инсталляторы
+//----------------------------------------------------------------------------------
 void MenuWindow::InstallConnect()
 {
     connect(ui->pushButton, SIGNAL(clicked()), SLOT(WWW_open_slot()));
     connect(ui->pushButton_2, SIGNAL(clicked()), SLOT(LSW_open_slot()));
     connect(ui->pushButton_3, SIGNAL(clicked()), SLOT(AW_open_slot()));
 }
+//----------------------------------------------------------------------------------
 void MenuWindow::InstallTexts()
 {
 
 }
+//----------------------------------------------------------------------------------
 void MenuWindow::InstallFocusWidget()
 {
 
 }
+//----------------------------------------------------------------------------------
 void MenuWindow::InstallColor()
 {
 
 }
+//----------------------------------------------------------------------------------
 void MenuWindow::InstallImages()
 {
 
 }
+//----------------------------------------------------------------------------------
 void MenuWindow::InstallAnimation()
 {
 
 }
+//----------------------------------------------------------------------------------
 
 
 
 
+// Сеты
+//----------------------------------------------------------------------------------
+void MenuWindow::SetAccount()
+{
+    QString adr;
+    if(dt->CurrentAccount() != nullptr){
+        adr = dt->CurrentAccount()->photo_adress;
+        ui->label_2->setText(dt->CurrentAccount()->name);
+    }
+    else{
+        adr = Adr::default_face_file;
+        ui->label_2->setText("");
+    }
+    QPixmap pix(adr);
+    ui->label->setPixmap(pix.scaled(PhotoSize, Qt::KeepAspectRatioByExpanding));
+    SetLD();
+}
+//----------------------------------------------------------------------------------
+void MenuWindow::SetLD()
+{
+    if(dt->CurrentLD() != nullptr){
+        ui->label_3->setText(dt->CurrentLD()->name);
+    }
+    else{
+        ui->label_3->setText("");
+    }
+    SetDictionaries();
+}
+//----------------------------------------------------------------------------------
+void MenuWindow::SetDictionaries()
+{
+    if(dt->CurrentLD() != nullptr){
+        DctList_UpDate();
+    }
+    else{
+        DctList_Clear();
+    }
+}
+//----------------------------------------------------------------------------------
+void MenuWindow::SetWords(const QString& dct_name)
+{
+}
+//----------------------------------------------------------------------------------
+
+
+
+
+// Функции DctList
+//----------------------------------------------------------------------------------
 void MenuWindow::DctList_Clear()
 {
     ui->scrollArea->Clear();
 }
+//----------------------------------------------------------------------------------
 void MenuWindow::DctList_UpDate()
 {
     DctList_Clear();
@@ -64,52 +123,19 @@ void MenuWindow::DctList_UpDate()
         }
     }
 }
+//----------------------------------------------------------------------------------
 void MenuWindow::DctList_Add(const QString& dct_name)
 {
     ui->scrollArea->AddItem(dct_name);
 }
+//----------------------------------------------------------------------------------
 
 
 
 
 
-
-
-void MenuWindow::SetAccount()
-{
-    if(dt->CurrentAccount() != nullptr){
-        ui->label_2->setText(dt->CurrentAccount()->name);
-        QPixmap pix(dt->CurrentAccount()->photo_adress);
-        ui->label->setPixmap(pix.scaled(PhotoSize, Qt::KeepAspectRatioByExpanding));
-    }
-    if(dt->CurrentLD() != nullptr){
-        ui->label_3->setText(dt->CurrentLD()->name);
-    }
-}
-
-
-//void MenuWindow::SetDictionaries()
-//{
-//    if(carcass->CurLearnDir->Get().knownL != ""){
-//        ObjSet_CurLearnDir(carcass->CurLearnDir->Get().knownL
-//                           + "-" + carcass->CurLearnDir->Get().targL);
-//        DctList_UpDate();
-//        if(!carcass->CurLearnDir->dictionaries.isEmpty()) SetWords(carcass->CurLearnDir->dictionaries.at(0));
-//    }
-//    else{
-//        ObjSet_CurLearnDir("");
-//        DctList_Clear();
-//    }
-//}
-
-//void MenuWindow::SetWords(const QString& dct_name)
-//{
-
-//}
-
-
-
-////-------------> Ф-и фильтра событий
+// Фильтры событий
+//----------------------------------------------------------------------------------
 //void MenuWindow::InstallEventFilter()
 //{
 //    Obj_for_photo->installEventFilter(this);
@@ -137,14 +163,17 @@ void MenuWindow::SetAccount()
 //    }
 //    return false;
 //}
+//----------------------------------------------------------------------------------
 
 
 
-
+// Слоты открытия окон
+//----------------------------------------------------------------------------------
 void MenuWindow::AW_open_slot()
 {
     emit AW_open_signal();
 }
+//----------------------------------------------------------------------------------
 void MenuWindow::WWW_open_slot()
 {
     if(dt->CurrentLD() == nullptr){
@@ -154,17 +183,22 @@ void MenuWindow::WWW_open_slot()
         qDebug() << "Создайте направление";
     }
 }
+//----------------------------------------------------------------------------------
 void MenuWindow::LSW_open_slot()
 {
     emit LSW_open_signal();
 }
+//----------------------------------------------------------------------------------
 
-////****************************************************************************************************
-////****************************************************************************************************
+
+// Деструктор
+//----------------------------------------------------------------------------------
 MenuWindow::~MenuWindow()
 {
     delete ui;
 }
+//----------------------------------------------------------------------------------
+
 //void MenuWindow::setLineColor( QColor c )
 //{
 //    lineColor = c;
